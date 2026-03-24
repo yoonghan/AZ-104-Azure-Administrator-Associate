@@ -2,7 +2,7 @@
 Exam Guide for AZ-104 Azure Administrator
 
 ## 📖 Table of Contents
-Visit [DP-420 Azure CosmosDB Study Guide](https://yoonghan.github.io/Azure-Cosmos-DB-DP-420/) for latest update.
+Visit [AZ-104 Study Guide](https://yoonghan.github.io/AZ-104-Azure-Administrator-Associate/) for latest update.
 
 ## 🚀 How to Contribute
 I am actively looking for peer reviews and updates! If you’ve recently taken the exam or found a better way to implement a pattern, please contribute:
