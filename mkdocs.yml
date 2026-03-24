@@ -27,42 +27,9 @@ theme:
 nav:
   - Home: index.md
   - Topics:
-    - 2. Overview.md
-    - 3. Replication.md
-    - 4. Conflict_Handling.md
-    - 5. Analytics_Connectivity.md
-    - 6. CosmosDB_Emulator.md
-    - 7. CosmosDB_Roles.md
-    - 8. InnerWorks.md
-    - 9. Integration.md
-    - 10. Designing Database.md
-    - 11. SDK Errors Codes.md
-    - 12. Batch Transaction.md
-    - 13. Bulk Execution.md
-    - 14. Queries.md
-    - 15. Indexing.md
-    - 16. Time To Live.md
-    - 17. Partition.md
-    - 18. Request Unit.md
-    - 19. Gateway Mode.md
-    - 20. Rest API.md
-    - 21. Security and Encryption.md
-    - 22. Backup.md
-    - 23. Consistency.md
-    - 24. Change Feed.md
-    - 25. CLI Command.md
-    - 26. DeveloperTools.md
-    - 27. Stored Procedure.md
-    - 28. UDF and Triggers.md
-    - 29. Features And Implementation.md
-    - 30. Vector.md
-    - 31. Cognitive Search.md
-    - 32. Troubleshooting And Monitoring.md
-    - 33. Authentication.md
-    - 34. Migration.md
+    - Command.md
   - Exam: 
-    - 1. Exam_Preparation/Notes.md
-    - 1. Exam_Preparation/Lab_Exercises.md
+    - Exam_Preparation/Notes.md
 markdown_extensions:
   - admonition
   - pymdownx.details
