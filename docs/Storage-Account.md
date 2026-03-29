@@ -17,10 +17,12 @@
 4. Premium Page Blob Storage - use for to store with index
 
 ### Notes
-1. Premium = using SSD, Standard = using HDD
-2. Queue/Table are only Standard General Purpose v2/HDD
-3. Page Blob are data disk or managed disks for VM. It can be used also for AKS, Backup.
-4. Even though a Managed Disk is fast, it has a major limitation: It is a regional resource. You cannot (easily) attach a Managed Disk in "Singapore" to a VM in "Hong Kong." .It is not accessible via a public URL or a simple connection string like a Storage Account is. You must have a compute resource (VM/AKS) to "mount" it.
+1. Premium = using SSD, Standard = using HDD,
+2. Premium are only LRS or ZRS in some available regions.
+3. Premium once selected, cannot be changed and no Standard options are available. E.g. No Hot, Cold or Archive, can be selected.
+4. Queue/Table are only Standard General Purpose v2/HDD.
+5. Page Blob are data disk or managed disks for VM. It can be used also for AKS, Backup.
+6. Even though a Managed Disk is fast, it has a major limitation: It is a regional resource. You cannot (easily) attach a Managed Disk in "Singapore" to a VM in "Hong Kong." .It is not accessible via a public URL or a simple connection string like a Storage Account is. You must have a compute resource (VM/AKS) to "mount" it.
 
 Feature | Managed Disk | Azure Files| Azure Blob
 --- | --- | --- | ---
@@ -57,10 +59,11 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 3. Container: Allow anonymous public read and list access to the entire container, including the blobs.
 
 ### Access Tier (In order)
-1. Hot - for frequently accessed data
-2. Cool - for infrequently accessed data
-3. Cold - for infrequently accessed data
-4. Archive - for rarely accessed data
+1. Premium - If premium is selected. Cannot choose below.
+2. Hot - for frequently accessed data
+3. Cool - for infrequently accessed data
+4. Cold - for infrequently accessed data
+5. Archive - for rarely accessed data
 
 #### Notes
 1. You can only set to Hot or Cool during creation. After creation, you can move data between tiers.
@@ -72,7 +75,7 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 | Cold | 90 days | Pay for 1 day + 89 days penalty. |
 | Archive | 180 days | Pay for 1 day + 179 days penalty. |
 3. If you have **Soft Delete** enabled (e.g., for 7 days) and you delete a blob, you continue to pay the storage cost for those 7 days while the blob sits in the "recycle bin."
-4. Archive is "offline", it cannot be read and need to be rehydrated to either Online tiers.
+4. Archive is "offline", it cannot be read and need to be rehydrated to either Hot, Cool or Cold tier.
 
 ### Lifecycle Management
 1. Can use days to set lifecycle to move DOWNward tier. Hot -> Cold but not Cold -> Hot. If wants to move the other way we call it rehydration and can take time depending on tiers.
@@ -97,3 +100,41 @@ Cannot be modified once selected.
 1. AzCopy
 2. Azure Storage Explorer
 3. Azure Data Box Disk - See later scope it's a physical disk that send to Azure Center.
+
+## Azure File
+1. Azure Files provides the SMB and NFS protocols, client libraries, and a REST interface that allows access from anywhere to stored files.
+2. Can be use as replacement for NAS, has file sync capabilities.
+3. True file/directory structure.
+
+### Access Tier (In order)
+1. *Premium - If premium is selected. cannot choose below options.
+2. Transaction Optimized - Fastest but still HDD
+3. Hot - balanced, still HDD
+4. Cool - for infrequently accessed data, still HDD
+
+### Azure File Sync
+N/A
+
+### Cloud tiering
+1. Allows frequently accessed files to be cached locally while other files are stored in Azure Files.
+2. When a file is tiered, Azure File Sync replaces the file locally with a pointer. A pointer is commonly referred to as a reparse point. The parse point represents a URL to the file in Azure Files.
+
+## Snapshot
+1. Snapshots are incremental, read-only point-in-time copies at the share level per file.
+2. To reduce time and cost only captures from the last snapshot.
+3. Same experience for SMB and NFS shares in all Azure public regions.
+4. Snapshot adds a unique timestamp to the share URI.
+5. Uses the shares redundancy settings.
+6. Up to 200 snapshots per file share for low-RPO recovery points.
+7. Snapshots persist until deleted. Deleting the share deletes all snapshots.
+8. Azure Backup can lease snapshots to help prevent accidental deletion.
+9. Restore a file, folder, or full share; full restore requires only the latest snapshot.
+
+## Soft delete
+1. Soft delete enabled at the storage account level.
+2. Soft delete transitions content to a soft deleted state instead of being permanently erased.
+3. Soft delete lets you configure the retention period. The retention period is the amount of time that soft deleted file shares are stored and available for recovery.
+4. Soft delete provides a retention period between 1 and 365 days.
+5. Soft delete can be enabled on either new or existing file shares.
+6. Use soft delete to recover data without paying ransom to cybercriminals.
+7. The "Recycle Bin": If you had files that were already soft-deleted before you turned the feature off, they are not immediately purged. Azure will continue to honor their original retention period (e.g., the remaining days out of the 30 you configured). Once that old time limit expires, they will be permanently removed.
