@@ -138,3 +138,43 @@ N/A
 5. Soft delete can be enabled on either new or existing file shares.
 6. Use soft delete to recover data without paying ransom to cybercriminals.
 7. The "Recycle Bin": If you had files that were already soft-deleted before you turned the feature off, they are not immediately purged. Azure will continue to honor their original retention period (e.g., the remaining days out of the 30 you configured). Once that old time limit expires, they will be permanently removed.
+
+## Security
+![Security Level](img/security.png)
+
+### Types
+- Microsoft Entra ID
+- Shared Key = Master Key
+- Shared Access Key = Limited permission, time bound
+- Anonymous = Public access
+
+### Shared Access Key Controls
+1. User Delegation
+2. Account Level - 
+3. Service Level - Allow service like delete/update on which type of blob
+4. Stored Access Policy - Ability to revoke access without changing the key
+
+### Encryption
+1. All storage are 256-bit advanced encryption standard (AES) encryption.
+2. Azure Storage encryption is enabled for all new and existing storage accounts and can't be disabled.
+3. Type encryption:
+   - Infrastructure encryption = enabled in account then 2 times encryption
+   - Platform-managed key = cannot disable, cannot rotate
+   - Customer-managed key = See later
+
+#### Customer Managed Keys
+1. Hardware Security Module (HSM) 
+2. Bring Your Own Key (BYOK)
+
+### Shared Key
+1. You have a primary and secondary key.
+
+## Storage Insights
+1. Real-Time Monitoring. Azure Storage Insights enables real-time monitoring of storage accounts, allowing you to track usage trends, monitor performance, and set up alerts for any anomalies.
+2. Security Auditing. It aids in security auditing by providing comprehensive monitoring and detailed logs, which are essential for ensuring compliance and identifying any security issues.
+3. Health Analysis and Optimization. The tool helps in health analysis and optimization of storage accounts, ensuring security and optimal performance.
+Contains:
+    - Metrics and Logs
+    - Enhanced Security and Compliance.
+    - Role-Based Access Control (RBAC).
+    - Unified View
