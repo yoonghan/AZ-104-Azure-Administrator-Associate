@@ -45,6 +45,7 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 3. GRS has 6 copies, 3 in LRS for 2 regions.
 4. If GZRS, the replication is 6 copies with 3 in ZRS for 2 regions.
 5. If LRS, there are still 3 copies but in the same data center.
+6. Premium Storage Account does not support GRS or RA-GRS.
 
 ## Service Endpoints
 1. Private Endpoints - $ and it's not via azure backbone
@@ -77,6 +78,11 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 3. If you have **Soft Delete** enabled (e.g., for 7 days) and you delete a blob, you continue to pay the storage cost for those 7 days while the blob sits in the "recycle bin."
 4. Archive is "offline", it cannot be read and need to be rehydrated to either Hot, Cool or Cold tier.
 
+## Soft delete
+1. Minimum 7 days.
+2. Default 14 days.
+3. Max 1 year.
+
 ### Lifecycle Management
 1. Can use days to set lifecycle to move DOWNward tier. Hot -> Cold but not Cold -> Hot. If wants to move the other way we call it rehydration and can take time depending on tiers.
 2. Careful that it still charges for minimum retention.
@@ -87,7 +93,8 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 1. Object replication is supported when the source and destination accounts are in the Hot, Cool, or Cold tier. The source and destination accounts can be in different tiers.
 2. Required Blob Versioning for both source and destination. 
 3. Snapshot not supported.
-4. There is "Last Access Date" or "Last Modified Date" to track the access time. If the blob is accessed, the last access date will be updated. **Last Access Date** needs to be turn on with **Access Time Tracking** option.
+4. There is "Last Access Date" or "Last Modified Date" to track the access time. If the blob is accessed, the last access date will be updated. **Last Access Date** needs to be turn on with **Access Time Tracking** optional. Else do not know which is deleted, update.
+5. Only Blob storage.
 
 
 ### Type
@@ -99,7 +106,8 @@ Cannot be modified once selected.
 ### Tools
 1. AzCopy
 2. Azure Storage Explorer
-3. Azure Data Box Disk - See later scope it's a physical disk that send to Azure Center.
+3. Azure Data Box Disk - See later scope it's a physical disk that send to Azure Center. Snowball/Snowcone
+4. Import/Export Service - a ticket support and monitor in Azure to see you on-premise move to Azure data center.
 
 ## Azure File
 1. Azure Files provides the SMB and NFS protocols, client libraries, and a REST interface that allows access from anywhere to stored files.
@@ -113,9 +121,10 @@ Cannot be modified once selected.
 4. Cool - for infrequently accessed data, still HDD
 
 ### Azure File Sync
-N/A
+1. Need to install agent in OS
+2. Cloud tiering is to cache file sync.
 
-### Cloud tiering
+#### Cloud tiering
 1. Allows frequently accessed files to be cached locally while other files are stored in Azure Files.
 2. When a file is tiered, Azure File Sync replaces the file locally with a pointer. A pointer is commonly referred to as a reparse point. The parse point represents a URL to the file in Azure Files.
 
@@ -139,20 +148,28 @@ N/A
 6. Use soft delete to recover data without paying ransom to cybercriminals.
 7. The "Recycle Bin": If you had files that were already soft-deleted before you turned the feature off, they are not immediately purged. Azure will continue to honor their original retention period (e.g., the remaining days out of the 30 you configured). Once that old time limit expires, they will be permanently removed.
 
+## Immutable Policy
+1. Data cannot change for audit purposes.
+2. Types:
+    - Time-Based Retention - Cannot delete until time expires.
+    - Legal Hold - Cannot delete until legal hold is removed.
+3. Only for Blob storage (no file, table, queue). All those need to use Azure Backup Immutable Vault.
+4. A service can have maximum of 1 legal hold and 1 time-based retention.
+
 ## Security
 ![Security Level](img/security.png)
 
 ### Types
 - Microsoft Entra ID
 - Shared Key = Master Key
-- Shared Access Key = Limited permission, time bound
+- Shared Access Key = Limited permission, time bound, a http/https link (including file).
+- Stored Access Policy = Similar to Shared Access Key but with ability to revoke access without changing the key. Max of **5** only.
 - Anonymous = Public access
 
 ### Shared Access Key Controls
 1. User Delegation
 2. Account Level - 
 3. Service Level - Allow service like delete/update on which type of blob
-4. Stored Access Policy - Ability to revoke access without changing the key
 
 ### Encryption
 1. All storage are 256-bit advanced encryption standard (AES) encryption.
@@ -160,7 +177,7 @@ N/A
 3. Type encryption:
    - Infrastructure encryption = enabled in account then 2 times encryption
    - Platform-managed key = cannot disable, cannot rotate
-   - Customer-managed key = See later
+   - Customer-managed key = See later, it applies to all. If you use Customer-Managed Keys (CMK), the Azure Key Vault storing those keys must have both Soft Delete and Purge Protection enabled in the Key Vault.
 
 #### Customer Managed Keys
 1. Hardware Security Module (HSM) 
