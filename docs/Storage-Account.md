@@ -150,6 +150,50 @@ Cannot be modified once selected:
 6. Use soft delete to recover data without paying ransom to cybercriminals.
 7. The "Recycle Bin": If you had files that were already soft-deleted before you turned the feature off, they are not immediately purged. Azure will continue to honor their original retention period (e.g., the remaining days out of the 30 you configured). Once that old time limit expires, they will be permanently removed.
 
+# Migration
+
+Requires 72 hours and you can't just switch from LRS to GZRS directly.
+
+Switch | to LRS | to GRS/RA-GRS | ZRS | GZRS/RA-GZRS
+--- | --- | --- | --- | ---
+LRS | - | Direct | Live/Manual | Live/Manual
+to GRS/RA-GRS | Direct | - | Manual/Live (have to switch to LRS first) | M/Live
+ZRS | Manual | Manual | - | Direct
+GZRS / RA-GZRS | Manual | Manual | Direct | -
+
+type | Direct | Live | Manual
+--- | --- | --- | ---
+general purpose v2 | ok | ok | ok
+premium file share |    | ok | ok
+premium block blob |    |    | ok
+premium page blob  |    |    | 
+managed disk       | ok |    | ok
+
+* Note - if RA-GRS Must change to GRS first. 2 step to remove secondary.
+
+
+# Migration
+
+Requires 72 hours and you can't just switch from LRS to GZRS directly.
+
+Switch | to LRS | to GRS/RA-GRS | ZRS | GZRS/RA-GZRS
+--- | --- | --- | --- | ---
+LRS | - | Direct | Live/Manual | Live/Manual
+to GRS/RA-GRS | Direct | - | Manual/Live (have to switch to LRS first) | M/Live
+ZRS | Manual | Manual | - | Direct
+GZRS / RA-GZRS | Manual | Manual | Direct | -
+
+type | Direct | Live | Manual
+--- | --- | --- | ---
+general purpose v2 | ok | ok | ok
+premium file share |    | ok | ok
+premium block blob |    |    | ok
+premium page blob  |    |    | 
+managed disk       | ok |    | ok
+
+* Note - if RA-GRS Must change to GRS first. 2 step to remove secondary.
+
+
 ## Immutable Policy
 1. Data cannot change for audit purposes.
 2. Types:
