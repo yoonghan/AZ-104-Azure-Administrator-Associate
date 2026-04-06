@@ -27,7 +27,7 @@
 | **Azure Security Center** | Provides security management and threat protection. |
 
 ## Sizes
-Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory.
+Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. This is vertical scaling.
 
 ## Availability Set
 1. Split to
@@ -47,13 +47,16 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory.
 
 ## VM Scale Set
 1. Controlled by Load Balancer to add remove servers.
-2. 2 Types of orchestration:
+2. 2 Types of orchestration that cannot be mixed:
     - Uniform (serverless)
     - Flexible (has VM/NIC/Disk)
 3. Max of 100 groups.
 4. Load balancer:
     [ ] Standard LB can handle: Standalone VMs, Availability Sets, and Availability Zones.
     [ ] Basic LB can handle: Only VMs in a single Availability Set or a single Scale Set.
+5. This is layer 4 load balancer, handling TCP/UDP. For Layer 7, requires to use Application Gateway.
+6. Scaling condition:
+![Scaling condition](img/vmss_scaling.png)
 
 ## VM extensions
 1. Used to configure and install more software on your virtual machine after the initial deployment. 
@@ -76,4 +79,4 @@ Azure Site Recovery replicates workloads from a primary site to a secondary loca
 1. Backup is done by Azure Backup service, a subset of Recovery Services.
 2. Azure Backup doesn't limit the amount of inbound or outbound data you transfer. Azure Backup also doesn't charge for the data that is transferred.
 
-![Virtual Machine Backup](vm_backup.png)
+![Virtual Machine Backup](img/vm_backup.png)
