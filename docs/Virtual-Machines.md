@@ -40,6 +40,19 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 | Fault Domains | 1 | 3 (depends on region) | 2 |
 | Update Domains | 1 | 20 | 5 |
 
+3. Splitting is based on Round Robin, If you have an Availability Set configured with 3 Fault Domains (FD) and 5 Update Domains (UD), the placement looks like this as you add VMs:
+4. Update Domain group, restarts together.
+5. Restarting VM individually, does not follow the UD group and may reorder the Update Domain. Also Placement is Immutable.
+
+| VM Number | Fault Domain (Rack) | Update Domain (Reboot Group) |
+| --- | --- | --- |
+| VM 1 | FD 0 | UD 0 |
+| VM 2 | FD 1 | UD 1 |
+| VM 3 | FD 2 | UD 2 |
+| VM 4 | FD 0 (Recycles) | UD 3 |
+| VM 5 | FD 1 | UD 4 |
+| VM 6 | FD 2 | UD 0 (Recycles) |
+
 ## Availability Zone
 1. Region always have 3 AZs
 2. Az cannot be switch to Availability Set, so are AS to AZ.
@@ -81,3 +94,11 @@ Azure Site Recovery replicates workloads from a primary site to a secondary loca
 2. Azure Backup doesn't limit the amount of inbound or outbound data you transfer. Azure Backup also doesn't charge for the data that is transferred.
 
 ![Virtual Machine Backup](img/vm_backup.png)
+
+## Differences
+
+Scope| Tool |What happens if...
+Rack Level | Fault Domains (inside Availability Set) | A single power supply or network switch on a rack fails.
+Server Level | Update Domains (inside Availability Set) | Microsoft patches the physical host server where your VM lives.
+Datacenter Level | Availability Zones | An entire building loses power or has a cooling failure.
+Traffic Level | Load Balancer Health Probes | "A VM is ""up"" but your application (IIS/Apache/Service) has crashed."
