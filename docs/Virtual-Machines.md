@@ -98,6 +98,7 @@ Azure Site Recovery replicates workloads from a primary site to a secondary loca
 ## Differences
 
 Scope| Tool |What happens if...
+--- | --- | ---
 Rack Level | Fault Domains (inside Availability Set) | A single power supply or network switch on a rack fails.
 Server Level | Update Domains (inside Availability Set) | Microsoft patches the physical host server where your VM lives.
 Datacenter Level | Availability Zones | An entire building loses power or has a cooling failure.
