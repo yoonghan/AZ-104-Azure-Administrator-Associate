@@ -1,4 +1,5 @@
 # Containers
+**NOTE:** Virtual machines provide a complete isolation and strong security boundaries than containers.
 ![Container Instance](https://learn.microsoft.com/en-us/azure/container-instances/)
 
 ## Azure Container Registry
