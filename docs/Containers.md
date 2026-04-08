@@ -187,3 +187,11 @@ properties:
 2. Azure Container Apps (ACA) serves serverless microservices. 
 3. Azure Kubernetes Service (AKS) provides full Kubernetes control for complex orchestration needs.
 
+## Difference between ACI and ACA
+
+| Feature | ACI (The "Manual" Specialist) | ACA (The "Automated" Manager)
+| --- | --- | --- |
+| Primary Vibe | Task-oriented. "I need to run this script right now." | Service-oriented. "I need this app to be available." |
+| Startup/Stop | Manual/Event-driven. You tell it when to start; it stops when the process ends. | Traffic-driven. It wakes up when a user visits and sleeps when they leave. |
+| Orchestration | None. No load balancer, no SSL management, no scaling. | Full. Built-in Ingress, CORS (which you just used!), and Auto-scaling. |
+| Best For | Batch jobs, CI/CD runners, or bursting from AKS. | Web APIs, microservices, and frontends. |
