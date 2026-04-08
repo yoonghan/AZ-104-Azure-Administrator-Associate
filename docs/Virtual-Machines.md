@@ -70,7 +70,7 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 5. This is layer 4 load balancer, handling TCP/UDP. For Layer 7, requires to use Application Gateway.
 6. Scaling condition:
 ![Scaling condition](img/vmss_scaling.png)
-7. Scale-in policy, configure the process of scale-in and out. (https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy)
+7. [Scale-in policy](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy), configure the process of scale-in and out. 
 
 ## VM extensions
 1. Used to configure and install more software on your virtual machine after the initial deployment. 

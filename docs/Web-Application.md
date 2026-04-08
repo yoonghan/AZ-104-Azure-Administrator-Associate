@@ -1,4 +1,5 @@
 # Web Application
+![Web App](https://learn.microsoft.com/en-us/azure/app-service/)
 
 ## App Service Plan
 An App Service plan defines a set of compute resources for a web application to run.
@@ -73,3 +74,5 @@ Always-ready instances. Maintains warmed instances to handle traffic spikes imme
 Tier availability. Available only on PremiumV2 and PremiumV3 tiers.
 
 ## Deployment Slots
+1. Standard and above tiers support deployment slots.
+2. Used to stage and test new versions of an app before swapping them into production. [Deployment slots](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots?tabs=portal)
