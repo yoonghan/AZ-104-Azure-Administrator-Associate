@@ -24,6 +24,36 @@ Like Docker Hub, but private.
 
 ![Container Group](img/containerinstance_container_group.png)
 
+```yaml
+apiVersion: '2021-10-01'
+location: eastus
+name: my-container-group
+properties:
+  containers:
+  - name: web-frontend
+    properties:
+      image: mcr.microsoft.com/azuredocs/aci-helloworld
+      resources:
+        requests:
+          cpu: 1.0        # Container 1 CPU
+          memoryInGB: 1.5 # Container 1 RAM
+      ports:
+      - port: 80
+  - name: sidecar-logger
+    properties:
+      image: mcr.microsoft.com/azuredocs/aci-tutorial-sidecar
+      resources:
+        requests:
+          cpu: 0.5        # Container 2 CPU
+          memoryInGB: 0.5 # Container 2 RAM
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: 80
+```
+
 ## Azure Container Apps
 1. Azure Container Apps is a serverless platform that allows you to maintain less infrastructure and save costs while running containerized applications. Instead of worrying about server configuration, container orchestration, and deployment details, Container Apps provides all the up-to-date server resources required to keep your applications stable and secure.
 2. Common uses of Azure Container Apps include:
