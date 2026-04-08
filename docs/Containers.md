@@ -157,6 +157,20 @@ properties:
 
 ![Container Apps](img/containerapps.png)
 
+### Multi-container
+1. Azure Container Instance and Azure Container Apps support multi-container groups. The YAML is the same.
+2. In Azure Container Instance, you can have multiple containers in a container group. But they all share the same network namespace and can communicate with each other using localhost.
+3. In Azure Container Apps, you can have multiple containers in a container group. But they all share the same network namespace and can communicate with each other using localhost. However, you can also use a shared volume to share data between containers. This is useful for scenarios where you have a web server and a database server in the same container group.
+4. Difference is pricing.
+5. "Which service is best for a multi-container task that runs once a day and then stops?" → ACI (Container Group).
+6. "Which service is best for a multi-container web app that needs scaling and SSL?" → ACA (Container Apps).
+
+| Feature | Azure Container Apps (ACA) | Azure Container Instance (ACI)
+| --- | --- | --- |
+| Scaling to Zero | Yes. When no one hits your site, you pay $0. | No. It stays on until you delete it. You pay for every second. |
+| Free Grant | Yes. First 180,000 vCPU-seconds/month are free. | No. There is no free tier for ACI. |
+| Efficiency | Best for web apps with "spiky" traffic. | Best for batch jobs (e.g., "Run this script for 5 minutes and die"). |
+
 ## Azure Kubernetes Service
 
 | Feature | Azure Container Apps (ACA) | Azure Kubernetes Service (AKS)
