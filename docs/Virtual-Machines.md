@@ -92,6 +92,9 @@ Azure Site Recovery replicates workloads from a primary site to a secondary loca
 ## Backup
 1. Backup is done by Azure Backup service, a subset of Recovery Services.
 2. Azure Backup doesn't limit the amount of inbound or outbound data you transfer. Azure Backup also doesn't charge for the data that is transferred.
+3. VM has extension for 2 type of backup:
+    - Storage: Snapshots when using an Azure VM or Azure Files.
+    - Stream backup: For databases like SQL or High-performance Analytic Appliance (HANA) running in VMs.
 
 ![Virtual Machine Backup](img/vm_backup.png)
 
