@@ -96,8 +96,5 @@ Vault tier: All snapshots are additionally transferred to the vault for more sec
 6. Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.
 
 ## Restore VM
-1. In the Azure portal, navigate to **Backup Center**.
-2. Under **Manage**, select **Backup instances**.
-3. In the **Backup instances** page, filter by **Platform type** as **Azure VM** and select the VM backup instance you want to restore.
-4. Select **Restore** from the top menu.
+[Restore a VM](https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms).
 
