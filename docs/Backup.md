@@ -38,6 +38,15 @@ Recovery Point Objective (RPO) is the maximum amount of data loss, measured in t
 - Azure Database for MySQL - Flexible servers
 - Azure Kubernetes cluster
 
+### Support
+Azure Backup supports the following scenarios:
+
+- **Azure VMs** - Back up Windows or Linux Azure VMs
+Azure Backup provides independent and isolated backups to guard against unintended destruction of the data on your VMs. Backups are stored in a Recovery Services vault with built-in management of recovery points. Configuration and scaling are simple, backups are optimized, and you can easily restore as needed.
+- **On-premises** - Back up files, folders, and system state using the Microsoft Azure Recovery Services (MARS) agent. Or use Microsoft Azure Backup Server (MABS) or Data Protection Manager (DPM) server to protect on-premises VMs (Hyper-V and VMware) and other on-premises workloads.
+- **Azure Files shares** - Azure Files provides snapshot management by Azure Backup.
+- **SQL Server in Azure VMs and SAP HANA databases in Azure VMs** - Azure Backup offers stream-based, specialized solutions to back up SQL Server, or SAP HANA running in Azure VMs. These solutions take workload-aware backups that support different backup types such as full, differential and log, 15-minute RPO, and point-in-time recovery.
+
 ## Backup types
 
 | Type | Description | Usage |
@@ -62,3 +71,33 @@ Additionally, Azure Backup provides the following advantages specifically for SQ
 - 15-minute recovery point objective (RPO) with frequent log backups
 - Point-in-time recovery up to a second
 - Individual database-level backup and restore
+
+## Enhanced soft delete 
+Enhanced soft delete is enabled by default for all Recovery Services vaults and Backup vaults. It protects against malicious or accidental deletion of backup data. Can be disabled for specific vaults and can turn _Always On_.
+
+## Backup Policy
+Backup policy
+You can define the backup frequency and retention duration for your backups. Currently, the VM backup can be triggered daily or weekly, and can be stored for multiple years. The backup policy supports two access tiers: snapshot tier and the vault tier. By using the Enhanced policy, you can trigger hourly backups.
+
+Selective disk backup: Azure Backup provides Selective Disk backup and restore capability using Enhanced policy. By using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. It helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.
+
+Snapshot tier: All the snapshots are stored locally for a maximum period of five days, in what is called the snapshot tier. For all types of operation recoveries, we recommended that you restore from the snapshots because it's faster to do so. This capability is called instant restore.
+
+Vault tier: All snapshots are additionally transferred to the vault for more security and longer retention. At this point, the recovery point type changes to "snapshot and vault."
+
+## How VM is backup
+1. For Azure VMs that are selected for backup, Azure Backup starts a backup job according to the backup frequency you specify in the backup policy.
+2. During the first backup, a backup extension is installed on the VM, if the VM is running:
+    - For Windows VMs, the VM Snapshot extension is installed.
+    - For Linux VMs, the VM SnapshotLinux extension is installed.
+3. After the snapshot is taken, the data is stored locally and transferred to the vault.
+4. The backup is optimized by backing up each VM disk in parallel.
+5. For each disk that's being backed up, Azure Backup reads the blocks on the disk and identifies and transfers only the data blocks that changed (the delta) since the previous backup.
+6. Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.
+
+## Restore VM
+1. In the Azure portal, navigate to **Backup Center**.
+2. Under **Manage**, select **Backup instances**.
+3. In the **Backup instances** page, filter by **Platform type** as **Azure VM** and select the VM backup instance you want to restore.
+4. Select **Restore** from the top menu.
+
