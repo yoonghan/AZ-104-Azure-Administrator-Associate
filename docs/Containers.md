@@ -158,7 +158,7 @@ properties:
 ![Container Apps](img/containerapps.png)
 
 ### Multi-container
-1. Azure Container Instance and Azure Container Apps support multi-container groups. The YAML is the same.
+1. Azure Container Instance and Azure Container Apps support multi-container groups. The YAML is the same. Terminology is different, one is side-car the other container group.
 2. In Azure Container Instance, you can have multiple containers in a container group. But they all share the same network namespace and can communicate with each other using localhost.
 3. In Azure Container Apps, you can have multiple containers in a container group. But they all share the same network namespace and can communicate with each other using localhost. However, you can also use a shared volume to share data between containers. This is useful for scenarios where you have a web server and a database server in the same container group.
 4. Difference is pricing.
@@ -195,3 +195,8 @@ properties:
 | Startup/Stop | Manual/Event-driven. You tell it when to start; it stops when the process ends. | Traffic-driven. It wakes up when a user visits and sleeps when they leave. |
 | Orchestration | None. No load balancer, no SSL management, no scaling. | Full. Built-in Ingress, CORS (which you just used!), and Auto-scaling. |
 | Best For | Batch jobs, CI/CD runners, or bursting from AKS. | Web APIs, microservices, and frontends. |
+
+## Sidecar vs. Container Group (The Exam Distinction)
+1. In ACI: You call it a Container Group. It's just a collection of containers sharing a network.
+2. In ACA/Kubernetes: You call it a Sidecar Pattern.
+3. A Note for your AZ-104: You might also hear about Init Containers. These are like a sidecar that "does its job and leaves." For example, a container that pulls a secret from Azure Key Vault, saves it to a shared folder, and then disappears before your main app starts.
