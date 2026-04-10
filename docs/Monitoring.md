@@ -2,6 +2,7 @@
 
 ## Basic Monitoring
 Includes:
+
 - VM availability
 - CPU usage percentage (average)
 - OS disk usage (total), not data disk
@@ -24,11 +25,11 @@ This can be enabled in Insights or installed manually, just Select the Azure Mon
 - Retains the data for 93 days with some exceptions.
 
 ## Insights
-To gather Guest OS, enable it.
-![Insights](https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/5-enable-vm-insights)
+To gather Guest OS, enable it with [Insights](https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/5-enable-vm-insights)
 
 ## Collect client event logs with DCR
-![DCR](https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/6-collect-log-data?ns-enrollment-type=learningpath&ns-enrollment-id=learn.az-104-monitor-backup-resources)
+[DCR](https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/6-collect-log-data?ns-enrollment-type=learningpath&ns-enrollment-id=learn.az-104-monitor-backup-resources)
+
 1. Step 1: Create Data Collection Endpoint.
 2. Step 2: Create a Data Collection Rule and point it to DCE. You can assign resources to be monitored + Data sources.
 3. Note that you can use the same DCR for multiple resources.
