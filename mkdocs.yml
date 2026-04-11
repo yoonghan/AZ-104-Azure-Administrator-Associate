@@ -32,6 +32,7 @@ nav:
     - Storage-Account.md
     - Encryption.md
     - Virtual-Network.md
+    - DNS.md
     - Virtual-Machines.md
     - Web-Application.md
     - Containers.md
