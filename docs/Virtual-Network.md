@@ -1,6 +1,6 @@
 # Virtual Network
 
-![Virtual Network](virtual-network.png)
+![Virtual Network](img/virtual-network.png)
 
 ![alt text](image.png)
 
