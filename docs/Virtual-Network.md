@@ -98,9 +98,20 @@ Initiated -> Connected
 
 ## Traffice Routing
 1. Service Chaining - is a method used to direct traffic from one virtual network to a virtual appliance or gateway. It involves defining a user-defined route that specifies the peered networks, allowing for flexible traffic management. User-defined routes (UDRs) enable you to specify the next hop for traffic, which can be the IP address of a virtual machine in a peered virtual network or a VPN gateway. 
-2. UDR - are crucial for managing traffic in a virtual network. They allow you to define the next hop for traffic, which can be directed to a virtual machine or a VPN gateway in a peered network. Service chaining complements this by enabling traffic to flow through designated appliances, enhancing the network’s capabilities. Together, these mechanisms facilitate a multi-level hub and spoke architecture, allowing for better resource management and connectivity between virtual networks.
-3. Virtual Application - often referred to as a network virtual appliance (NVA), is a virtual machine that performs specific network functions such as firewalls, WAN optimization, or other network services. These appliances can be integrated into Azure virtual networks to enhance network capabilities and manage traffic effectively.
+2. UDR - are crucial for managing traffic in a virtual network. They allow you to define the next hop for traffic, which can be directed to a virtual machine or a VPN gateway in a peered network. Service chaining complements this by enabling traffic to flow through designated appliances, enhancing the network’s capabilities. Together, these mechanisms facilitate a multi-level hub and spoke architecture, allowing for better resource management and connectivity between virtual networks. Service tags can be used in UDRs.
+3. Virtual Application - often referred to as a network virtual appliance (NVA), is a virtual machine that performs specific network functions such as firewalls, WAN optimization, or other network services. These appliances can be integrated into Azure virtual networks to enhance network capabilities and manage traffic effectively. [NVA](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/4-network-virtual-appliances)
 4. Gateway Transit - allows peered spoke VNets to share a single VPN or ExpressRoute gateway in a hub VNet, rather than deploying gateways in every VNet. It simplifies network management, reduces costs, and enables transitive connectivity between on-premises and all connected virtual networks. This is also a Hub-And-Spoke.
-5. Virtual Network Gateway
+5. Virtual Network Gateway - use to indicate when you want routes for a specific address to be routed to a virtual network gateway. It is used to send encrypted traffic between Azure and on-premises over the internet and to send encrypted traffic between Azure networks. A virtual network gateway contains routing tables and gateway services.
+![Virtual Network Gateway](img/virtual-network-gateway.png)
+6. Service endpoint - extend your private address space in Azure by providing a direct connection to your Azure resources. This connection restricts the flow of traffic: your Azure virtual machines can access your storage account directly from the private address space and deny access from a public virtual machine. Uses Azure backbone. This is free compared to private endpoint.
+7. Private endpoint - Private endpoints provide a dedicated private IP address accessible only within a specific virtual network, whereas service endpoints use public IP addresses. 
+8. Border Gateway Protocol (BGP) - A network gateway in your on-premises network can exchange routes with a virtual network gateway in Azure by using BGP. ![BGP](img/bgp.png)
 
-
+## Route selection and priority
+1. If multiple routes are available in a route table, Azure uses the route with the longest prefix match. For example, a message is sent to the IP address 10.0.0.2, but two routes are available with the 10.0.0.0/16 and 10.0.0.0/24 prefixes. Azure selects the route with the 10.0.0.0/24 prefix because it's more specific.
+2. The longer the route prefix, the shorter the list of IP addresses available through that prefix. When you use longer prefixes, the routing algorithm can select the intended address more quickly.
+3. You can't configure multiple user-defined routes with the same address prefix.
+4. If there are multiple routes with the same address prefix, Azure selects the route based on the type in the following order of priority:
+    - User-defined routes
+    - BGP routes
+    - System routes
