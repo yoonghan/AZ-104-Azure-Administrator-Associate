@@ -31,8 +31,11 @@ nav:
     - EntraId.md
     - Storage-Account.md
     - Encryption.md
-    - Virtual-Network.md
-    - DNS.md
+    - Virtual Network:
+      - Virtual-Network.md
+      - DNS.md
+      - Network-Security-Group.md
+      - Load-Balancers.md
     - Virtual-Machines.md
     - Web-Application.md
     - Containers.md
