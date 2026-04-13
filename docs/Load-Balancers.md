@@ -60,4 +60,23 @@ An outbound rule configures Source Network Address Translation (SNAT) for all VM
 ### Good to know
 - **Azure Front Door** (have cache) is an application-delivery network that provides a global load balancing and site acceleration service for web applications. It offers Layer 7 capabilities for your application like TLS/SSL offload, path-based routing, fast failover, a web application firewall, and caching to improve performance and high availability of your applications. Choose this option in scenarios such as load balancing a web app deployed across multiple Azure regions.
 - **Azure Traffic Manager** is a DNS-based traffic load balancer that allows you to distribute traffic optimally to services across global Azure regions while providing high availability and responsiveness. Because Traffic Manager is a DNS-based load-balancing service, it load balances only at the domain level. For that reason, it can't fail over as quickly as Front Door, because of common challenges around DNS caching and systems not honoring DNS TTLs.
-- **Azure Application Gateway** provides Application Delivery Controller (ADC) as a service, offering various Layer 7 load-balancing capabilities. Use it to optimize web farm productivity by offloading CPU-intensive TLS/SSL termination to the gateway. Application Gateway works within a region rather than globally.
+- **Azure Application Gateway**, when TLS is required, LB do not provide. Provides Application Delivery Controller (ADC) as a service, offering various Layer 7 load-balancing capabilities. Use it to optimize web farm productivity by offloading CPU-intensive TLS/SSL termination to the gateway. Application Gateway works within a region rather than globally.
+
+## Application Gateway
+ 1. Uses a round-robin process to load balance requests to the servers in each back-end pool. Session stickiness ensures client requests in the same session are routed to the same back-end server. 
+ 2. Session stickiness is especially important with e-commerce applications where you don’t want a transaction to be disrupted because the load balancer bounces it around between back-end servers.
+ 3. Feature
+    - Support for the HTTP, HTTPS, HTTP/2, and WebSocket protocols.
+    - WAF - A web application firewall to protect against web application vulnerabilities.
+    - End-to-end request encryption.
+    - Autoscaling to dynamically adjust capacity as your web traffic load change.
+    - **Connection draining** allowing graceful removal of back-end pool members during planned service updates.
+    - Redirection. Redirection can be used to another site, or from HTTP to HTTPS.
+    - Rewrite HTTP headers. HTTP headers allow the client and server to pass parameter information with the request or the response.
+    - Custom error pages. Application Gateway allows you to create custom error pages instead of displaying default error pages. You can use your own branding and layout using a custom error page.
+    - Health probes
+
+4. Routing
+    - Path-based routing, i.e /video/*  to 1 backendpool, /images/* to another backendpool
+    - Multi-site hosting / Host-based routing, i.e www.contoso.com to 1 backendpool, www.fabrikam.com to another backendpool
+    
