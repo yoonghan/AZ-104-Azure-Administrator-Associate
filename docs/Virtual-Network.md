@@ -39,6 +39,7 @@ Role-based virtual machines such as Domain Controllers and DNS servers.
 ## Type of IPs
 1. Private IP addresses enable communication within an Azure virtual network and your on-premises network. You create a private IP address for your resource when you use a VPN gateway or Azure ExpressRoute circuit to extend your network to Azure.
 2. Public IP addresses allow your resource to communicate with the internet. You can create a public IP address to connect with Azure public-facing services.
+3. To connect to private IPs, there is a need to create an EMPTY subnet for external services to connect from empty subnet to private connection.
 
 ## IP address SKU
 
@@ -104,7 +105,7 @@ Initiated -> Connected
 5. Virtual Network Gateway - use to indicate when you want routes for a specific address to be routed to a virtual network gateway. It is used to send encrypted traffic between Azure and on-premises over the internet and to send encrypted traffic between Azure networks. A virtual network gateway contains routing tables and gateway services.
 ![Virtual Network Gateway](img/virtual-network-gateway.png)
 6. Service endpoint - extend your private address space in Azure by providing a direct connection to your Azure resources. This connection restricts the flow of traffic: your Azure virtual machines can access your storage account directly from the private address space and deny access from a public virtual machine. Uses Azure backbone. This is free compared to private endpoint.
-7. Private endpoint - Private endpoints provide a dedicated private IP address accessible only within a specific virtual network, whereas service endpoints use public IP addresses. 
+7. Private endpoint - Private endpoints provide a dedicated private IP address accessible only within a specific virtual network, whereas service endpoints use public IP addresses.
 8. Border Gateway Protocol (BGP) - A network gateway in your on-premises network can exchange routes with a virtual network gateway in Azure by using BGP. ![BGP](img/bgp.png)
 
 ## Route selection and priority
