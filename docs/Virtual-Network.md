@@ -41,6 +41,23 @@ Role-based virtual machines such as Domain Controllers and DNS servers.
 2. Public IP addresses allow your resource to communicate with the internet. You can create a public IP address to connect with Azure public-facing services.
 3. To connect to private IPs, there is a need to create an EMPTY subnet for external services to connect from empty subnet to private connection.
 
+```mermaid
+    graph LR
+        subgraph "External Services"
+            ES[External Services]
+        end
+        subgraph "Azure"
+            subgraph "VNet"
+                subgraph "Empty Subnet"
+                    PE[Private Endpoint] or Service Endpoint
+                end
+                subgraph "Private Subnet"
+                    VM[VM]
+                end
+            end
+        end
+```
+
 ## IP address SKU
 
 | SKU | Description |
