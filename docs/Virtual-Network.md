@@ -100,7 +100,7 @@ Initiated -> Connected
 3. Virtual Application - often referred to as a network virtual appliance (NVA), is a virtual machine that performs specific network functions such as firewalls, WAN optimization, or other network services. These appliances can be integrated into Azure virtual networks to enhance network capabilities and manage traffic effectively. [NVA](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/4-network-virtual-appliances)
 4. Gateway Transit - allows peered spoke VNets to share a single VPN or ExpressRoute gateway in a hub VNet, rather than deploying gateways in every VNet. It simplifies network management, reduces costs, and enables transitive connectivity between on-premises and all connected virtual networks. This is also a Hub-And-Spoke.
 5. Virtual Network Gateway - use to indicate when you want routes for a specific address to be routed to a virtual network gateway. It is used to send encrypted traffic between Azure and on-premises over the internet and to send encrypted traffic between Azure networks. A virtual network gateway contains routing tables and gateway services.
-![Virtual Network Gateway](img/virtual-network-gateway.png)
+![Virtual Network Gateway](img/virtual-network-gateway.svg)
 6. Service endpoint - extend your private address space in Azure by providing a direct connection to your Azure resources. This connection restricts the flow of traffic: your Azure virtual machines can access your storage account directly from the private address space and deny access from a public virtual machine. Uses Azure backbone. This is free compared to private endpoint.
 7. Private endpoint - Private endpoints provide a dedicated private IP address accessible only within a specific virtual network, whereas service endpoints use public IP addresses.
 8. Border Gateway Protocol (BGP) - A network gateway in your on-premises network can exchange routes with a virtual network gateway in Azure by using BGP. ![BGP](img/bgp.png)
@@ -144,3 +144,38 @@ graph LR
     end
 ```
 Figure: Can also have 2 different vnet just need linking, e.g. peering.
+
+
+## Bastion Server
+1. Used as intermitery jump box to access resources in a private subnet. [Bastion Server](https://learn.microsoft.com/en-us/training/modules/secure-access-to-vms-with-azure-bastion/2-what-is-azure-bastion)
+2. SKUs.
+    - Premium: Includes all Standard features plus session recording for compliance and private-only deployment.
+    - Standard: Includes all Basic features plus scalability and advanced features (native client, shareable links, IP-based connections, custom ports, file transfer).
+    - Basic: Dedicated deployment with fixed capacity for production environments with moderate connection requirements.
+    - Developer: Free SKU using shared infrastructure recommended for development and testing. Supports one VM at a time. Available in select regions.
+3. Deployment:
+    - Private-only deployment: Premium SKU without public IP address for enhanced security.
+    - Dedicated deployment: Basic, Standard, and Premium SKUs deployed to your virtual network.
+    ![Dedicated Deployment](img/bastion_dedicated.png)
+    - Developer: Shared infrastructure for development and testing environments. 
+
+## Network Watcher
+Monitor flows between resources in Azure. [Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/2-what-is-azure-network-watcher)
+
+### Network Watcher features
+Network Watcher consists of three major sets of tools and capabilities:
+
+1. Monitoring
+    - Topology
+    - Connection monitor
+2. Network diagnostic
+    - IP flow verify
+    - NSG diagnostics
+    - Next hop
+    - Effective security rules
+    - Connection troubleshoot
+    - Packet capture
+    - VPN troubleshoot
+3. Traffic
+    - Flow logs
+    - Traffic analytics
