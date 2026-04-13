@@ -65,9 +65,18 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 3. Max of 100 groups.
 4. Note: No longer has different SKU of basic/standard LB.
 5. This is layer 4 load balancer, handling TCP/UDP. For Layer 7, requires to use Application Gateway.
-6. Scaling condition:
+
+### Scale in policy
+[Scale-in policy](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy)
+Configures to remove based on:
+1. Default
+    - Balance virtual machines across availability zones (if the scale set is deployed in zone-spanning configuration)
+    - Balance virtual machines across fault domains (best effort)
+    - Delete virtual machine with the highest instance ID
+2. NewestVM - delete the newest, or most recently created virtual machine in the scale set, after balancing VMs across availability zones
+3. OldestVM - delete the oldest, or least recently created virtual machine in the scale set, after balancing VMs across availability zones.
+
 ![Scaling condition](img/vmss_scaling.png)
-7. [Scale-in policy](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy), configure the process of scale-in and out. 
 
 ## VM extensions
 1. Used to configure and install more software on your virtual machine after the initial deployment. 
