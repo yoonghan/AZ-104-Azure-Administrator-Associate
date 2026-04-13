@@ -106,3 +106,13 @@ Rack Level | Fault Domains (inside Availability Set) | A single power supply or 
 Server Level | Update Domains (inside Availability Set) | Microsoft patches the physical host server where your VM lives.
 Datacenter Level | Availability Zones | An entire building loses power or has a cooling failure.
 Traffic Level | Load Balancer Health Probes | "A VM is ""up"" but your application (IIS/Apache/Service) has crashed."
+
+## LifeCycle
+1. Deallocated means the VM gets removed from the host, so you will not be charged for compute, but you will still be charged for storage.
+2. Public IP are released for stop and deallocate.
+
+```mermaid
+flowchart TD
+    Creating --> Starting --> Start --> Running --> Stopping --> Stopped
+    Running --> Deallocating --> Deallocated
+```
