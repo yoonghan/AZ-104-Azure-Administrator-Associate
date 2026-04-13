@@ -1,4 +1,5 @@
 # Load Balancer
+[Load Balancing](http://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-portal)
 
 ## Public Load Balancers
 1. Load balance internet traffic to your virtual machines (VMs). A public load balancer maps the public IP address and port number of incoming traffic to the private IP address and port number of the back-end pool VMs. 
