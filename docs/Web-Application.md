@@ -3,6 +3,7 @@
 
 ## App Service Plan
 An App Service plan defines a set of compute resources for a web application to run.
+An App Service = Azure Server WebFarms, if you park anything under Microsoft.Web/serverFarms it ties to this.
 
 | Feature | Description |
 | --- | --- |

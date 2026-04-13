@@ -39,24 +39,6 @@ Role-based virtual machines such as Domain Controllers and DNS servers.
 ## Type of IPs
 1. Private IP addresses enable communication within an Azure virtual network and your on-premises network. You create a private IP address for your resource when you use a VPN gateway or Azure ExpressRoute circuit to extend your network to Azure.
 2. Public IP addresses allow your resource to communicate with the internet. You can create a public IP address to connect with Azure public-facing services.
-3. To connect to private IPs, there is a need to create an EMPTY subnet for external services to connect from empty subnet to private connection.
-
-```mermaid
-    graph LR
-        subgraph "External Services"
-            ES[External Services]
-        end
-        subgraph "Azure"
-            subgraph "VNet"
-                subgraph "Empty Subnet"
-                    PE[Private Endpoint] or Service Endpoint
-                end
-                subgraph "Private Subnet"
-                    VM[VM]
-                end
-            end
-        end
-```
 
 ## IP address SKU
 
@@ -133,3 +115,28 @@ Initiated -> Connected
     - User-defined routes
     - BGP routes
     - System routes
+
+ # Subnet Delegation
+ 1. Services cannot call private ips (e.g. private endpoints). So we need to delegate the subnet to the service. E.g. A webapp connecting to Private Endpoint of a database - without going via the internet.
+ 2. A subnet delegation involves an empty subnet (a subnet with nothing assigned, i.e. no VM) when created. If you have resources in the subnet, you need to move them to another subnet before delegating.
+ 3. To create a subnet delegation, you need to specify the service that you want to delegate the subnet to. Open the subnet, click "Delegate subnet to a service", and select Microsoft.Web/serverFarms to enable functions and webapps.
+**NOTE**: Only 1 App Plan can be delegated to a subnet. Meaning if you want to share the Subnet with Function and Webapp, you need to make sure it belongs to the same App Plan.
+
+
+```mermaid
+    graph LR
+        subgraph "External Services"
+            ES[External Services]
+        end
+        subgraph "Azure"
+            subgraph "VNet"
+                subgraph "Empty Subnet"
+                    PE[Private Endpoint] or Service Endpoint or Internet
+                end
+                subgraph "Private Subnet"
+                    VM[VM]
+                end
+            end
+        end
+```
+Figure: Can also have 2 different vnet just need linking, e.g. peering.
