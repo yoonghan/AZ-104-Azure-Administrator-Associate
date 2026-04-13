@@ -63,9 +63,7 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
     - Uniform (serverless)
     - Flexible (has VM/NIC/Disk)
 3. Max of 100 groups.
-4. Load balancer:
-    [ ] Standard LB can handle: Standalone VMs, Availability Sets, and Availability Zones.
-    [ ] Basic LB can handle: Only VMs in a single Availability Set or a single Scale Set.
+4. Note: No longer has different SKU of basic/standard LB.
 5. This is layer 4 load balancer, handling TCP/UDP. For Layer 7, requires to use Application Gateway.
 6. Scaling condition:
 ![Scaling condition](img/vmss_scaling.png)
