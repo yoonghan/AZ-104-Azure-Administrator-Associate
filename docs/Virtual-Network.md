@@ -1,9 +1,7 @@
 # Virtual Network
-[Link] (https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview#service-chaining)
+[Virtual Network](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview#service-chaining)
 
 ![Virtual Network](img/virtual-network.png)
-
-![alt text](image.png)
 
 ## Subnet
 1. Must be specified with CIDR notation. E.g. 10.0.0.2/24
@@ -124,19 +122,24 @@ Initiated -> Connected
 
 
 ```mermaid
-    graph LR
-        subgraph "External Services"
-            ES[External Services]
-        end
-        subgraph "Azure"
-            subgraph "VNet"
-                subgraph "Empty Subnet"
-                    PE[Private Endpoint] or Service Endpoint or Internet
-                end
-                subgraph "Private Subnet"
-                    VM[VM]
-                end
+graph LR
+    subgraph Internet
+        User((User))
+    end
+
+    subgraph Azure
+        WA[Azure Web App]
+        
+        subgraph VNet
+            subgraph EmptySubnet ["Delegated Subnet (Empty)"]
+                VI[VNet Integration Interface]
+            end
+
+            subgraph PrivateSubnet ["Private Subnet"]
+                VM[Virtual Machine]
+                PE[Private Endpoint for DB]
             end
         end
+    end
 ```
 Figure: Can also have 2 different vnet just need linking, e.g. peering.

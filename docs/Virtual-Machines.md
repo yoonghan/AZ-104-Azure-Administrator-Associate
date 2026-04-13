@@ -1,6 +1,5 @@
 # Virtual Machines
-
-![Link to VM Size](https://learn.microsoft.com/en-us/azure/virtual-machines/)
+[Link to VM Size](https://learn.microsoft.com/en-us/azure/virtual-machines/)
 
 | Feature | Description |
 | --- | --- |

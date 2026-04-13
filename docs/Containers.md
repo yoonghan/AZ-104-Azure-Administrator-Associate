@@ -1,6 +1,5 @@
 # Containers
-**NOTE:** Virtual machines provide a complete isolation and strong security boundaries than containers.
-![Container Instance](https://learn.microsoft.com/en-us/azure/container-instances/)
+**NOTE:** Virtual machines provide a complete isolation and strong security boundaries than containers. [Container Instance](https://learn.microsoft.com/en-us/azure/container-instances/)
 
 ## Azure Container Registry
 Like Docker Hub, but private.
@@ -10,7 +9,7 @@ Like Docker Hub, but private.
 ### Just Instance
 1. Custom sizes. You specify CPU cores (from 0.1 to 4 vCPU) and memory (from 0.1 to 16 GB) for each container at deployment time. Resource allocation is fixed for the lifetime of the container group.
 2. Persistent storage. Containers support direct mounting of Azure Files file shares.
-![Container Instance](img/container-instance.png.png)
+![Container Instance](img/container-instance.png)
 
 ### Container Group
 1. A container group is a collection of containers that get scheduled on the same host machine. The containers in a container group share a lifecycle, resources, local network, and storage volumes. It's similar in concept to a pod in Kubernetes.

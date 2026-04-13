@@ -1,5 +1,5 @@
 # Web Application
-![Web App](https://learn.microsoft.com/en-us/azure/app-service/)
+[Web App](https://learn.microsoft.com/en-us/azure/app-service/)
 
 ## App Service Plan
 An App Service plan defines a set of compute resources for a web application to run.
