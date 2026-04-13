@@ -1,10 +1,14 @@
 # Network Security Group (NSG)
 
 1. Can assign to NIC or Subnet.
-2. Protected subnet are called DMZ (Demilitarized Zone).
-3. Port assignment are stateful. Meaning you don't need to define output for the port.
-4. You can't remove the default security rules. See below.
-5. You can override a default security rule by creating another security rule that has a higher Priority setting for your network security group.
+2. Optional to not even assigned, the default is now DENY.
+    - Inbound: All traffic from the Internet is Denied.
+    - Outbound: All traffic to the Internet is Denied by default.
+    - Internal: Traffic within the same VNet is still Allowed.
+3. Protected subnet are called DMZ (Demilitarized Zone).
+4. Port assignment are stateful. Meaning you don't need to define output for the port.
+5. You can't remove the default security rules. See below.
+6. You can override a default security rule by creating another security rule that has a higher Priority setting for your network security group.
 
 ![Default Inbound](img/default-inbound.png)
 ![Default Outbound](img/default-outbound.png)

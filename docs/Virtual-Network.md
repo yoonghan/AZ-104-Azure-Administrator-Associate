@@ -114,7 +114,8 @@ Initiated -> Connected
     - BGP routes
     - System routes
 
- # Subnet Delegation
+ ## Subnet Delegation
+ 
  1. Services cannot call private ips (e.g. private endpoints). So we need to delegate the subnet to the service. E.g. A webapp connecting to Private Endpoint of a database - without going via the internet.
  2. A subnet delegation involves an empty subnet (a subnet with nothing assigned, i.e. no VM) when created. If you have resources in the subnet, you need to move them to another subnet before delegating.
  3. To create a subnet delegation, you need to specify the service that you want to delegate the subnet to. Open the subnet, click "Delegate subnet to a service", and select Microsoft.Web/serverFarms to enable functions and webapps.
