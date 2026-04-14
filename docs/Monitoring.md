@@ -34,3 +34,7 @@ To gather Guest OS, enable it with [Insights](https://learn.microsoft.com/en-us/
 2. Step 2: Create a Data Collection Rule and point it to DCE. You can assign resources to be monitored + Data sources.
 3. Note that you can use the same DCR for multiple resources.
 4. Each DCR can only have one destination and one Platform Type (Linux, Windows or Both).
+
+## Creating Alerts
+1. Create Alert Groups (to email, webhooks)
+2. Create Alerts Rules (based on metrics or logs) and assign to an Alert Group.
