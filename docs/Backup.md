@@ -98,3 +98,27 @@ Vault tier: All snapshots are additionally transferred to the vault for more sec
 ## Restore VM
 [Restore a VM](https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms).
 
+## Deleting Vault
+1. You cannot delete a Resource Group that has vault backup
+2. Vault backup cannot be deleted when
+    - requires to stop backup
+    - if data has retention/protected data
+    - if soft delete is turned on. Require to disable soft-delete, delete all data then delete soft-delete datas.
+    
+## Data Box
+
+### Import Procedure
+1. Choose Data Box
+2. Create in Azure Portal a Ticket
+3. Copy data to Data Box using WAImport/Export Tool
+4. Ship back to Microsoft
+5. Microsoft upload data to Azure
+6. Update in Azure Portal
+
+### Export Procedure
+1. Create Azure Portal a job
+2. Select a container (only Blob allowed)
+3. Add address
+4. Microsoft ships Data Box to you
+5. Update Azure Portal
+6. Copy data from Data Box using WAImport/Export Tool
