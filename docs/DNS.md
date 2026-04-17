@@ -37,6 +37,10 @@ The alias record set is supported in the following DNS record types:
 ## Azure DNS Private Resolver
 - Azure DNS Private Resolver is a fully managed DNS service that allows you to resolve DNS queries for your private domains in Azure.
 - It is a hybrid DNS solution that allows you to resolve DNS queries for your private domains in Azure and on-premises.
+- This feature is disabled by default, if required need to check as "auto resolve private DNS".
+
+### Note on Public Resolver
+There are no such thing as public resolver in Azure DNS. So a domain like contoso.com in public DNS, you need to use Azure DNS or some 3rd-party resolver to resolve a public domain.
 
 ## Security Feature
 - **Role-based access control**, which gives you fine-grained control over users' access to Azure resources. You can monitor their usage and control the resources and services to which they have access.
