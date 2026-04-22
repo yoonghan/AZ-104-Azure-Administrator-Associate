@@ -28,7 +28,9 @@ nav:
   - Home: index.md
   - Topics:
     - Commands.md
-    - EntraId.md
+    - EntraId:
+      - EntraId.md
+      - User.md
     - Storage-Account.md
     - Encryption.md
     - Networking:
