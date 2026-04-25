@@ -4,6 +4,7 @@
 1. Azure Backup stores the backed-up data in Recovery Services vaults and Backup vaults.
 2. For on-premises Windows machines, you can back up directly to Azure with the Azure Backup Microsoft Azure Recovery Services (MARS) agent. Alternatively, you can back up these Windows machines to a backup server, perhaps a System Center Data Protection Manager (DPM) or Microsoft Azure Backup Server (MABS). You can then back that server up to a Recovery Services vault in Azure.
 3. In UI, this is called **Backup Center**. Backup center allows you to have a single pane of glass to manage all tasks related to backups. Backup center is designed to function well across a large and distributed Azure environment. You can use Backup center to efficiently manage backups spanning multiple workload types, vaults, subscriptions, regions, and Azure Lighthouse tenants.
+4. **Recovery Services vault** and **Backup vault** are same. However Backup Vault is only for VM Backup. 
 
 ![Backup Center](/img/backup_center.png)
 
@@ -79,11 +80,11 @@ Enhanced soft delete is enabled by default for all Recovery Services vaults and 
 Backup policy
 You can define the backup frequency and retention duration for your backups. Currently, the VM backup can be triggered daily or weekly, and can be stored for multiple years. The backup policy supports two access tiers: snapshot tier and the vault tier. By using the Enhanced policy, you can trigger hourly backups.
 
-Selective disk backup: Azure Backup provides Selective Disk backup and restore capability using Enhanced policy. By using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. It helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.
+**Selective disk backup**: Azure Backup provides Selective Disk backup and restore capability using Enhanced policy. By using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. It helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.
 
-Snapshot tier: All the snapshots are stored locally for a maximum period of five days, in what is called the snapshot tier. For all types of operation recoveries, we recommended that you restore from the snapshots because it's faster to do so. This capability is called instant restore.
+**Snapshot tier**: All the snapshots are stored locally for a maximum period of five days, in what is called the snapshot tier. For all types of operation recoveries, we recommended that you restore from the snapshots because it's faster to do so. This capability is called instant restore.
 
-Vault tier: All snapshots are additionally transferred to the vault for more security and longer retention. At this point, the recovery point type changes to "snapshot and vault."
+**Vault tier**: All snapshots are additionally transferred to the vault for more security and longer retention. At this point, the recovery point type changes to "snapshot and vault."
 
 ## How VM is backup
 1. For Azure VMs that are selected for backup, Azure Backup starts a backup job according to the backup frequency you specify in the backup policy.
@@ -97,6 +98,33 @@ Vault tier: All snapshots are additionally transferred to the vault for more sec
 
 ## Restore VM
 [Restore a VM](https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms).
+1. Backup for VM are only for the same Region and OS. But backup for SQL Server can be restore to different region.
+2. If restore VM:
+    - Restore to same region. 
+    - Restore to different region, must make sure the OS is same.
+3. If restore VM to different region, you need to provide a new
+    - Network interface
+    - Private IP
+    - Public IP
+    - Availability set/zone
+    - VNet
+    - Subnet
+    - Resource Group
+    - Name (New)
+    - Storage Account for disk 
+    - Disk Type
+4. If restore OS disk only, you can:
+    - Restore to same region. 
+    - Restore to different region, must make sure the OS is same.
+5. If restore OS disk only to different region:
+    - No VNet, no Subnet, no Public IP, no Private IP
+    - Resource Group
+    - Name (New)
+    - Storage Account for disk 
+    - Disk Type
+6. Replacing existing disk, the VM must be stopped and the disk must be unattached from the VM. The VM must exists.
+    - Replacing existing disk with encryption are not supported.
+7. Encrypted VM cannot be restored to another region, because it require the key to decrypt. Unless using Azure Disk Encryption. 
 
 ## Deleting Vault
 1. You cannot delete a Resource Group that has vault backup
@@ -106,19 +134,73 @@ Vault tier: All snapshots are additionally transferred to the vault for more sec
     - if soft delete is turned on. Require to disable soft-delete, delete all data then delete soft-delete datas.
     
 ## Data Box
+1. Types
+    - DataBox Disk - up to 10TB
+    - DataBox - up to 80TB
+    - DataBox Heavy - 1 PB
+    - DataBox Go - up to 30TB
 
 ### Import Procedure
-1. Choose Data Box
-2. Create in Azure Portal a Ticket
-3. Copy data to Data Box using WAImport/Export Tool
-4. Ship back to Microsoft
-5. Microsoft upload data to Azure
-6. Update in Azure Portal
+1. Create in Azure Portal a Ticket
+2. Copy data to Data Box using WAImport/Export Tool
+    - Either specify dataset.csv and driveset.csv to copy file. 
+    - Can specify encryption, e.g. Bitlocker.
+3. Ship back to Microsoft
+4. Microsoft upload data to Azure
+5. Update in Azure Portal
 
 ### Export Procedure
 1. Create Azure Portal a job
 2. Select a container (only Blob allowed)
-3. Add address
+3. Add address in portal to ship
 4. Microsoft ships Data Box to you
 5. Update Azure Portal
-6. Copy data from Data Box using WAImport/Export Tool
+6. Optional - Copy data from Data Box using WAImport/Export Tool
+
+## Recovery Service Vault
+1. To recover specific file, this is the portal.
+2. Default GRS backup.
+3. A Log must be created for Recovery Service Vault, it can be:
+    - Log Analytics Workspace (any Region)  OR
+    - Storage Account (must in same region as Recovery Service Vault)
+4. Minimum 30 days retention. 
+5. Backup Vault is a subset of Recovery Service Vault.
+
+## To delete Vault
+1. Stop Backup
+2. Delete all the data
+3. Disable soft delete
+4. Delete all soft delete data
+5. Delete Backup Vault
+6. Delete Logs (optional)
+7. Delete Recovery Service Vault / Resource Group
+
+## Recovery Sites
+1. This is not related to backup/restore. This is for Disaster Recovery.
+2. Requires a Recovery Service Vault.
+3. Can be configured in two ways:
+    - Azure to Azure
+    - On-premises to Azure
+4. For on-premises to Azure, need to install **Mobility service** on the on-premises machine. (No agent for Azure to Azure)
+5. Can use Azure Site Recovery on an Azure VM (in different region) to replicate to another region.
+6. For Hyper-V on-premises, need to install **Azure Site Recovery Provider** and **Azure Recovery Services Agent** on the on-premises Hyper-V host. A new Hyper-V site is required to be created for recovery.
+8. Recovery goal defines the RTO (Recovery Time Objective) and RPO (Recovery Point Objective).
+
+### Testing failover
+    a. Test failover;
+        - Create a new RPO (Recovery Point Objective)
+        - Create a new VM from the recovery point
+    b. Commit;
+        - Failover to a new region
+    c. Reprotect;
+        - Failover back to primary region
+
+### Planned failover
+    a. Planned failover;
+        - Stop the VM
+        - Create a new RPO (Recovery Point Objective)
+        - Create a new VM from the recovery point
+    b. Commit;
+        - Failover to a new region, do not create new VM, just power on the VM.
+        - Commit the failover so recovery point is cleaned up.
+        

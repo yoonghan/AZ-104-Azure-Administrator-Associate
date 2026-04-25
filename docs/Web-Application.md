@@ -2,8 +2,9 @@
 [Web App](https://learn.microsoft.com/en-us/azure/app-service/)
 
 ## App Service Plan
-An App Service plan defines a set of compute resources for a web application to run.
-An App Service = Azure Server WebFarms, if you park anything under Microsoft.Web/serverFarms it ties to this.
+1. An App Service plan defines a set of compute resources for a web application to run.
+2. An App Service = Azure Server WebFarms, if you park anything under Microsoft.Web/serverFarms it ties to this.
+3. App Service Plans are OS and Region specific. You cannot move an App Service Plan to a different region. You can move an App Service Plan to a different OS, but that requires recreating the App Service Plan and redeploying the app.
 
 | Feature | Description |
 | --- | --- |
@@ -77,3 +78,35 @@ Tier availability. Available only on PremiumV2 and PremiumV3 tiers.
 ## Deployment Slots
 1. Standard and above tiers support deployment slots.
 2. Used to stage and test new versions of an app before swapping them into production. [Deployment slots](https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots?tabs=portal)
+3. Each stage has a unique domain.
+4. Support slot swap, to change hostname.
+
+## VNet Integration
+1. Allows the app to connect to resources in a virtual network.
+2. Private Endpoints provide private access to your app from within a virtual network.
+3. Types of VNet Integration:
+    - **Multi-tenant VNet Integration** : Used in Basic, Standard, Premium. Injects the subnet into the App Service network, App Service Plan is still multitenant.
+    - **Isolated VNet Integration** : Used in Isolated/IsolatedV2. The App Service plan is isolated into a dedicated VNet.
+```mermaid
+flowchart LR
+    A[App Service Plan] -->|Multi-tenant VNet Integration| B[VNet Integration Subnet] --> W[Private Endpoint] --> Z[To other resources, like SQL Server]
+    A[App Service Plan] -->|Isolated VNet Integration| C[Isolated VNet] --> W
+```
+
+## Logs Types
+(logs)[https://learn.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs]
+1. Web server logs => Only for IIS on Windows.
+2. Application logs => 
+    - Verbosity: Critical <- Error <- Warning <- Info <- Verbose
+    - Filesystem => Default, and temporary storage. Logs are deleted when app is deleted.
+    - Blob storage => Stored logs to Storage Account 
+3. Deployment logs => Enabled by default. Provide information about the deployments that occur in your web application. See in Deployment / Deployment Center.
+4. Detailed error messages => Only for IIS on Windows. Provide information about errors that occur in your web application, such as invalid page requests and application errors.
+5. Standard Azure logs:
+    - Resource Logs - also known as Diagnostics Logs, send to Log Analytics (Azure Monitor), Storage Account, or Event Hub.
+    - Activity Logs - Always to Azure Monitor
+6. Log Stream => Shows application logs in real time.
+7. All logs needs to be enabled manually, except for Activity Logs and Deployment logs.
+
+## Notes
+1. "ASP.Net Core" is OS agnostic. If exam notes APS.Net only means it's for windows.

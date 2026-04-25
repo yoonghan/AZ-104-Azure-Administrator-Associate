@@ -39,7 +39,20 @@ A load balancer rule configured with protocol - all and port - 0 is known as a h
 3. Client IP and protocol (3-tuple): Specifies that the same back-end instance can handle successive requests from the same client IP address and protocol combination.
 
 ### Inbound NAT rules
-You can use load balancing rules in combination with Network Address Translation (NAT) rules.
+1. You can use load balancing rules in combination with Network Address Translation (NAT) rules.
+2. Useful for port forwarding to a Single VM to multiple VMs without specific ports assigned, for example RDP.
+3. It forwards traffic based on port, not based on load balancing algorithm.
+
+```mermaid
+flowchart LR
+    User[Internet] --> LB[Load Balancer<br/>Public IP: 20.225.100.100]
+    LB -- LB rule: TCP/80 --> VM1[VM1<br/>Private IP: 10.0.0.4]
+    LB -- LB rule: TCP/80 --> VM2[VM2<br/>Private IP: 10.0.0.5]
+    
+    User --> LB2[Load Balancer<br/>Public IP: 20.225.100.101]
+    LB2 -- Inbound NAT rule: TCP/3389 --> VM1[VM1<br/>Private IP: 10.0.0.4]
+    LB2 -- Inbound NAT rule: TCP/3389 --> VM2[VM2<br/>Private IP: 10.0.0.5]
+```
 
 ### Outbound rules
 An outbound rule configures Source Network Address Translation (SNAT) for all VMs or instances identified by the back-end pool.

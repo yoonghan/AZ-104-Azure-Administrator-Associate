@@ -18,6 +18,12 @@ SPF (sender policy framework)
 SRV (server locations)
 The SOA and NS records are created automatically when you create a DNS zone by using Azure DNS.
 
+### MX and TXT note
+1. **MX**: Points to mail server IP Address/Name. 
+2. **TXT**: Points to Azure verification.
+3. Entra ID & Microsoft 365 requires to configure a TXT record to verify domain ownership. Usually just "@" with a random string. 
+4. For Email of Microsoft 365, it requires to set both MX record and a specific TXT record. 
+
 ### A vs AAAA
 A = ipv4, AAAA = ipv6
 
@@ -30,14 +36,16 @@ The alias record set is supported in the following DNS record types:
 - AAAA
 - CNAME
 
-## Private Domains
-1. It's via Azure DNS Private Resolver. To publish a private DNS zone to your virtual network, you specify the list of virtual networks that are allowed to resolve records within the zone.
-2. Assign the Virtual Network to the Private DNS Zone.
+## Azure Private DNS Zones
+1. **Virtual Network Links**: To allow resources in a virtual network to resolve records in a Private DNS zone, you must link the VNet to the zone.
+2. **Resolution Limits**: A single VNet can be linked to multiple Private DNS zones (up to 1,000) for name resolution. Conversely, multiple VNets can be linked to the same Private DNS zone.
+3. **Auto-registration**: You can enable auto-registration on a VNet link so that VMs in that VNet automatically register their DNS records in the Private DNS zone.
+   - **Caveat Answered**: A specific Virtual Network can only be linked to **ONE** Private DNS zone with auto-registration enabled. However, a single Private DNS zone can have **multiple** VNets (up to 100) linked to it with auto-registration enabled. 
 
 ## Azure DNS Private Resolver
-- Azure DNS Private Resolver is a fully managed DNS service that allows you to resolve DNS queries for your private domains in Azure.
-- It is a hybrid DNS solution that allows you to resolve DNS queries for your private domains in Azure and on-premises.
-- This feature is disabled by default, if required need to check as "auto resolve private DNS".
+- Azure DNS Private Resolver is a fully managed hybrid DNS service.
+- It allows you to resolve DNS queries between Azure and on-premises environments without needing to deploy VM-based DNS servers.
+- It works using **Inbound Endpoints** (for on-premises to resolve Azure Private DNS) and **Outbound Endpoints** (for Azure to resolve on-premises DNS).
 
 ### Note on Public Resolver
 There are no such thing as public resolver in Azure DNS. So a domain like contoso.com in public DNS, you need to use Azure DNS or some 3rd-party resolver to resolve a public domain.
@@ -62,3 +70,15 @@ There are no such thing as public resolver in Azure DNS. So a domain like contos
 
 ## TTL
 This is time to live, to prevent DNS to always check there is a cache to remember the ip against configuration.
+
+## Public IPs
+1. Dynamic public IP address (default), assigned from available IPs in each region.
+2. Static public IP address, assigned from available IPs in each region.
+3. Can be assigned to:
+    - NIC of a VM
+    - Load Balancer
+    - Application Gateway
+    - Azure Firewall
+    - NAT Gateway
+    - VPN Gateway 
+    - Bastion

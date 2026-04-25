@@ -84,6 +84,7 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 1. Minimum 7 days.
 2. Default 14 days.
 3. Max 1 year.
+4. Purge protection(no deletion even with delete permission after enabled) can only be enabled if soft delete is enabled.
 
 ## Lifecycle Management
 1. Can use days to set lifecycle to move DOWNward tier. Hot -> Cold but not Cold -> Hot. If wants to move the other way we call it rehydration and can take time depending on tiers.
@@ -93,10 +94,13 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 
 ## Object replication
 1. Object replication is supported when the source and destination accounts are in the Hot, Cool, or Cold tier. The source and destination accounts can be in different tiers.
-2. Required Blob Versioning for both source and destination. 
+2. Require:
+    - Blob Versioning for both source and destination.
+    - Blob Change Feed for source only. Either access/modified date.
 3. Snapshot not supported.
 4. There is "Last Access Date" or "Last Modified Date" to track the access time. If the blob is accessed, the last access date will be updated. **Last Access Date** needs to be turn on with **Access Time Tracking** optional. Else do not know which is deleted, update.
 5. Only Blob storage.
+6. Max 2 policy and 2 destination account.
 
 ## Type
 Cannot be modified once selected:
@@ -106,7 +110,7 @@ Cannot be modified once selected:
 3. Page Blobs - like data disk
 
 ## Tools
-1. AzCopy
+1. AzCopy - only for Blob or File.
 2. Azure Storage Explorer
 3. Azure Data Box Disk - See later scope it's a physical disk that send to Azure Center. Snowball/Snowcone
 4. Import/Export Service - a ticket support and monitor in Azure to see you on-premise move to Azure data center.
@@ -218,9 +222,10 @@ managed disk       | ok |    | ok
 3. Service Level - Allow service like delete/update on which type of blob
 
 ### Encryption
-1. All storage are 256-bit advanced encryption standard (AES) encryption.
-2. Azure Storage encryption is enabled for all new and existing storage accounts and can't be disabled.
-3. Type encryption:
+1. Only during CREATION.
+3. All storage are 256-bit advanced encryption standard (AES) encryption.
+4. Azure Storage encryption is enabled for all new and existing storage accounts and can't be disabled.
+5. Type encryption:
    - Infrastructure encryption = enabled in account then 2 times encryption
    - Platform-managed key = cannot disable, cannot rotate
    - Customer-managed key = See later, it applies to all. If you use Customer-Managed Keys (CMK), the Azure Key Vault storing those keys must have both Soft Delete and Purge Protection enabled in the Key Vault.
@@ -228,6 +233,9 @@ managed disk       | ok |    | ok
 #### Customer Managed Keys
 1. Hardware Security Module (HSM) 
 2. Bring Your Own Key (BYOK)
+3. Requires CMK in Key Vault to have:
+    - soft delete
+    - purge protection
 
 ## Storage Insights
 1. Real-Time Monitoring. Azure Storage Insights enables real-time monitoring of storage accounts, allowing you to track usage trends, monitor performance, and set up alerts for any anomalies.

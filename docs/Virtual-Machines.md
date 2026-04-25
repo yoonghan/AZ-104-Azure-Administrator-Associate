@@ -4,7 +4,7 @@
 | Feature | Description |
 | --- | --- |
 | **VM Size** | Determines CPU, RAM, and storage performance. |
-| **OS Disk** | The boot disk for the VM. Can be Premium SSD, Standard SSD, or Standard HDD. |
+| **OS Disk** | The boot disk for the VM. Can be Premium SSD, Standard SSD, Standard SSD LRS (not available for OS disk), Ultra Disk, Ultra Disk LRS (not available for OS disk), Standard HDD. |
 | **Data Disks** | Additional disks attached to the VM for data storage. |
 | **Network Interface (NIC)** | Connects the VM to the virtual network. |
 | **Public IP Address** | Optional address for internet access. |
@@ -30,7 +30,7 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 
 ## Availability Set
 1. Split to
-    - Fault domain = Physical. This is on diff rack.
+    - Fault domain = Physical, same network and hardware. This is on diff rack.
     - Update domain = Software. Use for software update/shutdown.
 2. Control on domain/fault
 
@@ -42,6 +42,7 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 3. Splitting is based on Round Robin, If you have an Availability Set configured with 3 Fault Domains (FD) and 5 Update Domains (UD), the placement looks like this as you add VMs:
 4. Update Domain group, restarts together.
 5. Restarting VM individually, does not follow the UD group and may reorder the Update Domain. Also Placement is Immutable.
+6. If there is > X update domain, then there must be >= X fault domain. It does not have to be exact. But if UD is 1, FD must be 1, if UD is 2, FD must be 1 or 2 ...
 
 | VM Number | Fault Domain (Rack) | Update Domain (Reboot Group) |
 | --- | --- | --- |
@@ -60,11 +61,13 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 ## VM Scale Set
 1. Controlled by Load Balancer to add remove servers.
 2. 2 Types of orchestration that cannot be mixed:
-    - Uniform (serverless)
-    - Flexible (has VM/NIC/Disk)
+    - Uniform (serverless) - max 100 VMs in a single Zone.
+    - Flexible (has VM/NIC/Disk) - max 1000 VMs spread across AZs. Not all zone are supported.
 3. Max of 100 groups.
 4. Note: No longer has different SKU of basic/standard LB.
 5. This is layer 4 load balancer, handling TCP/UDP. For Layer 7, requires to use Application Gateway.
+6. Can only be in a Availability Zone or Availability Set, not both.
+7. Only in 1 region. No cross region. Use Traffic Manager for cross-region.
 
 ### Scale in policy
 [Scale-in policy](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy)
@@ -122,3 +125,19 @@ flowchart TD
     Creating --> Starting --> Start --> Running --> Stopping --> Stopped
     Running --> Deallocating --> Deallocated
 ```
+
+## Extra notes
+1. VM must be shutdown:
+    - if NIC is to be added/removed.
+    - if a VM is moved from one Availability Set to another.
+    - if a VM is resized to a different VM size.
+2. VM doesn't need to shutdown:
+    - if Public IP is to be added/removed/changed. It only takes effect when the VM is restarted.
+    - if Disk is to be added/removed/resized.
+    - if VM extension is to be added/removed/updated.
+    - if VM is to be moved from one Availability Zone to another.
+3. Disk Types:
+    - OS type
+    - Data type
+    - Temp type
+4. Only Standard HDD, Standard SSD, Premium SSD can be attached as OS disk. For data disk, all disk types are supported.

@@ -39,3 +39,9 @@ Example: AzureCloud, AzureLoadBalancer, etc.
 2. Note: Only NIC can be assigned to application security group. Not the VM.
 3. The source (Service Tag) is set to the Application Security Group.
 4. **Limitation**: All NICs assigned to a specific ASG must reside within the same Virtual Network (VNet).
+5. NSG and ASG can coexist with the same NIC.
+6. ASG can only be tied to NIC.
+7. If a VM is moved to another VNet, the ASG will be moved with the NIC.
+8. If a VM has both ASG and NSG in its NIC, the most restrictive rule applies.
+9. ASG can only be used within the same region. 
+    

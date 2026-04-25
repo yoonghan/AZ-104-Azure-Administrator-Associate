@@ -59,6 +59,8 @@ Role-based virtual machines such as Domain Controllers and DNS servers.
 4. Global peering of virtual networks in different Azure Government cloud regions isn't permitted.
 5. Virtual network peering is nontransitive. So A->B->C doesn't mean A->C. Option of using Hub-And-Spoke ($).
 6. **Azure Virtual Network Manager ** can be used to view and manage all virtual network peering in a region.
+7. You can **enable** or **disable** traffic forwarding between VNets with peering ("Allow forwarded traffic"). By default, this is **disabled**. Enabling this does NOT magically make peering transitive; it merely allows a VNet to accept traffic from a peer that originated outside that peer (which is required when using a Network Virtual Appliance in a hub VNet to route traffic between spokes).
+8. ** Gateway Transit ** allows spoke VNets to use the gateway in the hub VNet for connectivity to on-premises or the internet.
 
 ![Network Peering](img/network-peering.png)
 
@@ -94,7 +96,7 @@ Role-based virtual machines such as Domain Controllers and DNS servers.
 ### Status
 Initiated -> Connected
 
-## Traffice Routing
+## Traffic Routing
 1. Service Chaining - is a method used to direct traffic from one virtual network to a virtual appliance or gateway. It involves defining a user-defined route that specifies the peered networks, allowing for flexible traffic management. User-defined routes (UDRs) enable you to specify the next hop for traffic, which can be the IP address of a virtual machine in a peered virtual network or a VPN gateway. 
 2. UDR - are crucial for managing traffic in a virtual network. They allow you to define the next hop for traffic, which can be directed to a virtual machine or a VPN gateway in a peered network. Service chaining complements this by enabling traffic to flow through designated appliances, enhancing the network’s capabilities. Together, these mechanisms facilitate a multi-level hub and spoke architecture, allowing for better resource management and connectivity between virtual networks. Service tags can be used in UDRs.
 3. Virtual Application - often referred to as a network virtual appliance (NVA), is a virtual machine that performs specific network functions such as firewalls, WAN optimization, or other network services. These appliances can be integrated into Azure virtual networks to enhance network capabilities and manage traffic effectively. [NVA](https://learn.microsoft.com/en-us/training/modules/control-network-traffic-flow-with-routes/4-network-virtual-appliances)
@@ -148,7 +150,7 @@ Figure: Can also have 2 different vnet just need linking, e.g. peering.
 
 ## Bastion Server
 1. Used as intermitery jump box to access resources in a private subnet. [Bastion Server](https://learn.microsoft.com/en-us/training/modules/secure-access-to-vms-with-azure-bastion/2-what-is-azure-bastion)
-2. SKUs.
+2. SKUs. You can upgrade, but cannot downgrade.
     - Premium: Includes all Standard features plus session recording for compliance and private-only deployment.
     - Standard: Includes all Basic features plus scalability and advanced features (native client, shareable links, IP-based connections, custom ports, file transfer).
     - Basic: Dedicated deployment with fixed capacity for production environments with moderate connection requirements.
@@ -158,6 +160,9 @@ Figure: Can also have 2 different vnet just need linking, e.g. peering.
     - Dedicated deployment: Basic, Standard, and Premium SKUs deployed to your virtual network.
     ![Dedicated Deployment](img/bastion_dedicated.png)
     - Developer: Shared infrastructure for development and testing environments. 
+4. Requires to deploy to VNET with at least /26 subnet. And the Bastion needs its own subnet. Do not deploy other resources to the Bastion subnet.
+5. You can not use UDR or Firewall to route the traffic to the Bastion. It has to go directly to the Bastion.
+6. Bastion can have multiple NICs.
 
 ## Network Watcher
 Monitor flows between resources in Azure. [Network Watcher](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-network-watcher/2-what-is-azure-network-watcher)
