@@ -42,22 +42,46 @@ A load balancer rule configured with protocol - all and port - 0 is known as a h
 
 ### Inbound NAT rules
 1. You can use load balancing rules in combination with Network Address Translation (NAT) rules.
-2. Useful for port forwarding to a Single VM to multiple VMs without specific ports assigned, for example RDP.
+2. Useful for port forwarding to specific VMs within a backend pool (e.g., mapping separate frontend ports to RDP/SSH on different VMs).
 3. It forwards traffic based on port, not based on load balancing algorithm.
+
+#### Restrictions
+- **No Health Probes**: Unlike load balancing rules, inbound NAT rules do not use health probes. Traffic is forwarded regardless of instance health.
+- **Rule Limits**: Maximum of 1,500 total rules (including LB, NAT, and Outbound rules) per Standard Load Balancer.
+- **Port Overlap**: Frontend ports cannot overlap with existing load balancing rules on the same IP.
+- **1:1 Mapping**: Each frontend port maps to a specific backend instance. You cannot map one port to multiple VMs.
+
+#### How to Create
+1. Navigate to **Load Balancer** > **Settings** > **Inbound NAT rules**.
+2. Click **+ Add**.
+3. Configure the **Name**, **Frontend IP**, and **Backend Pool**.
+4. Select the **Target Virtual Machine** and define the **Frontend Port** and **Backend Port** (e.g., Frontend 3389 -> VM1 3389, Frontend 3390 -> VM2 3389).
 
 ```mermaid
 flowchart LR
     User[Internet] --> LB[Load Balancer<br/>Public IP: 20.225.100.100]
-    LB -- LB rule: TCP/80 --> VM1[VM1<br/>Private IP: 10.0.0.4]
-    LB -- LB rule: TCP/80 --> VM2[VM2<br/>Private IP: 10.0.0.5]
+    LB -- LB rule: TCP/80 --> Pool[Backend Pool]
+    Pool --> VM1[VM1<br/>10.0.0.4]
+    Pool --> VM2[VM2<br/>10.0.0.5]
     
     User --> LB2[Load Balancer<br/>Public IP: 20.225.100.101]
-    LB2 -- Inbound NAT rule: TCP/3389 --> VM1[VM1<br/>Private IP: 10.0.0.4]
-    LB2 -- Inbound NAT rule: TCP/3389 --> VM2[VM2<br/>Private IP: 10.0.0.5]
+    LB2 -- NAT rule: TCP/3389 --> VM1[VM1<br/>10.0.0.4]
+    LB2 -- NAT rule: TCP/3390 --> VM2[VM2<br/>10.0.0.5]
 ```
 
 ### Outbound rules
-An outbound rule configures Source Network Address Translation (SNAT) for all VMs or instances identified by the back-end pool.
+1. An outbound rule configures Source Network Address Translation (SNAT) for all VMs or instances identified by the back-end pool.
+2. Used for:
+    - **Internet Connectivity**: Provides outbound internet access for VMs in a backend pool that do not have their own public IP addresses.
+    - **SNAT Port Management**: Allows you to manually scale and allocate SNAT ports to avoid "SNAT port exhaustion" when many outbound connections are made.
+    - **Multiple Frontends**: Can use different public IPs for different backend pools to manage outbound traffic identity.
+
+#### How to Create Outbound rules
+1. Navigate to **Load Balancer** > **Settings** > **Outbound rules**.
+2. Click **+ Add**.
+3. Select the **Frontend IP address** (must be public) and the **Backend pool**.
+4. Define the **Protocol** (TCP, UDP, or All).
+5. (Optional) Set **Port allocation** to "Manually choose number of outbound ports" if you need specific scaling.
 
 ## Load Balancer SKU
 1. Standard SKU
