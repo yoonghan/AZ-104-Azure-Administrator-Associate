@@ -141,3 +141,5 @@ flowchart TD
     - Data type
     - Temp type
 4. Only Standard HDD, Standard SSD, Premium SSD can be attached as OS disk. For data disk, all disk types are supported.
+5. Disk Resizing doesn't need to be detached. But requires re-partitioning within the OS to use the new space.
+6. Disk Resize can only increase size, not decrease.

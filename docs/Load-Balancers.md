@@ -19,10 +19,12 @@ The front-end IP address is the address clients use to connect to your web appli
 ![Front-end IP](img/front-end-ip.png)
 
 ### Load balancer rules
-A load balancer rule defines how traffic is distributed to the back-end pool.
+A load balancer rule defines how traffic is distributed to the back-end pool. It uses the frontend IP, the back-end pool, the health probe, the protocol, the port, and the type of load balancing.
 
 ### Back-end pool
-The back-end pool is a group of VMs or instances in a Virtual Machine Scale Set that responds to the incoming request.
+1. The back-end pool is a group of VMs or instances in a Virtual Machine Scale Set that responds to the incoming request.
+2. The pool can also contain a mix of VMs and Virtual Machine Scale Set instances, but a VM cannot belong to both a standard load balancer back-end pool and a zone-redundant load balancer back-end pool.
+3. Load balancer rules must have a unique name, but they cannot use the same IP address and port combinations.
 
 ### Health probes
 1. Allows:
@@ -88,7 +90,6 @@ An outbound rule configures Source Network Address Translation (SNAT) for all VM
     - Rewrite HTTP headers. HTTP headers allow the client and server to pass parameter information with the request or the response.
     - Custom error pages. Application Gateway allows you to create custom error pages instead of displaying default error pages. You can use your own branding and layout using a custom error page.
     - Health probes
-
 4. Routing
     - Path-based routing, i.e /video/*  to 1 backendpool, /images/* to another backendpool
     - Multi-site hosting / Host-based routing, i.e www.contoso.com to 1 backendpool, www.fabrikam.com to another backendpool

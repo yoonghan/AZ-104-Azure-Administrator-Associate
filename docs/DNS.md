@@ -78,7 +78,7 @@ This is time to live, to prevent DNS to always check there is a cache to remembe
     - NIC of a VM
     - Load Balancer
     - Application Gateway
-    - Azure Firewall
+    - Azure Firewall (also known as NVA)
     - NAT Gateway
     - VPN Gateway 
     - Bastion

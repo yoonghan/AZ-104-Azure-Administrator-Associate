@@ -15,13 +15,14 @@
 ## Order
 [Policy Effect](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effect-basics)
 
-- disabled
-- append / modify
-- deny
-- audit
-- manual
-- auditIfNotExists / deployIfNotExists
-- denyAction
+- disabled (no enforcement, but policy definition still exists)
+- append (allow the policy to update or add new values. Only applied during resource creation.)
+- modify (allow the policy to update or add new values. Only applied during resource creation.)
+- deny (Deny policy always takes precedence over other policies. Not allowed to create or update resources.)
+- audit (Audit policy will evaluate resource, and if the policy is not met, it will audit the resource.)
+- auditIfNotExists (Audit policy will evaluate resource, and if the policy is not met, it will audit the resource.)
+- deployIfNotExists (Deploy policy will evaluate resource, and if the policy is not met, it will deploy the resource. This is a policy that can be used to enforce compliance with other policies.)
+- manualTrigger (Manual trigger policy will trigger the remediation task manually.)
 
 ## Remediation
 Remediation is a process that allows you to apply a policy assignment to existing resources. When you create a policy assignment, it will not affect existing resources. To apply the policy assignment to existing resources, you need to run a remediation task.
