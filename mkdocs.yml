@@ -38,6 +38,7 @@ nav:
       - DNS.md
       - Network-Security-Group.md
       - Load-Balancers.md
+      - VPN.md
     - Virtual-Machines.md
     - Web-Application.md
     - Containers.md
