@@ -1,6 +1,9 @@
 # Azure Policy
-[Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/)
+[Azure Policy](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/azure-policy-design-principles)
+1. The link above is much more concise. Read it first.
 
+## General Concepts
+1. Applies to Management Group, Subscription, and Resource Group. Can be up to Tenant Root.
 1. New policy assigned will take 5-15 minutes to take effect.
 2. Policy applied restricts new resource creation and updates, but will not affect existing resource creation and updates. To apply to existing resources, you need to run a remediation task.
 3. Deny Policy always takes precedence over other policies.
