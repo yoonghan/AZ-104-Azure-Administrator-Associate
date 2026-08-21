@@ -1,0 +1,2079 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Han">
+      
+      
+        <link rel="canonical" href="https://yoonghan.github.io/AZ-104-Azure-Administrator-Associate/Virtual-Machines/">
+      
+      
+        <link rel="prev" href="../VPN/">
+      
+      
+        <link rel="next" href="../Web-Application/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Virtual Machines - Azure Administrator (AZ-104) Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#virtual-machines" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Azure Administrator (AZ-104) Study Guide" class="md-header__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Azure Administrator (AZ-104) Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Virtual Machines
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Infrastructure/" class="md-tabs__link">
+          
+  
+  
+  Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Exam_Preparation/Notes/" class="md-tabs__link">
+          
+  
+  
+  Exam
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Azure Administrator (AZ-104) Study Guide" class="md-nav__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Azure Administrator (AZ-104) Study Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Topics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntraId
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EntraId
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EntraId/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../User/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Storage-Account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Virtual-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Network-Security-Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security Group (NSG)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Load-Balancers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VPN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Machines
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sizes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability-zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability Zone
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-scale-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VM Scale Set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VM Scale Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spot-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spot VM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-in-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scale in policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VM extensions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-automation-runbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure automation / runbook
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto - shutdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-site-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Site Recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LifeCycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-extra-az-305" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra - Extra AZ-305
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extra - Extra AZ-305">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-cool-down-scale-in-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Cool-down (scale-in) period
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connection Cool-down (scale-in) period">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cool-down-for-scale-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cool-down for Scale out
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flapping-and-thrashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flapping and Thrashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Web-Application/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exam
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exam_Preparation/Notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exam_Preparation/Labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sizes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability-zone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability Zone
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-scale-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VM Scale Set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VM Scale Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spot-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spot VM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-in-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scale in policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VM extensions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-automation-runbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure automation / runbook
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto - shutdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-site-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Site Recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differences
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LifeCycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-extra-az-305" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra - Extra AZ-305
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extra - Extra AZ-305">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-cool-down-scale-in-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Cool-down (scale-in) period
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connection Cool-down (scale-in) period">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cool-down-for-scale-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cool-down for Scale out
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flapping-and-thrashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flapping and Thrashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="virtual-machines">Virtual Machines</h1>
+<p><a href="https://learn.microsoft.com/en-us/azure/virtual-machines/">Link to VM Size</a></p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VM Size</strong></td>
+<td>Determines CPU, RAM, and storage performance.</td>
+</tr>
+<tr>
+<td><strong>OS Disk</strong></td>
+<td>The boot disk for the VM. Can be Premium SSD, Standard SSD, Standard SSD LRS (not available for OS disk), Ultra Disk, Ultra Disk LRS (not available for OS disk), Standard HDD.</td>
+</tr>
+<tr>
+<td><strong>Data Disks</strong></td>
+<td>Additional disks attached to the VM for data storage.</td>
+</tr>
+<tr>
+<td><strong>Network Interface (NIC)</strong></td>
+<td>Connects the VM to the virtual network.</td>
+</tr>
+<tr>
+<td><strong>Public IP Address</strong></td>
+<td>Optional address for internet access.</td>
+</tr>
+<tr>
+<td><strong>Availability Set</strong></td>
+<td>Spreads VMs across physical hardware to prevent downtime.</td>
+</tr>
+<tr>
+<td><strong>Availability Zone</strong></td>
+<td>Spreads VMs across different data centers for zone-level redundancy.</td>
+</tr>
+<tr>
+<td><strong>VM Scale Set</strong></td>
+<td>Automatically manages and scales a group of identical VMs.</td>
+</tr>
+<tr>
+<td><strong>Azure Backup</strong></td>
+<td>Service for backing up and restoring VMs.</td>
+</tr>
+<tr>
+<td><strong>Azure Site Recovery</strong></td>
+<td>Service for disaster recovery and business continuity.</td>
+</tr>
+<tr>
+<td><strong>Azure Monitor</strong></td>
+<td>Service for monitoring VM performance and health.</td>
+</tr>
+<tr>
+<td><strong>Azure Advisor</strong></td>
+<td>Provides recommendations for optimizing VM performance and cost.</td>
+</tr>
+<tr>
+<td><strong>Azure Policy</strong></td>
+<td>Enforces organizational standards and assesses compliance.</td>
+</tr>
+<tr>
+<td><strong>Azure Role-Based Access Control (RBAC)</strong></td>
+<td>Controls access to VM resources.</td>
+</tr>
+<tr>
+<td><strong>Azure Disk Encryption</strong></td>
+<td>Encrypts VM disks for security.</td>
+</tr>
+<tr>
+<td><strong>Azure Security Center</strong></td>
+<td>Provides security management and threat protection.</td>
+</tr>
+<tr>
+<td><strong>Azure Advisor</strong></td>
+<td>Provides recommendations for optimizing VM performance and cost.</td>
+</tr>
+<tr>
+<td><strong>Azure Policy</strong></td>
+<td>Enforces organizational standards and assesses compliance.</td>
+</tr>
+<tr>
+<td><strong>Azure Role-Based Access Control (RBAC)</strong></td>
+<td>Controls access to VM resources.</td>
+</tr>
+<tr>
+<td><strong>Azure Disk Encryption</strong></td>
+<td>Encrypts VM disks for security.</td>
+</tr>
+<tr>
+<td><strong>Azure Security Center</strong></td>
+<td>Provides security management and threat protection.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sizes">Sizes</h2>
+<p>Checkout from Size-&gt;Overview in Azure Learn site. Principal is CPU vs Memory. This is vertical scaling.</p>
+<h2 id="availability-set">Availability Set</h2>
+<ol>
+<li>Split to<ul>
+<li>Fault domain = Physical, same network and hardware. This is on diff rack.</li>
+<li>Update domain = Software. Use for software update/shutdown.</li>
+</ul>
+</li>
+<li>Control on domain/fault</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Min (Allowed)</th>
+<th>Max (Allowed)</th>
+<th>Common Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fault Domains</td>
+<td>1</td>
+<td>3 (depends on region)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Update Domains</td>
+<td>1</td>
+<td>20</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Splitting is based on Round Robin, If you have an Availability Set configured with 3 Fault Domains (FD) and 5 Update Domains (UD), the placement looks like this as you add VMs:</li>
+<li>Update Domain group, restarts together.</li>
+<li>Restarting VM individually, does not follow the UD group and may reorder the Update Domain. Also Placement is Immutable.</li>
+<li>If there is &gt; X update domain, then there must be &gt;= X fault domain. It does not have to be exact. But if UD is 1, FD must be 1, if UD is 2, FD must be 1 or 2 ...</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>VM Number</th>
+<th>Fault Domain (Rack)</th>
+<th>Update Domain (Reboot Group)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VM 1</td>
+<td>FD 0</td>
+<td>UD 0</td>
+</tr>
+<tr>
+<td>VM 2</td>
+<td>FD 1</td>
+<td>UD 1</td>
+</tr>
+<tr>
+<td>VM 3</td>
+<td>FD 2</td>
+<td>UD 2</td>
+</tr>
+<tr>
+<td>VM 4</td>
+<td>FD 0 (Recycles)</td>
+<td>UD 3</td>
+</tr>
+<tr>
+<td>VM 5</td>
+<td>FD 1</td>
+<td>UD 4</td>
+</tr>
+<tr>
+<td>VM 6</td>
+<td>FD 2</td>
+<td>UD 0 (Recycles)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="availability-zone">Availability Zone</h2>
+<ol>
+<li>Region always have 3 AZs</li>
+<li>Az cannot be switch to Availability Set, so are AS to AZ.</li>
+<li>Data transfer between AZ cost $, within AZ is free.</li>
+</ol>
+<h2 id="vm-scale-set">VM Scale Set</h2>
+<ol>
+<li>Controlled by Load Balancer to add remove servers.</li>
+<li>2 Types of orchestration that cannot be mixed:<ul>
+<li>Uniform (serverless) - max 100 VMs in a single Zone.</li>
+<li>Flexible (has VM/NIC/Disk) - max 1000 VMs spread across AZs. Not all zone are supported and Spot VMs are not supported.</li>
+</ul>
+</li>
+<li>Max of 100 groups.</li>
+<li>Note: No longer has different SKU of basic/standard LB.</li>
+<li>This is layer 4 load balancer, handling TCP/UDP. For Layer 7, requires to use Application Gateway.</li>
+<li>Can only be in a Availability Zone or Availability Set, not both.</li>
+<li>Only in 1 region. No cross region. Use Traffic Manager for cross-region.</li>
+</ol>
+<h3 id="spot-vm">Spot VM</h3>
+<p>Use Spot VMs for:
+1. compute-intensive, fault-tolerant workloads like batch processing, rendering, or big data analytics
+2. short-term workloads that can tolerate interruptions, such as batch processing, rendering, or big data analytics.
+<strong>Note</strong>: Spot VMs are not supported for Flexible VM Scale Sets, and Spot VMs can only be deployed in Zone-Redundant VM Scale Sets.</p>
+<h3 id="scale-in-policy">Scale in policy</h3>
+<p><a href="https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy">Scale-in policy</a>
+Configures to remove based on:
+1. Default
+    - Balance virtual machines across availability zones (if the scale set is deployed in zone-spanning configuration)
+    - Balance virtual machines across fault domains (best effort)
+    - Delete virtual machine with the highest instance ID
+2. NewestVM - delete the newest, or most recently created virtual machine in the scale set, after balancing VMs across availability zones
+3. OldestVM - delete the oldest, or least recently created virtual machine in the scale set, after balancing VMs across availability zones.</p>
+<p><img alt="Scaling condition" src="../img/vmss_scaling.png" /></p>
+<h2 id="vm-extensions">VM extensions</h2>
+<ol>
+<li>Used to configure and install more software on your virtual machine after the initial deployment. </li>
+<li>OS based:<ul>
+<li>Linux uses waagent (Linux Agent)</li>
+<li>Windows uses Windows Azure VM Agent, installed by default. Has option to install diagnostic agent.</li>
+</ul>
+</li>
+<li>Can be listed with command (az vm extension list --resource-group <resource-group-name> --vm-name <vm-name>)</li>
+<li>Custom script, allows shell script <code>https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows</code>. Don't use the Custom Script Extension to run Update-AzVM with the same VM as its parameter. The extension will wait for itself.</li>
+</ol>
+<h2 id="azure-automation-runbook">Azure automation / runbook</h2>
+<p>Just a script to autoshutdown, or run some automation.</p>
+<h2 id="auto-shutdown">Auto - shutdown</h2>
+<p>Optional to use runbook/automation to run this as well.</p>
+<h2 id="azure-site-recovery">Azure Site Recovery</h2>
+<p>Azure Site Recovery replicates workloads from a primary site to a secondary location. If an outage happens at your primary site, you can fail over to a secondary location. This failover enables users to continue to access your applications without interruption. You can then fail back to the primary location after it's up and running again. Azure Site Recovery is about replication of virtual or physical machines; it keeps your workloads available in an outage.</p>
+<h2 id="backup">Backup</h2>
+<ol>
+<li>Backup is done by Azure Backup service, a subset of Recovery Services.</li>
+<li>Azure Backup doesn't limit the amount of inbound or outbound data you transfer. Azure Backup also doesn't charge for the data that is transferred.</li>
+<li>VM has extension for 2 type of backup:<ul>
+<li>Storage: Snapshots when using an Azure VM or Azure Files.</li>
+<li>Stream backup: For databases like SQL or High-performance Analytic Appliance (HANA) running in VMs.</li>
+</ul>
+</li>
+</ol>
+<p><img alt="Virtual Machine Backup" src="../img/vm_backup.png" /></p>
+<h2 id="differences">Differences</h2>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Tool</th>
+<th>What happens if...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rack Level</td>
+<td>Fault Domains (inside Availability Set)</td>
+<td>A single power supply or network switch on a rack fails.</td>
+</tr>
+<tr>
+<td>Server Level</td>
+<td>Update Domains (inside Availability Set)</td>
+<td>Microsoft patches the physical host server where your VM lives.</td>
+</tr>
+<tr>
+<td>Datacenter Level</td>
+<td>Availability Zones</td>
+<td>An entire building loses power or has a cooling failure.</td>
+</tr>
+<tr>
+<td>Traffic Level</td>
+<td>Load Balancer Health Probes</td>
+<td>"A VM is ""up"" but your application (IIS/Apache/Service) has crashed."</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lifecycle">LifeCycle</h2>
+<ol>
+<li>Deallocated means the VM gets removed from the host, so you will not be charged for compute, but you will still be charged for storage.</li>
+<li>Public IP are released for stop and deallocate.</li>
+</ol>
+<pre class="mermaid"><code>flowchart TD
+    Creating --&gt; Starting --&gt; Start --&gt; Running --&gt; Stopping --&gt; Stopped
+    Running --&gt; Deallocating --&gt; Deallocated</code></pre>
+<h2 id="extra-notes">Extra notes</h2>
+<ol>
+<li>VM must be shutdown:<ul>
+<li>if NIC is to be added/removed.</li>
+<li>if a VM is moved from one Availability Set to another.</li>
+<li>if a VM is resized to a different VM size.</li>
+</ul>
+</li>
+<li>VM doesn't need to shutdown:<ul>
+<li>if Public IP is to be added/removed/changed. It only takes effect when the VM is restarted.</li>
+<li>if Disk is to be added/removed/resized.</li>
+<li>if VM extension is to be added/removed/updated.</li>
+<li>if VM is to be moved from one Availability Zone to another.</li>
+</ul>
+</li>
+<li>Disk Types:<ul>
+<li>OS type</li>
+<li>Data type</li>
+<li>Temp type</li>
+</ul>
+</li>
+<li>Only Standard HDD, Standard SSD, Premium SSD can be attached as OS disk. For data disk, all disk types are supported.</li>
+<li>Disk Resizing doesn't need to be detached. But requires re-partitioning within the OS to use the new space.</li>
+<li>Disk Resize can only increase size, not decrease.</li>
+</ol>
+<h2 id="extra-extra-az-305">Extra - Extra AZ-305</h2>
+<ol>
+<li>Flapping (for scale set VM), happens when:<ul>
+<li>CPU threshold is met, scale out, CPU usage drops, scale in and kept repeating.</li>
+<li>If clash in configuration, e.g. CPU scale out at 45% and memory scale in at 80%, it will keep jumping between scale out and scale in. An error will be prompted for conflicting rules.</li>
+<li>This can be prevented by setting a "Cooldown" period (Scale-in cooldown and Scale-out cooldown).</li>
+<li>The cool-down period is the time that the scale set waits before evaluating whether to scale out or in again, and it should be longer than the time it takes for the application to stabilize after a scale-out or scale-in event.</li>
+</ul>
+</li>
+<li>Cool-down period, is the time that the scale set waits before evaluating whether to scale out or in again, and it should be longer than the time it takes for the application to stabilize after a scale-out or scale-in event.</li>
+<li>Windows OS 10/11 allows multi-session, so it is possible to have multiple users logging in at the same time.</li>
+<li>Connection drain timeout, is the time that the scale set waits before removing a VM. Default is 5 minutes.</li>
+</ol>
+<h3 id="connection-cool-down-scale-in-period">Connection Cool-down (scale-in) period</h3>
+<ol>
+<li>Autoscale Cool-down Period (The "Wait to Scale" Period)
+This is a setting in Virtual Machine Scale Sets (VMSS). It prevents "flapping," where a VM scales out and then immediately scales in because the metrics are jumping around.</li>
+<li>The Example:<ol>
+<li>Imagine you have a scale-out rule: "If CPU &gt; 75% for 5 minutes, add 1 VM."</li>
+<li>9:00 AM: CPU hits 80%.</li>
+<li>9:05 AM: The 5-minute duration is met. Azure adds VM-2.</li>
+<li>9:06 AM: VM-2 is starting up, but it isn't "helping" yet because the app hasn't fully loaded. CPU is still 80%.</li>
+<li>The Problem: Without a cool-down, Azure would see CPU is still 80% and immediately trigger VM-3, VM-4, etc., over-provisioning your resources.</li>
+<li>The Solution: You set a Cool-down of 10 minutes. Azure will now ignore all scaling triggers until 9:16 AM, giving VM-2 enough time to start up and actually lower the average CPU.</li>
+</ol>
+</li>
+<li>Connection Draining (The "Graceful Exit" Period)
+While sometimes called a "cool-down," this is officially Connection Draining (for Application Gateway) or Inbound NAT/Load Balancer rules. It ensures that when a VM is being removed (Scale-in), users currently logged in don't get a "404" or "Connection Reset."</li>
+<li>The Example:<ol>
+<li>You have a Scale-in rule: "If CPU &lt; 25%, remove 1 VM."</li>
+<li>User A is currently downloading a large 500MB file from VM-2.</li>
+<li>The Trigger: Average CPU drops to 20%. Azure decides to delete VM-2.</li>
+<li>The Problem: If Azure deletes the VM immediately, User A's download fails at 90%.</li>
+<li>The Solution: You set a Connection Draining timeout of 300 seconds (5 minutes).</li>
+<li>New users are immediately sent to VM-1.</li>
+<li>VM-2 is marked as "Draining." It stays alive just long enough for User A to finish their download.</li>
+<li>After 5 minutes (or once the connection closes), Azure finally deletes the VM.</li>
+</ol>
+</li>
+</ol>
+<h4 id="cool-down-for-scale-out">Cool-down for Scale out</h4>
+<ol>
+<li>Scale-out Cool-down (The "Warm-up" Buffer)
+When a scale-out event occurs, the cool-down period is primarily there to allow the new instances to become fully operational.</li>
+<li>The Scenario: You add a VM because CPU is high.</li>
+<li>The Wait: The cool-down starts the moment the scale-out is triggered.</li>
+<li>The Reason: New VMs take time to "warm up" (boot OS, start IIS/Nginx, load cache). During this boot time, the average CPU of the set might still look high. Without a cool-down, Azure would think the first new VM didn't help and would keep spamming more VMs into existence.</li>
+</ol>
+<h4 id="flapping-and-thrashing">Flapping and Thrashing</h4>
+<ol>
+<li>The scale-in cool-down is usually more conservative (often set longer) to prevent "thrashing."</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Flapping</th>
+<th>Thrashing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Layer</td>
+<td>Management Plane (Autoscale).</td>
+<td>Operating System / Hardware Plane.</td>
+</tr>
+<tr>
+<td>Movement</td>
+<td>Adding/Removing entire VMs.</td>
+<td>Swapping data between RAM and Disk.</td>
+</tr>
+<tr>
+<td>Solution</td>
+<td>Increase Cool-down periods or widen the threshold gap.</td>
+<td>Upgrade the VM Size (Vertical Scaling/Scale-up) to get more RAM.</td>
+</tr>
+<tr>
+<td>Metric to Watch</td>
+<td>Instance Count.</td>
+<td>Disk IOPS and Memory Available.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

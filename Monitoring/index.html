@@ -1,0 +1,1843 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Han">
+      
+      
+        <link rel="canonical" href="https://yoonghan.github.io/AZ-104-Azure-Administrator-Associate/Monitoring/">
+      
+      
+        <link rel="prev" href="../Backup/">
+      
+      
+        <link rel="next" href="../Roles/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Monitoring - Azure Administrator (AZ-104) Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#monitoring" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Azure Administrator (AZ-104) Study Guide" class="md-header__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Azure Administrator (AZ-104) Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Monitoring
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Infrastructure/" class="md-tabs__link">
+          
+  
+  
+  Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Exam_Preparation/Notes/" class="md-tabs__link">
+          
+  
+  
+  Exam
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Azure Administrator (AZ-104) Study Guide" class="md-nav__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Azure Administrator (AZ-104) Study Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Topics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntraId
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EntraId
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EntraId/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../User/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Storage-Account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Virtual-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Network-Security-Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security Group (NSG)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Load-Balancers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VPN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Virtual-Machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Web-Application/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-collection-rules-dcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Collection Rules (DCR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Collection Rules (DCR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collecting-logs-for-azure-vms-with-dcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collecting Logs for Azure VMs with DCR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Alerts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostic-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostic Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-analytics-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Analytics Workspace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application Insights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kusto-query-language-kql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kusto Query Language (KQL)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-performance-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Performance Monitoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Performance Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-network-watcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Network Watcher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Monitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-troubleshoot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Troubleshoot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traffic-analytics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traffic Analytics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-monitor-network-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Monitor Network Insights
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exam
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exam_Preparation/Notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exam_Preparation/Labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-collection-rules-dcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Collection Rules (DCR)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Collection Rules (DCR)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collecting-logs-for-azure-vms-with-dcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collecting Logs for Azure VMs with DCR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Alerts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnostic-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostic Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-analytics-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Analytics Workspace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application Insights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kusto-query-language-kql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kusto Query Language (KQL)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-performance-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Performance Monitoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Performance Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-network-watcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Network Watcher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Monitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-troubleshoot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Troubleshoot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traffic-analytics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traffic Analytics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-monitor-network-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Monitor Network Insights
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="monitoring">Monitoring</h1>
+<h2 id="basic-monitoring">Basic Monitoring</h2>
+<p>Includes:</p>
+<ul>
+<li>VM availability</li>
+<li>CPU usage percentage (average)</li>
+<li>OS disk usage (total), not data disk</li>
+<li>Network operations (total)</li>
+<li>Disk operations per second (average)</li>
+</ul>
+<h2 id="data-collection-rules-dcr">Data Collection Rules (DCR)</h2>
+<p><strong>Data Collection Rules (DCRs)</strong> are a centralized way in Azure Monitor to define <strong>what</strong> data to collect, how to <strong>transform</strong> it, and <strong>where</strong> to send it. It replaces the older Windows and Linux diagnostic extensions and the legacy Azure Monitor Agent configuration.</p>
+<p>While they are heavily used for Virtual Machines, <strong>DCRs are NOT only for VMs</strong>. They are the modern, standard method for data ingestion across multiple Azure services:</p>
+<ul>
+<li><strong>Azure Monitor Agent (AMA)</strong>: Collects guest OS metrics, Windows Event Logs, and Syslog from VMs and Virtual Machine Scale Sets.</li>
+<li><strong>Logs Ingestion API</strong>: Allows any custom application to send data directly to a Log Analytics Workspace via a DCR.</li>
+<li><strong>Container Insights</strong>: Used to configure data collection for Azure Kubernetes Service (AKS).</li>
+<li><strong>Workspace Transformations</strong>: Used to filter or modify data using KQL <em>before</em> it is stored in Log Analytics (saving costs by dropping unneeded logs).</li>
+</ul>
+<p><strong>Key Components of a DCR:</strong>
+1. <strong>Data Sources</strong>: What to collect (e.g., Performance Counters, Event Logs, Custom Logs).
+2. <strong>Transformations (Optional)</strong>: KQL queries to filter out sensitive/unnecessary data or change the structure before ingestion.
+3. <strong>Destinations</strong>: Where to send the data (Log Analytics Workspace, Azure Monitor Metrics, or Event Hubs).</p>
+<h3 id="collecting-logs-for-azure-vms-with-dcr">Collecting Logs for Azure VMs with DCR</h3>
+<p><a href="https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/6-collect-log-data?ns-enrollment-type=learningpath&amp;ns-enrollment-id=learn.az-104-monitor-backup-resources">Microsoft Learn: DCR</a></p>
+<ol>
+<li><strong>Step 1: Create a Data Collection Endpoint (DCE)</strong> (Required for Custom Logs or private links).</li>
+<li><strong>Step 2: Create a DCR</strong>. You define the Data Sources and Destinations here.</li>
+<li><strong>Step 3: Associate the DCR</strong> with your target resources (e.g., VMs). Note that one DCR can be associated with multiple resources.</li>
+<li>Each DCR is typically scoped to a specific OS type (Linux or Windows) when used with the Azure Monitor Agent, though some configurations allow both.
+This can be enabled via VM Insights or installed manually. When you enable VM Insights, the Azure Monitor Agent is installed and a DCR is created automatically.
+<img alt="Enable VM Insights" src="../img/enable_vm_insights.png" /></li>
+</ol>
+<h2 id="metrics">Metrics</h2>
+<ul>
+<li><strong>Azure Monitor Metrics</strong> can store only metrics data</li>
+<li><strong>Azure Monitor Logs</strong> can store both metrics and event logs.</li>
+<li>Azure Monitor doesn't collect logs by default. You need to install Azure Monitor Agent and set up a DCR to collect logs.</li>
+<li>Azure Monitor stores collected log data in a Log Analytics workspace. </li>
+<li>Retains the data for 93 days with some exceptions.</li>
+</ul>
+<h2 id="insights">Insights</h2>
+<p>To gather Guest OS, enable it with <a href="https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/5-enable-vm-insights">Insights</a></p>
+<h2 id="creating-alerts">Creating Alerts</h2>
+<ol>
+<li>Create Alert Groups (to email, webhooks)</li>
+<li>Create Alerts Rules (based on metrics or logs) and assign to an Alert Group.</li>
+</ol>
+<h2 id="activity-logs">Activity Logs</h2>
+<ol>
+<li>Shows events that happened in the subscription. Track resource changes. </li>
+<li>Always enabled and available in Azure Monitor.</li>
+</ol>
+<h2 id="diagnostic-settings">Diagnostic Settings</h2>
+<ol>
+<li>Settings for diagnostics on Resource logs.</li>
+<li>Destination: Azure Monitor, Event Hub, Storage Account</li>
+</ol>
+<h2 id="log-analytics-workspace">Log Analytics Workspace</h2>
+<ol>
+<li>Workspace for log analysis.</li>
+<li>Cost is based on volume of data processed.</li>
+<li>Data retention is 31 days and 90 days for Sential. Can be increased to 2 years, but cost will increase.</li>
+<li>Supports multiple workspace for one resource and across regions.</li>
+<li>Table name might be AppDependencies</li>
+</ol>
+<h2 id="application-insights">Application Insights</h2>
+<ol>
+<li>It is a monitoring tool for web applications.</li>
+<li>It can collect data from multiple sources, including:<ul>
+<li>Web applications</li>
+<li>Desktop applications</li>
+<li>Mobile applications</li>
+<li>Cloud-hosted applications</li>
+</ul>
+</li>
+<li>Supports live metrics stream.</li>
+<li>Supports multiple application for one resource and across regions.</li>
+<li>This is a UI to Log Analytic Workspace. The table like AppDependencies are aliased as dependencies. 1 Workspace can have multiple App Insights but not the other way round.</li>
+</ol>
+<h2 id="custom-logs">Custom Logs</h2>
+<ol>
+<li><strong>Definition</strong>: Logs generated by applications or services that write to specific text or JSON files, rather than standard OS logging systems (like Windows Event logs or Syslog).</li>
+<li><strong>Relationship with DCR</strong>: Yes, they are directly related! With the modern Azure Monitor Agent (AMA), you use <strong>Data Collection Rules (DCRs)</strong> to define and collect Custom Logs. </li>
+<li><strong>How it works</strong>: You configure a DCR to specify the file path pattern of your custom logs and map them to a custom table in your Log Analytics workspace. You also need a <strong>Data Collection Endpoint (DCE)</strong> to ingest these custom logs. Alternatively, you can use the Logs Ingestion API to send custom logs programmatically via a DCR.</li>
+</ol>
+<h2 id="kusto-query-language-kql">Kusto Query Language (KQL)</h2>
+<ol>
+<li>Query language for Log Analytics.</li>
+</ol>
+<h2 id="network-performance-monitoring">Network Performance Monitoring</h2>
+<h3 id="azure-network-watcher">Azure Network Watcher</h3>
+<ol>
+<li><a href="https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview">Network Watcher</a> provides tools to monitor and diagnose network issues. It includes features like Network Diagnostic Tests (e.g., IP flow verify, NSG flow logs, connection troubleshooting) and Connection Monitor (for monitoring connectivity between endpoints).</li>
+<li>Requires to install Network Watcher extention on the VM. Agent runs on port 443.</li>
+</ol>
+<h3 id="connection-monitor">Connection Monitor</h3>
+<ol>
+<li>Connection Monitor is a tool that helps you monitor the network connectivity between your Azure resources and the internet. It can be used to monitor the network connectivity between your Azure resources and the internet. </li>
+<li>Requires <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-overview">Azure Monitor Agent (AMA)</a> and Data Collection Endpoint (DCE) installed on the VM.</li>
+<li>Supports both Azure resources and On-premises endpoints.</li>
+<li>Can be used with Azure Network Watcher, but not required. </li>
+<li>Supports Network Virtual Appliances (NVA).</li>
+</ol>
+<h3 id="topology">Topology</h3>
+<p>Topology service provides visualization of the network resources and their connections. It can be used to visualize the network connectivity between your Azure resources and the internet. </p>
+<h3 id="connection-troubleshoot">Connection Troubleshoot</h3>
+<p><a href="https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-connectivity-troubleshoot-overview">Connection Troubleshooting</a></p>
+<h2 id="traffic-analytics">Traffic Analytics</h2>
+<ol>
+<li>Traffic analytics analyzes network traffic flow logs from NSG (Network Security Groups) and <strong>Firewall</strong> (both Azure Firewall and Network Virtual Appliances (NVAs)) and presents them in a visual format.</li>
+<li>It requires <strong>NSG flow logs</strong> to be enabled.</li>
+<li>This is a subset to Azure Monitor Network Insights.</li>
+<li>Monitors traffic between Azure resources and on-premises networks, and across Azure regions.</li>
+<li>Can use <strong>Service Chaining</strong> to monitor traffic between Azure resources.</li>
+</ol>
+<h2 id="azure-monitor-network-insights">Azure Monitor Network Insights</h2>
+<ol>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/network-insights/network-insights-overview">Azure Monitor Network Insights</a> provides a comprehensive view of network health and performance in Azure. It includes features like Network Diagnostic Tests (e.g., IP flow verify, NSG flow logs, connection troubleshooting) and Connection Monitor (for monitoring connectivity between endpoints).</li>
+<li>It is a superset to Traffic Analytics.</li>
+<li>Collects data from multiple sources, including:<ul>
+<li><strong>Traffic analytics</strong></li>
+<li><strong>Connection Monitor</strong></li>
+<li><strong>Network Watcher</strong></li>
+<li><strong>Azure Firewall</strong></li>
+<li><strong>Network Virtual Appliances (NVAs)</strong></li>
+<li><strong>Network Security Groups (NSGs)</strong></li>
+<li><strong>Route Tables</strong></li>
+<li><strong>IP Addresses</strong></li>
+<li><strong>Virtual Networks</strong></li>
+<li><strong>Subnets</strong></li>
+<li><strong>NICs</strong></li>
+<li><strong>Load Balancers</strong></li>
+<li><strong>Application Gateways</strong></li>
+<li><strong>NAT Gateways</strong></li>
+<li><strong>Virtual Network Gateways</strong></li>
+<li><strong>ExpressRoute circuits</strong></li>
+<li><strong>VPN Gateways</strong></li>
+<li><strong>Private DNS Zones</strong></li>
+<li><strong>Private DNS Zones</strong></li>
+</ul>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
