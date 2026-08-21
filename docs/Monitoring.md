@@ -13,6 +13,7 @@ Includes:
 **Data Collection Rules (DCRs)** are a centralized way in Azure Monitor to define **what** data to collect, how to **transform** it, and **where** to send it. It replaces the older Windows and Linux diagnostic extensions and the legacy Azure Monitor Agent configuration.
 
 While they are heavily used for Virtual Machines, **DCRs are NOT only for VMs**. They are the modern, standard method for data ingestion across multiple Azure services:
+
 - **Azure Monitor Agent (AMA)**: Collects guest OS metrics, Windows Event Logs, and Syslog from VMs and Virtual Machine Scale Sets.
 - **Logs Ingestion API**: Allows any custom application to send data directly to a Log Analytics Workspace via a DCR.
 - **Container Insights**: Used to configure data collection for Azure Kubernetes Service (AKS).
@@ -25,6 +26,7 @@ While they are heavily used for Virtual Machines, **DCRs are NOT only for VMs**.
 
 ### Collecting Logs for Azure VMs with DCR
 [Microsoft Learn: DCR](https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-using-diagnostic-data/6-collect-log-data?ns-enrollment-type=learningpath&ns-enrollment-id=learn.az-104-monitor-backup-resources)
+
 1. **Step 1: Create a Data Collection Endpoint (DCE)** (Required for Custom Logs or private links).
 2. **Step 2: Create a DCR**. You define the Data Sources and Destinations here.
 3. **Step 3: Associate the DCR** with your target resources (e.g., VMs). Note that one DCR can be associated with multiple resources.
