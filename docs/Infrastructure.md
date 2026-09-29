@@ -4,7 +4,8 @@
 
 ## Azure Geographies
 [read](https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure)
-1. Just take note, or "paired" region.
+
+1. Just take note of "paired" region.
 2. Sovereign regions:
     - US Government: physical and logical network-isolated instances of Azure for U.S. government agencies and partners. These datacenters are operated by screened U.S. personnel and include additional compliance certifications.
     - China: available through a unique partnership between Microsoft and 21Vianet, whereby Microsoft doesn't directly maintain the datacenters.
@@ -16,6 +17,7 @@
 ## Resource Group
 
 ![Resource Group](img/resource_group.png)
+
 1. Everything resources has to be under a resource group.
 2. No nesting is allowed.
 3. You can move resources to different resource group.
