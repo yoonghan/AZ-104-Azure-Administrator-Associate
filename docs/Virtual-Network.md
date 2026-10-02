@@ -105,7 +105,7 @@ Initiated -> Connected
 ![Virtual Network Gateway](img/virtual-network-gateway.svg)
 6. Service endpoint - extend your private address space in Azure by providing a direct connection to your Azure resources. This connection restricts the flow of traffic: your Azure virtual machines can access your storage account directly from the private address space and deny access from a public virtual machine. Uses Azure backbone. This is free compared to private endpoint.
 7. Private endpoint - Private endpoints provide a dedicated private IP address accessible only within a specific virtual network, whereas service endpoints use public IP addresses.
-8. Border Gateway Protocol (BGP) - A network gateway in your on-premises network can exchange routes with a virtual network gateway in Azure by using BGP. ![BGP](img/bgp.png)
+8. Border Gateway Protocol (BGP) - A network gateway in your on-premises network can exchange routes with a virtual network gateway in Azure by using BGP. ![BGP](img/bgp.svg)
 
 ## Route selection and priority
 1. If multiple routes are available in a route table, Azure uses the route with the longest prefix match. For example, a message is sent to the IP address 10.0.0.2, but two routes are available with the 10.0.0.0/16 and 10.0.0.0/24 prefixes. Azure selects the route with the 10.0.0.0/24 prefix because it's more specific.
@@ -116,12 +116,12 @@ Initiated -> Connected
     - BGP routes
     - System routes
 
- ## Subnet Delegation
+## Subnet Delegation
  
- 1. Services cannot call private ips (e.g. private endpoints). So we need to delegate the subnet to the service. E.g. A webapp connecting to Private Endpoint of a database - without going via the internet.
- 2. A subnet delegation involves an empty subnet (a subnet with nothing assigned, i.e. no VM) when created. If you have resources in the subnet, you need to move them to another subnet before delegating.
- 3. To create a subnet delegation, you need to specify the service that you want to delegate the subnet to. Open the subnet, click "Delegate subnet to a service", and select Microsoft.Web/serverFarms to enable functions and webapps.
-**NOTE**: Only 1 App Plan can be delegated to a subnet. Meaning if you want to share the Subnet with Function and Webapp, you need to make sure it belongs to the same App Plan.
+1. Services cannot call private ips (e.g. private endpoints). So we need to delegate the subnet to the service. E.g. A webapp connecting to Private Endpoint of a database - without going via the internet.
+2. A subnet delegation involves an empty subnet (a subnet with nothing assigned, i.e. no VM) when created. If you have resources in the subnet, you need to move them to another subnet before delegating.
+3. To create a subnet delegation, you need to specify the service that you want to delegate the subnet to. Open the subnet, click "Delegate subnet to a service", and select Microsoft.Web/serverFarms to enable functions and webapps.
+    - NOTE: Only 1 App Plan can be delegated to a subnet. Meaning if you want to share the Subnet with Function and Webapp, you need to make sure it belongs to the same App Plan.
 
 
 ```mermaid

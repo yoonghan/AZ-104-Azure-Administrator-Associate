@@ -32,7 +32,7 @@ A load balancer rule defines how traffic is distributed to the back-end pool. It
     - HTTP or HTTPS custom probe
 
 ### High availability port
-A load balancer rule configured with protocol - all and port - 0 is known as a high availability (HA) port rule.
+A load balancer rule configured with protocol - all and port - 0 is known as a high availability (HA) port rule.<br>
 ![High Availability Port](img/high-availability-port.png) 
 
 ### Session Persistance

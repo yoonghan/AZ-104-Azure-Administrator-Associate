@@ -55,3 +55,8 @@
         - 3072-bit
         - 4096-bit
 5. Requires Key Vault Premium tier to support Client HSM.
+
+## Soft-Delete vs. Purge Protection Requirements
+1. **Soft-Delete**: Enabled automatically on all modern Key Vaults and Managed HSMs and cannot be turned off. It acts like a recycle bin, keeping deleted vaults or keys recoverable for a retention period (default of 90 days).
+2. **Purge Protection**: An optional baseline setting that _requires soft-delete to be turned on first_. When enabled, it prevents even a vault administrator or malicious actor from permanently purging an object or vault until the retention period expires. Once enabled, it cannot be turned off.
+3. For Disk Encryption / Customer-Managed Keys (CMK): Many Azure security policies and dependent services (like Azure Disk Encryption, Azure SQL, and Backup Vaults) strictly require both soft-delete and purge protection to be enabled before you can successfully configure or assign the encryption keys. If purge protection is missing during validation, the encryption configuration fails.

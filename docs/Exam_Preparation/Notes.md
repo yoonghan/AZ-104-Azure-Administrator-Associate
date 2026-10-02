@@ -20,3 +20,7 @@ Return to review can risk more time than expected. To actually return to view al
 6. **Azure Log Analytics Agent** - MMA (Legacy)
 7. **Network Watcher Agent** - MMA (Legacy)
 8. **Network Dependency Agent** - MMA (Legacy)
+
+## Purge
+1. Can only be disabled if soft-delete is disabled.
+2. CMK/Encryption requires purge protection enabled (soft-delete already enabled).
