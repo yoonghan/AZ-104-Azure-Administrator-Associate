@@ -97,9 +97,16 @@ flowchart LR
 | SLA | 99.99% | 99.99% |
 
 ### Good to know
-- **Azure Front Door** (have cache) is an application-delivery network that provides a global load balancing and site acceleration service for web applications. It offers Layer 7 capabilities for your application like TLS/SSL offload, path-based routing, fast failover, a web application firewall, and caching to improve performance and high availability of your applications. Choose this option in scenarios such as load balancing a web app deployed across multiple Azure regions.
-- **Azure Traffic Manager** is a DNS-based traffic load balancer that allows you to distribute traffic optimally to services across global Azure regions while providing high availability and responsiveness. Because Traffic Manager is a DNS-based load-balancing service, it load balances only at the domain level. For that reason, it can't fail over as quickly as Front Door, because of common challenges around DNS caching and systems not honoring DNS TTLs.
-- **Azure Application Gateway**, when TLS is required, LB do not provide. Provides Application Delivery Controller (ADC) as a service, offering various Layer 7 load-balancing capabilities. Use it to optimize web farm productivity by offloading CPU-intensive TLS/SSL termination to the gateway. Application Gateway works within a region rather than globally.
+- **Azure Front Door** Use this for global web applications (HTTP/HTTPS). It have cache and provides a global load balancing and site acceleration service for web applications. It offers Layer 7 capabilities for your application like TLS/SSL offload, path-based routing, fast failover, a web application firewall, and caching to improve performance and high availability of your applications. Choose this option in scenarios such as load balancing a web app deployed across multiple Azure regions.
+- **Azure Traffic Manager** use this for global non-web applications (or any protocol). It is a DNS-based traffic load balancer that allows you to distribute traffic optimally to services across global Azure regions while providing high availability and responsiveness. Because Traffic Manager is a DNS-based load-balancing service, it load balances only at the domain level. For that reason, it can't fail over as quickly as Front Door, because of common challenges around DNS caching and systems not honoring DNS TTLs.
+- **Azure Application Gateway**, Use this for regional web applications (HTTP/HTTPS). LB do not provide. Provides Application Delivery Controller (ADC) as a service, offering various Layer 7 load-balancing capabilities. Use it to optimize web farm productivity by offloading CPU-intensive TLS/SSL termination to the gateway. Application Gateway works within a region rather than globally.
+- **Azure Load Balancer**: Use this for regional non-web traffic (Layer 4 - TCP/UDP). It's best for load balancing internal database traffic, custom application protocols, or just providing basic internet access to VMs in a single region.
+
+## If Azure Front Door is so powerful, why use Traffic Manager?
+1. While Front Door is excellent, it is not actually available for all cases. You would choose Traffic Manager over Front Door in these scenarios:
+  - **Non-HTTP/HTTPS Traffic**: Front Door only supports HTTP and HTTPS. If you need to route traffic globally for a custom TCP/UDP protocol, FTP, or a database protocol, you must use Traffic Manager because it just returns an IP address via DNS, allowing the client to connect directly using any protocol.
+  - **Hybrid Cloud/On-Premises**: Traffic Manager can route traffic to non-Azure endpoints (like your on-premises data center) purely by pointing DNS records, making it easier for hybrid failover scenarios.
+  - **Cost and Overhead**: Because Traffic Manager only answers DNS queries (and doesn't proxy the actual data payload like Front Door does), it is generally cheaper and has less overhead for simple routing needs.
 
 ## Application Gateway
  1. Uses a round-robin process to load balance requests to the servers in each back-end pool. Session stickiness ensures client requests in the same session are routed to the same back-end server. 
@@ -117,4 +124,11 @@ flowchart LR
 4. Routing
     - Path-based routing, i.e /video/*  to 1 backendpool, /images/* to another backendpool
     - Multi-site hosting / Host-based routing, i.e www.contoso.com to 1 backendpool, www.fabrikam.com to another backendpool
-    
+
+|Feature|Azure Traffic Manager|Azure Application Gateway|
+| --- | --- | --- |
+| Scope | Global (Routes traffic across multiple Azure regions or on-prem) | Regional (Routes traffic within a single Azure region / VNet) |
+| Operating Layer | DNS Level (It resolves the domain name to an IP, but the client connects directly to the server) | Layer 7 (It proxies the connection, meaning it intercepts the HTTP/HTTPS request, reads it, and forwards it to the backend) |
+| Supported Protocols | Any protocol (Because it's just DNS) | HTTP, HTTPS, HTTP/2, WebSocket |
+| Routing Features | Priority, Geographic, Performance (Proximity) | URL Path-based (/video), Host-based (www.site.com), Custom headers |
+| Advanced Web Features | None | SSL Termination, WAF, Session Stickiness, Custom error pages |
