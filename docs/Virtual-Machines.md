@@ -42,7 +42,9 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 3. Splitting is based on Round Robin, If you have an Availability Set configured with 3 Fault Domains (FD) and 5 Update Domains (UD), the placement looks like this as you add VMs:
 4. Update Domain group, restarts together.
 5. Restarting VM individually, does not follow the UD group and may reorder the Update Domain. Also Placement is Immutable.
-6. If there is > X update domain, then there must be >= X fault domain. It does not have to be exact. But if UD is 1, FD must be 1, if UD is 2, FD must be 1 or 2 ...
+6. There is no correlation between the number of Fault Domains and Update Domains. You can have a high number of UDs (e.g., 20) with a low number of FDs (e.g., 2 or 3).
+7. Maximum only 3 Fault Domains (some regions only 2) and Maximum only 20 Update Domains.
+8. Existing VM cannot be added to a Availability Set after creation.
 
 | VM Number | Fault Domain (Rack) | Update Domain (Reboot Group) |
 | --- | --- | --- |
@@ -71,13 +73,16 @@ Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. Th
 
 ### Spot VM
 Use Spot VMs for:
+
 1. compute-intensive, fault-tolerant workloads like batch processing, rendering, or big data analytics
 2. short-term workloads that can tolerate interruptions, such as batch processing, rendering, or big data analytics.
+
 **Note**: Spot VMs are not supported for Flexible VM Scale Sets, and Spot VMs can only be deployed in Zone-Redundant VM Scale Sets.
 
 ### Scale in policy
 [Scale-in policy](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-scale-in-policy)
 Configures to remove based on:
+
 1. Default
     - Balance virtual machines across availability zones (if the scale set is deployed in zone-spanning configuration)
     - Balance virtual machines across fault domains (best effort)
@@ -198,3 +203,41 @@ When a scale-out event occurs, the cool-down period is primarily there to allow 
 | Movement | Adding/Removing entire VMs.|Swapping data between RAM and Disk.|
 | Solution|Increase Cool-down periods or widen the threshold gap.|Upgrade the VM Size (Vertical Scaling/Scale-up) to get more RAM.|
 | Metric to Watch|Instance Count.|Disk IOPS and Memory Available. |
+
+## Questions
+1. The "Round-Robin Placement" Question (Very Common)
+```
+This is exactly the scenario you touched on. They will give you the number of FDs, UDs, and VMs, and ask you to determine the placement or the impact of a failure.
+
+Example Scenario: You create an Availability Set with 2 Fault Domains and 5 Update Domains. You deploy 6 VMs into this Availability Set.
+
+Question A: Which Fault Domain and Update Domain will VM 6 reside in?
+How to solve: You map it out using zero-indexed round-robin.
+VM1: FD0, UD0
+VM2: FD1, UD1
+VM3: FD0, UD2 (FD loops back)
+VM4: FD1, UD3
+VM5: FD0, UD4
+VM6: FD1, UD0 (UD loops back)
+Answer: VM 6 is in Fault Domain 1 and Update Domain 0.
+Question B: If Microsoft performs planned maintenance (an update), what is the maximum number of VMs that will reboot at the same time?
+Answer: 2 VMs. Since there are 5 UDs and 6 VMs, UD0 has VM1 and VM6. The other UDs only have 1 VM. So at most, 2 VMs go down together.
+Question C: If Rack 0 (Fault Domain 0) loses power, how many VMs stay online?
+Answer: 3 VMs. Half the VMs (VM 1, 3, 5) are in FD0, and the other half (VM 2, 4, 6) are in FD1.
+```
+2. The "Adding an Existing VM" Question (Classic Gotcha)
+```
+Example Scenario: You have a standalone VM (VM1) that is currently running. You realize you need high availability, so you create a second VM (VM2) and an Availability Set.
+
+Question: How do you add VM1 to the new Availability Set?
+Answer: You cannot add an existing VM to an Availability Set. A VM can only be added to an Availability Set at the time of its creation. To fix this, you must delete VM1 (keeping its disks) and recreate it inside the Availability Set.
+```
+3. The "Planned vs. Unplanned" Identification Question
+```
+Example Scenario: You are designing architecture and need to protect against a power failure in a single rack, and also protect against host servers rebooting due to OS patching.
+
+Question: Which mechanisms do you use?
+Answer: You map them strictly:
+Power/hardware failure (Unplanned) = Fault Domain
+OS Patching/reboots (Planned) = Update Domain
+```
