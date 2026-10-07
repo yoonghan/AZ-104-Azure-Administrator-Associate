@@ -1,5 +1,6 @@
 # Azure Policy
 [Azure Policy](https://learn.microsoft.com/en-us/training/modules/sovereignty-policy-initiatives/azure-policy-design-principles)
+
 1. The link above is much more concise. Read it first.
 
 ## General Concepts
@@ -31,3 +32,4 @@
 Remediation is a process that allows you to apply a policy assignment to existing resources. When you create a policy assignment, it will not affect existing resources. To apply the policy assignment to existing resources, you need to run a remediation task.
 
 
+![Policy Check](img/policy-check.png)
