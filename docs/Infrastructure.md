@@ -23,6 +23,7 @@
 5. Lock can be applied on resource group or resources. It prevents accidental deletion or modification of resources.
 6. Resources are just group doesn't restricts network traffic. Meaning resources in different resource group can communicate with other resource group's resources by default.
 7. Action or setting at the Resource Group level are applied to all the resources in the resource group.
+8. Resources in Resource group are seperated. E.g. if VNET in RG1 and NSG in RG2 with same region, they can connect.
 
 ## Hierarchy
 
