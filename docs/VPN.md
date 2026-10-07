@@ -22,3 +22,13 @@
 | Connection resiliency | active-passive or active-active | active-passive or active-active
 | Typical use case | Secure access to Azure virtual networks for remote users | Dev, test, and lab scenarios and small to medium scale production workloads for cloud services and virtual machines
 2. SKU List (https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways), Basic has no BGP the rest of SKU are based on speed.
+
+## Rules
+1. Always reinstall client when there is VPN gateway change. Point-to-Site (P2S) VPN clients must be downloaded and reinstalled again after virtual network peering is successfully configured to ensure that the new routes are downloaded to the client. 
+```
+You have an on-premises device named Device1 that runs Windows and has a Point-to-Site (P2S) VPN client installed.
+
+You configure network peering between VNet1 and VNet2.
+
+You need to ensure that Device1 can access VNet2 when a VPN connection is established.
+```
