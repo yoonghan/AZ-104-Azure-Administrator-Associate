@@ -182,5 +182,20 @@ Network Watcher consists of three major sets of tools and capabilities:
     - Packet capture
     - VPN troubleshoot
 3. Traffic
-    - Flow logs
     - Traffic analytics
+
+## Private DNS
+1. Azure Private DNS provides a reliable, secure DNS service to manage and resolve domain names in a virtual network without the need to add a custom DNS solution.
+2. By using Azure Private DNS, you can use your own custom domain names rather than the Azure-provided names.
+3. You can link a private DNS zone to one or more virtual networks by creating **virtual network links**.
+4. **Auto-registration**: If you enable auto-registration on a virtual network link, the DNS records for the virtual machines on that virtual network are automatically registered in the private DNS zone.
+
+### Exam Scenario
+**Question:**
+You have an Azure virtual network named VNet1. You create an Azure Private DNS zone named contoso.com. You need to ensure that the virtual machines on VNet1 register in the contoso.com private DNS zone. What should you do?
+
+**Answer:** 
+- Add a virtual network link to contoso.com.
+
+**Explanation:** 
+To have VMs automatically register their DNS records in an Azure Private DNS zone, you must create a virtual network link between the VNet and the DNS zone. When configuring this link, enabling auto-registration ensures the virtual machines' IP addresses are automatically registered as A records within the private DNS zone.

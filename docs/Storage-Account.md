@@ -115,10 +115,17 @@ Cannot be modified once selected:
 3. Azure Data Box Disk - See later scope it's a physical disk that send to Azure Center. Snowball/Snowcone
 4. Import/Export Service - a ticket support and monitor in Azure to see you on-premise move to Azure data center.
 
+## Az Copy
+1. To allow AZ-copy to access the blob storage, you need to enable the **Allow Azure services on the trusted Microsoft services list** in the firewall.
+2. Then command wise. `az copy <source> <destination>`. Remember `--recursive` for folders.
+3. Use `Get-ChildItem -Path $imageFiles -Recurse | Set-AzStorageBlobContent -Container $containerName -Context $ctx` to upload multiple files with Powershell. But this is not azcopy..noted because of exam question.
+
+
 ## Azure File
 1. Azure Files provides the SMB and NFS protocols, client libraries, and a REST interface that allows access from anywhere to stored files.
 2. Can be use as replacement for NAS, has file sync capabilities.
 3. True file/directory structure.
+4. **Identity-Based**, only in Azure file there is identity based access. Means you can set AD authentication, either AD DS or Azure AD DS. Uses Keberos to authenticate the user's PC to allow access.
 
 ### Access Tier (In order)
 1. *Premium - If premium is selected. cannot choose below options.
@@ -246,3 +253,7 @@ Contains:
     - Enhanced Security and Compliance.
     - Role-Based Access Control (RBAC).
     - Unified View
+
+## Integration
+1. Data Lake Storage is supported.
+    - Only blob and general-purpose v2 SA is supported

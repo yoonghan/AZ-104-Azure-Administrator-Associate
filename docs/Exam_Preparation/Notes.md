@@ -20,3 +20,6 @@ Return to review can risk more time than expected. To actually return to view al
 6. **Azure Log Analytics Agent** - MMA (Legacy)
 7. **Network Watcher Agent** - MMA (Legacy)
 8. **Network Dependency Agent** - MMA (Legacy)
+
+## Azure Files
+1. Still one that can use AD for authentication. Identity-based.
