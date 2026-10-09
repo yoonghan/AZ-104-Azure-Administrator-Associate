@@ -139,7 +139,7 @@ flowchart TD
     - if a VM is resized to a different VM size.
 2. VM doesn't need to shutdown:
     - if Public IP is to be added/removed/changed. It only takes effect when the VM is restarted.
-    - if Disk is to be added/removed/resized.
+    - if Data Disk is to be added/removed/resized.
     - if VM extension is to be added/removed/updated.
     - if VM is to be moved from one Availability Zone to another.
 3. Disk Types:
@@ -149,6 +149,7 @@ flowchart TD
 4. Only Standard HDD, Standard SSD, Premium SSD can be attached as OS disk. For data disk, all disk types are supported.
 5. Disk Resizing doesn't need to be detached. But requires re-partitioning within the OS to use the new space.
 6. Disk Resize can only increase size, not decrease.
+7. Multiple NIC can be attached to 1 VM, good to have multiple NIC to connect to different subnets.
 
 ## Extra - Extra AZ-305
 1. Flapping (for scale set VM), happens when:

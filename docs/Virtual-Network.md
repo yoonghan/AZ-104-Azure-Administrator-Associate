@@ -5,7 +5,8 @@
 
 ## Subnet
 1. Must be specified with CIDR notation. E.g. 10.0.0.2/24
-2. All subnet has this default system routes:
+2. Subnet are not connected, if require VM to connects both either create peering or easier create a NIC that can be connected to VM.
+3. All subnet has this default system routes:
 
 Address prefix | Next hop type
 --- | ---
