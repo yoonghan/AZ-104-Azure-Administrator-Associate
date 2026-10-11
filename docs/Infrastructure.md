@@ -19,8 +19,8 @@
 1. Everything resources has to be under a resource group.
 2. No nesting is allowed.
 3. You can move resources to different resource group.
-4. Resources does not define region (metadata), but region is a property of resources. Meaning VM can be in US, but the resource group can be in EU.
-5. Lock can be applied on resource group or resources. It prevents accidental deletion or modification of resources.
+4. Resources Group does not define region (metadata), but region is a property of resources. Meaning VM can be in US, but the resource group can be in EU.
+5. **Lock** can be applied on resource group or resources. It prevents accidental deletion or modification of resources.
 6. Resources are just group doesn't restricts network traffic. Meaning resources in different resource group can communicate with other resource group's resources by default.
 7. Action or setting at the Resource Group level are applied to all the resources in the resource group.
 8. Resources in Resource group are seperated. E.g. if VNET in RG1 and NSG in RG2 with same region, they can connect.
