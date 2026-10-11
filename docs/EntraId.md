@@ -13,6 +13,7 @@ Also know as Active Directory Domain Service(AD DS) previously. It deals only wi
 - Extending existing on-premises Active Directory implementations to Microsoft Entra ID
 - Configuring Application Proxy for cloud and local applications
 - Configuring Conditional Access for users and devices
+- Configure "External collaboration settings" to enable guest/user to invite external users.
 
 ## Supplementary Notes
 1. Microsoft 365 comes with Entra ID.

@@ -87,13 +87,19 @@ Configures to remove based on:
 
 ![Scaling condition](img/vmss_scaling.png)
 
-## VM extensions
-1. Used to configure and install more software on your virtual machine after the initial deployment. 
+## VM Custom Script Extension
+1. Used to configure Post install - normally for software installation on your virtual machine after the initial deployment. 
 2. OS based:
     - Linux uses waagent (Linux Agent)
     - Windows uses Windows Azure VM Agent, installed by default. Has option to install diagnostic agent.
 3. Can be listed with command (az vm extension list --resource-group <resource-group-name> --vm-name <vm-name>)
 4. Custom script, allows shell script `https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows`. Don't use the Custom Script Extension to run Update-AzVM with the same VM as its parameter. The extension will wait for itself.
+
+## DSC, Desired State Configuration
+Desired State Configuration (DSC) is a management platform that you can use to manage an IT and development infrastructure with configuration as code.
+
+## VM Access extension
+VMAccess extension acts as a KVM switch that allows you to access the console to reset access to Linux or perform disk-level maintenance.
 
 ## Azure automation / runbook
 Just a script to autoshutdown, or run some automation.
