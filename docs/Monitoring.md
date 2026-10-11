@@ -135,3 +135,12 @@ Topology service provides visualization of the network resources and their conne
 ## Alerts
 - The alert state is manually set by the user and does not have any automated logic behind it. The alert state can be either *New*, *Acknowledged*, or *Closed*.
 - Do setup 1 and it's easy to understand. Alert Group -> Alert Rules.
+
+## Azure Advisor
+1. Blade in each service, like VM. [Azure Advisor](https://learn.microsoft.com/en-us/azure/advisor/advisor-reference-cost-recommendations)
+2. Recommendation
+    - Cost: Identifies idle and underutilized resources.
+    - Operation Excellence: Recommend on the operational health.
+    - Performance: Recommend on the performance.
+    - Reliability: Recommend on the reliability.
+    - Security: Recommend on the security.

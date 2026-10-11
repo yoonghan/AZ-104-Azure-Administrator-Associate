@@ -6,33 +6,6 @@
 2. An App Service = Azure Server WebFarms, if you park anything under Microsoft.Web/serverFarms it ties to this.
 3. App Service Plans are OS and Region specific. You cannot move an App Service Plan to a different region. You can move an App Service Plan to a different OS, but that requires recreating the App Service Plan and redeploying the app.
 
-| Feature | Description |
-| --- | --- |
-| **App Service Plan** | Determines the compute resources (CPU, RAM, storage) allocated to your web app. |
-| **Pricing Tier** | Defines the features and performance level of your app (e.g., Free, Shared, Basic, Standard, Premium, Isolated). |
-| **Instance Size** | Specifies the CPU and memory resources available to each instance of your app. |
-| **Instance Count** | The number of VM instances running your app. Can be scaled manually or automatically. |
-| **Scale-Out** | Automatically adds more instances when traffic increases. |
-| **Scale-In** | Automatically removes instances when traffic decreases. |
-| **Autoscale Settings** | Configure rules for automatic scaling based on metrics like CPU usage, memory usage, or request count. |
-| **Deployment Slots** | Create separate environments (e.g., staging, production) for testing and deploying changes without affecting the live site. |
-| **Custom Domains** | Map your own domain name to your web app. |
-| **SSL/TLS Certificates** | Secure your app with SSL/TLS certificates. |
-| **VNet Integration** | Connect your app to a virtual network for secure access to private resources. |
-| **Private Endpoints** | Provide private access to your app from within a virtual network. |
-| **Application Insights** | Monitor your app's performance and usage. |
-| **Azure Backup** | Back up your app's configuration and content. |
-| **Azure Advisor** | Get recommendations for optimizing your app's performance and cost. |
-| **Azure Policy** | Enforce organizational standards and assess compliance. |
-| **Azure Role-Based Access Control (RBAC)** | Control access to your app resources. |
-| **Azure Disk Encryption** | Encrypt your app's data at rest. |
-| **Azure Security Center** | Provides security management and threat protection. |
-| **Azure Advisor** | Provides recommendations for optimizing your app's performance and cost. |
-| **Azure Policy** | Enforces organizational standards and assesses compliance. |
-| **Azure Role-Based Access Control (RBAC)** | Controls access to your app resources. |
-| **Azure Disk Encryption** | Encrypts your app's data at rest. |
-| **Azure Security Center** | Provides security management and threat protection. |
-
 ## Pricing Tier
 
 | Tier | Description |

@@ -1,30 +1,6 @@
 # Virtual Machines
 [Link to VM Size](https://learn.microsoft.com/en-us/azure/virtual-machines/)
 
-| Feature | Description |
-| --- | --- |
-| **VM Size** | Determines CPU, RAM, and storage performance. |
-| **OS Disk** | The boot disk for the VM. Can be Premium SSD, Standard SSD, Standard SSD LRS (not available for OS disk), Ultra Disk, Ultra Disk LRS (not available for OS disk), Standard HDD. |
-| **Data Disks** | Additional disks attached to the VM for data storage. |
-| **Network Interface (NIC)** | Connects the VM to the virtual network. |
-| **Public IP Address** | Optional address for internet access. |
-| **Availability Set** | Spreads VMs across physical hardware to prevent downtime. |
-| **Availability Zone** | Spreads VMs across different data centers for zone-level redundancy. |
-| **VM Scale Set** | Automatically manages and scales a group of identical VMs. |
-| **Azure Backup** | Service for backing up and restoring VMs. |
-| **Azure Site Recovery** | Service for disaster recovery and business continuity. |
-| **Azure Monitor** | Service for monitoring VM performance and health. |
-| **Azure Advisor** | Provides recommendations for optimizing VM performance and cost. |
-| **Azure Policy** | Enforces organizational standards and assesses compliance. |
-| **Azure Role-Based Access Control (RBAC)** | Controls access to VM resources. |
-| **Azure Disk Encryption** | Encrypts VM disks for security. |
-| **Azure Security Center** | Provides security management and threat protection. |
-| **Azure Advisor** | Provides recommendations for optimizing VM performance and cost. |
-| **Azure Policy** | Enforces organizational standards and assesses compliance. |
-| **Azure Role-Based Access Control (RBAC)** | Controls access to VM resources. |
-| **Azure Disk Encryption** | Encrypts VM disks for security. |
-| **Azure Security Center** | Provides security management and threat protection. |
-
 ## Sizes
 Checkout from Size->Overview in Azure Learn site. Principal is CPU vs Memory. This is vertical scaling.
 
