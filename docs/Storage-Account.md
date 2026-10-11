@@ -61,9 +61,9 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 
 ### Access Tier (In order)
 1. Premium - If premium is selected. Cannot choose below.
-2. Hot - for frequently accessed data
-3. Cool - for infrequently accessed data
-4. Cold - for infrequently accessed data
+2. Hot - for frequently accessed data (Default)
+3. Cool - for infrequently accessed data (30 days), better if read/write
+4. Cold - for infrequently accessed data (90 days)
 5. Archive - for rarely accessed data
 
 #### Notes
@@ -257,3 +257,5 @@ Contains:
 ## Integration
 1. Data Lake Storage is supported.
     - Only blob and general-purpose v2 SA is supported
+    - Hierachy namespace has to be enabled for DLS.
+    - Hierarchy enable POSIX ACLs. Because of hierarchy /, can control which folder/file has access to whom.
