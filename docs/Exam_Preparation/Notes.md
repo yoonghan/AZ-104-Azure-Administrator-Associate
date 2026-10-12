@@ -30,3 +30,6 @@ Return to review can risk more time than expected. To actually return to view al
 ## Roles
 1. **Contributor** can add/delete but cannot manage users
 2. **User Access Administrator** - can manage users and roles.
+
+## Monitor
+1. Any Azure Monitor/Dashboard can only have max up to 30days, regardless of logs analytics storage.
