@@ -5,6 +5,8 @@
     - use Azure CLI, challenge to see how to create resource-group.
     - use ARM template, challenge to see how to create resource-group and storage account.
 
+## Roles
+This is nice to go thru [roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
 
 ## Timing
 You have ONLY 2 hours to complete ~60 questions. With that you can only spend an average of 2 minutes per question, so time it properly and if the question seems simple enough just go thru it.
@@ -23,3 +25,7 @@ Return to review can risk more time than expected. To actually return to view al
 
 ## Azure Files
 1. Still one that can use AD for authentication. Identity-based.
+
+## Roles
+1. **Contributor** can add/delete but cannot manage users
+2. **User Access Administrator** - can manage users and roles.

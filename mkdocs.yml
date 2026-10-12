@@ -44,6 +44,7 @@ nav:
     - Web-Application.md
     - Containers.md
     - Backup.md
+    - AzurePolicy.md
     - Monitoring.md
     - Roles.md
     - Budget.md
