@@ -17,11 +17,12 @@ Return to review can risk more time than expected. To actually return to view al
 1. **Azure Backup Agent** - MARS Agent, for on-premise VMs to Azure
 2. **Azure Site Recovery Agent** - Azure Site Recovery Provider, for disaster recovery
 3. **Microsoft Azure Recovery Services Agent** - MABS
-4. **Azure Diagnostic Agent** - MDA (see DCR)
+4. **Azure Diagnostic Agent** - MDA (see Data Collection Rule)
 5. **Azure Monitor Agent** - AMA
 6. **Azure Log Analytics Agent** - MMA (Legacy)
-7. **Network Watcher Agent** - MMA (Legacy)
-8. **Network Dependency Agent** - MMA (Legacy)
+7. **Network Watcher Agent** - MMA, used to monitor network packets
+8. **Network Dependency Agent** - MMA, used to monitor network dependencies
+9. MMA - Microsoft Monitor Agent, MABS - Microsoft Azure Backup Server, MARS - Microsoft Azure Recovery Services Agent, MDA - Microsoft Diagnostic Agent
 
 ## Azure Files
 1. Still one that can use AD for authentication. Identity-based.
