@@ -95,6 +95,15 @@ You can define the backup frequency and retention duration for your backups. Cur
 4. The backup is optimized by backing up each VM disk in parallel.
 5. For each disk that's being backed up, Azure Backup reads the blocks on the disk and identifies and transfers only the data blocks that changed (the delta) since the previous backup.
 6. Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.
+7. Example below; backup of 5 days ago can instant restore, but backup of 6 days ago, vault restore is used.
+```
+The backup policy sub type is Standard, and the backup policy has the following configurations:
+
+Backup schedule frequency: Weekly
+Retain instant recovery snapshot(s) for: 15 days
+Retention of weekly backup point: On Sunday at 8:00 AM for 12 weeks
+```
+
 
 ## Restore VM
 [Restore a VM](https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms).

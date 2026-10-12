@@ -92,6 +92,7 @@ Azure Site Recovery replicates workloads from a primary site to a secondary loca
 3. VM has extension for 2 type of backup:
     - Storage: Snapshots when using an Azure VM or Azure Files.
     - Stream backup: For databases like SQL or High-performance Analytic Appliance (HANA) running in VMs.
+4. Disk snapshot is preserved for 30 days
 
 ![Virtual Machine Backup](img/vm_backup.png)
 
@@ -132,6 +133,7 @@ flowchart TD
 5. Disk Resizing doesn't need to be detached. But requires re-partitioning within the OS to use the new space.
 6. Disk Resize can only increase size, not decrease.
 7. Multiple NIC can be attached to 1 VM, good to have multiple NIC to connect to different subnets.
+8. D:/ is temporary, restart during resize disappears. Only C: remain.
 
 ## Extra - Extra AZ-305
 1. Flapping (for scale set VM), happens when:

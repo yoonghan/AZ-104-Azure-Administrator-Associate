@@ -91,6 +91,7 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 2. Careful that it still charges for minimum retention.
 3. Can be set to delete. Careful on exam question, if not asked to delete assume it to be archived.
 4. Every access to the file resets the time again.
+5. Only Blobs - on General-purpose v2 (GPv2), Blob Storage, and Premium block blob storage accounts.
 
 ## Object replication
 1. Object replication is supported when the source and destination accounts are in the Hot, Cool, or Cold tier. The source and destination accounts can be in different tiers.
@@ -259,3 +260,6 @@ Contains:
     - Only blob and general-purpose v2 SA is supported
     - Hierachy namespace has to be enabled for DLS.
     - Hierarchy enable POSIX ACLs. Because of hierarchy /, can control which folder/file has access to whom.
+
+## Trick question
+1. If change monitored with `last modified` and file moved from cool -> archive -> hot. It doesn't matter the lifecycle only monitors file's last modified. So within 24 hours it will move back to archive/cool depending on lifecycle applied, e.g. last modified = 5 move to archive then even when move to hot and file doesn't change within 24 hours it will move back to archive. 

@@ -1,6 +1,6 @@
 # Network Security Group (NSG)
 
-1. Can assign to NIC or Subnet.
+1. Can **Only** be assign to NIC or Subnet.
 2. Optional to not even assigned, the default is now DENY.
     - Inbound: All traffic from the Internet is Denied.
     - Outbound: All traffic to the Internet is Denied by default.
