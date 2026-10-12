@@ -1,8 +1,11 @@
 # Virtual Network
 [Virtual Network](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview#service-chaining)
 
-![Virtual Network](img/virtual-network.png)
+## VNet
+1. NIC can only connect to the same VNET of same region. E.g. NIC to Region US East can only connect to VNET in Region US East.
 
+![Virtual Network](img/virtual-network.png)
+ 
 ## Subnet
 1. Must be specified with CIDR notation. E.g. 10.0.0.2/24
 2. Subnet are not connected, if require VM to connects both either create peering or easier create a NIC that can be connected to VM.
