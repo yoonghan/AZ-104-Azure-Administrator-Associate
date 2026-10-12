@@ -180,7 +180,7 @@ You can define the backup frequency and retention duration for your backups. Cur
 2. Requires a Recovery Service Vault.
 3. Can be configured in two ways:
     - Azure to Azure
-    - On-premises to Azure
+    - On-premises to Azure, requires MARS and MABS
 4. For on-premises to Azure, need to install **Mobility service** on the on-premises machine. (No agent for Azure to Azure)
 5. Can use Azure Site Recovery on an Azure VM (in different region) to replicate to another region.
 6. For Hyper-V on-premises, need to install **Azure Site Recovery Provider** and **Azure Recovery Services Agent** on the on-premises Hyper-V host. A new Hyper-V site is required to be created for recovery.
@@ -203,4 +203,16 @@ You can define the backup frequency and retention duration for your backups. Cur
     b. Commit;
         - Failover to a new region, do not create new VM, just power on the VM.
         - Commit the failover so recovery point is cleaned up.
-        
+
+
+### Backup & Recovery Agents
+1. **MARS Agent (Azure Backup Agent)**:
+   - Lightweight agent installed directly on target machines.
+   - Backs up **Files, Folders, and System State** directly to Azure Recovery Services Vault.
+   - No separate backup server needed; Windows only (up to 3 backups/day).
+2. **MABS (Microsoft Azure Backup Server)**:
+   - Dedicated on-premises backup server (requires local storage).
+   - Supports **Application-aware workloads** (SQL, Exchange, SharePoint), **Hyper-V/VMware VMs**, and **Bare Metal Recovery**.
+   - Backs up locally first, then offloads to Azure (uses MARS agent internally to replicate to the vault).
+3. **Azure Site Recovery (ASR) Mobility Service / Provider**:
+   - Used for disaster recovery and VM replication to Azure (not traditional backup).
