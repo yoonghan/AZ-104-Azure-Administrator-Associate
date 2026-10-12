@@ -85,8 +85,15 @@ To gather Guest OS, enable it with [Insights](https://learn.microsoft.com/en-us/
 ## Network Performance Monitoring 
 
 ### Azure Network Watcher
-1. [Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview) provides tools to monitor and diagnose network issues. It includes features like Network Diagnostic Tests (e.g., IP flow verify, NSG flow logs, connection troubleshooting) and Connection Monitor (for monitoring connectivity between endpoints).
-2. Requires to install Network Watcher extention on the VM. Agent runs on port 443.
+1. [Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview) provides tools to monitor and diagnose network issues. It includes features like:
+    - IP flow verify - checks NSG also all networks [link](https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview)
+    - NSG diagnostics - checks only NSG
+    - Next Hop
+    - Effective Security Rules
+    - Packet Capture - Capture packet from VM
+    - Connection troubleshooting - Test connectivity between two endpoints without agent
+2. If the tool just looks at Azure configurations (IP Flow Verify, Next Hop, VPN Troubleshoot, Effective Security Rules), it does not need the agent. If the tool has to interact with the inside of the operating system to capture or generate traffic (Packet Capture, Connection Troubleshoot, Connection Monitor), it requires the **AzureNetworkWatcherExtension**.
+3. Agent runs on port 443
     
 ### Connection Monitor
 1. Connection Monitor is a tool that helps you monitor the network connectivity between your Azure resources and the internet. It can be used to monitor the network connectivity between your Azure resources and the internet. 
