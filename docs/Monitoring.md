@@ -151,3 +151,32 @@ Topology service provides visualization of the network resources and their conne
     - Performance: Recommend on the performance.
     - Reliability: Recommend on the reliability.
     - Security: Recommend on the security.
+
+## Extra AZ-305
+
+### Defender for Cloud
+1. Aims to protect and detect threats across:
+    - Azure PaaS services - Detects threats across services such as App Service, Azure SQL, and Azure Storage.
+    - Azure data services - Provides data security assessments and recommendations for services such as Azure SQL and Storage.
+    - Networks - Helps reduce brute-force exposure through controls such as just-in-time VM access and restrictive port policies.
+2. Defends for external AWS and GCP as well.
+    - Extend CSPM recommendations and compliance assessments to AWS resources.
+    - Extend Defender for Containers protections to Amazon EKS clusters.
+    - Extend Defender for Servers protections to EC2 instances. 
+
+## MS Sentinel
+1. A cloud-native Security Information and Event Management (SIEM) and Security Orchestration, Automation, and Response (SOAR) platform. 
+2. Collects logs from multiple sources, including: 
+    - Microsoft sources (Microsoft 365, Defender for Endpoint, Azure AD, etc.)
+    - Non-Microsoft sources (AWS, GCP, Palo Alto, Check Point, Cisco, etc.)
+    - Custom sources
+
+
+## Comparison
+
+| Feature | Microsoft Sentinel | Microsoft Defender for Cloud |
+| --- | --- | --- |
+| Primary Category |  Security Information and Event Management (SIEM) and Security Orchestration, Automation, and Response (SOAR) | CSPM (Cloud Security Posture Management) & CWPP (Cloud Workload Protection Platform) |
+| Main Purpose | Aggregates logs and alerts across your entire enterprise to detect, investigate, and automate responses to cross-platform threats. | Secures cloud resources, monitors configuration health, hardens workloads, and offers proactive security recommendations. |
+| Data Scope | Ingests data from any source (Azure, AWS, firewalls, identity systems, custom apps). | Focuses specifically on cloud workloads (VMs, databases, storage, containers) and infrastructure posture. |
+| Role in Operations | Acts as the central command room and SOC dashboard. | Acts as a specialized security guard for cloud resources and feeds alerts into Sentinel. |
