@@ -111,15 +111,16 @@ Cannot be modified once selected:
 3. Page Blobs - like data disk
 
 ## Tools
-1. AzCopy - only for Blob or File.
+1. AzCopy - only for Blob or File. 
 2. Azure Storage Explorer
 3. Azure Data Box Disk - See later scope it's a physical disk that send to Azure Center. Snowball/Snowcone
 4. Import/Export Service - a ticket support and monitor in Azure to see you on-premise move to Azure data center.
 
 ## Az Copy
-1. To allow AZ-copy to access the blob storage, you need to enable the **Allow Azure services on the trusted Microsoft services list** in the firewall.
-2. Then command wise. `az copy <source> <destination>`. Remember `--recursive` for folders.
-3. Use `Get-ChildItem -Path $imageFiles -Recurse | Set-AzStorageBlobContent -Container $containerName -Context $ctx` to upload multiple files with Powershell. But this is not azcopy..noted because of exam question.
+1. See [Copy data to and from Azure Storage with AzCopy](https://learn.microsoft.com/en-us/training/modules/describe-azure-storage-services/7-identify-azure-file-movement-options)
+2. To allow AZ-copy to access the blob storage, you need to enable the **Allow Azure services on the trusted Microsoft services list** in the firewall.
+3. Then command wise. `az copy <source> <destination>`. Remember `--recursive` for folders.
+4. Use `Get-ChildItem -Path $imageFiles -Recurse | Set-AzStorageBlobContent -Container $containerName -Context $ctx` to upload multiple files with Powershell. But this is not azcopy..noted because of exam question.
 
 
 ## Azure File
