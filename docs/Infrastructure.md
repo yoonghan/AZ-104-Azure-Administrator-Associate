@@ -37,3 +37,6 @@
 
 ![Hierarchy of resources](img/hierarchy_of_resources.png)
 
+## Resource lock
+1. **CanNotDelete** permits authorized users to read and modify a resource, but they can't delete the resource without first removing the lock.
+2. **ReadOnly** allows authorized users to read a resource, but they can't delete or change the resource. Applying this lock is like restricting all authorized users to the permissions granted by the Reader role in Azure RBAC.
