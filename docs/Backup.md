@@ -76,10 +76,9 @@ Additionally, Azure Backup provides the following advantages specifically for SQ
 - Individual database-level backup and restore
 
 ## Enhanced soft delete 
-Enhanced soft delete is enabled by default for all Recovery Services vaults and Backup vaults. It protects against malicious or accidental deletion of backup data. Can be disabled for specific vaults and can turn _Always On_.
+Enhanced soft delete is *enabled* by default for all Recovery Services vaults and Backup vaults. It protects against malicious or accidental deletion of backup data. Can be disabled for specific vaults and can turn _Always On_.
 
 ## Backup Policy
-Backup policy
 You can define the backup frequency and retention duration for your backups. Currently, the VM backup can be triggered daily or weekly, and can be stored for multiple years. The backup policy supports two access tiers: snapshot tier and the vault tier. By using the Enhanced policy, you can trigger hourly backups.
 
 **Selective disk backup**: Azure Backup provides Selective Disk backup and restore capability using Enhanced policy. By using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. It helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.
@@ -88,12 +87,14 @@ You can define the backup frequency and retention duration for your backups. Cur
 
 **Vault tier**: All snapshots are additionally transferred to the vault for more security and longer retention. At this point, the recovery point type changes to "snapshot and vault."
 
-## How VM is backup
+## How VM is backed up
 1. For Azure VMs that are selected for backup, Azure Backup starts a backup job according to the backup frequency you specify in the backup policy.
-2. During the first backup, a backup extension is installed on the VM, if the VM is running:
-    - For Windows VMs, the VM Snapshot extension is installed.
-    - For Linux VMs, the VM SnapshotLinux extension is installed.
-3. After the snapshot is taken, the data is stored locally and transferred to the vault.
+2. During the first backup, a backup extension is **automatically installed** by Azure Backup through the **Azure VM Guest Agent** (no manual installation needed):
+    - **Windows VMs**: Installs the `VMSnapshot` extension (coordinates with Windows VSS for application-consistent backups).
+    - **Linux VMs**: Installs the `VMSnapshotLinux` extension (coordinates with file system / pre-post scripts).
+    - **Prerequisite**: The **Azure VM Guest Agent** must be installed and in a `Ready` state with outbound network access to Azure Backup endpoints (port 443).
+    - **If the VM is stopped / deallocated**: Azure Backup still completes the backup! It captures an **agentless, crash-consistent backup** directly from the Azure storage fabric without needing the VM to run or the extension to be installed.
+3. After the snapshot is taken, the data is stored locally (Snapshot tier) and transferred to the vault.
 4. The backup is optimized by backing up each VM disk in parallel.
 5. For each disk that's being backed up, Azure Backup reads the blocks on the disk and identifies and transfers only the data blocks that changed (the delta) since the previous backup.
 6. Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.
@@ -106,9 +107,44 @@ Retain instant recovery snapshot(s) for: 15 days
 Retention of weekly backup point: On Sunday at 8:00 AM for 12 weeks
 ```
 
+### How On-Premises VMs are Backed Up (Comparison with Cloud VMs)
+
+Unlike Azure VMs, **Azure cannot automatically push extensions to on-premises VMs** because they run outside the Azure Resource Manager fabric and do not have the Azure VM Guest Agent.
+
+On-premises VMs are backed up using one of two approaches:
+
+#### 1. Hypervisor-Level VM Backup using MABS (Microsoft Azure Backup Server) or DPM
+When you want full VM-level and application-consistent backup for on-premises virtual environments:
+- **Architecture**: A dedicated on-premises server running **MABS** (or System Center DPM) coordinates the backups.
+- **For Hyper-V VMs**:
+  - The MABS protection agent is installed on the **Hyper-V host server** (NOT inside individual guest VMs).
+  - The agent captures VM snapshots host-side using the Hyper-V VSS writer.
+- **For VMware VMs (vCenter / ESXi)**:
+  - **Completely agentless!** No agent is installed on the ESXi host or inside guest VMs.
+  - MABS communicates directly with the **vCenter Server** or **ESXi host** using native VMware vSphere APIs (VADP).
+- **Data Flow**: On-premises VMs are backed up to **local attached disks on the MABS server first** (for fast local restore), and then offloaded to the **Azure Recovery Services Vault** for long-term retention.
+
+#### 2. Guest OS-Level Backup using MARS Agent (No Backup Server)
+If you do not want to deploy a dedicated MABS server:
+- You must **manually install the MARS Agent** directly inside each Windows guest OS.
+- Backs up **Files, Folders, and System State** directly over HTTPS to the **Azure Recovery Services Vault**.
+- **Limitation**: Does NOT support full VM image backup, bare metal recovery, or Linux workloads; cannot do hypervisor-level snapshots.
+
+#### Cloud vs. On-Premises VM Backup Comparison
+
+| Feature / Aspect | Azure VMs (Cloud) | On-Prem Hyper-V (via MABS) | On-Prem VMware (via MABS) | On-Prem Windows (via MARS) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Backup Extension / Agent** | **Auto-installed extension** via Azure VM Guest Agent | Agent installed on **Hyper-V Host** | **Agentless** (via vCenter APIs) | **Manually installed** in Guest OS |
+| **Agent inside Guest VM?** | No (only pre-installed Guest Agent) | **No** | **No** | **Yes** (MARS agent) |
+| **Dedicated Backup Server?** | **No** (Zero-infrastructure BaaS) | **Yes** (MABS / DPM on-premises) | **Yes** (MABS / DPM on-premises) | **No** (Direct to cloud) |
+| **Initial Backup Destination** | Snapshot Tier (Local) + Vault | Local MABS disk (operational) | Local MABS disk (operational) | Recovery Services Vault |
+| **Offsite Long-Term Storage** | Recovery Services Vault | Recovery Services Vault | Recovery Services Vault | Recovery Services Vault |
+| **Recovery Granularity** | Full VM, Disks, or Files | Full VM, Disks, Files, Apps | Full VM, Disks, Files, Apps | Files, folders, system state |
+
 
 ## Restore VM
 [Restore a VM](https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms).
+
 1. Backup for VM are only for the same Region and OS. But backup for SQL Server can be restore to different region.
 2. If restore VM:
     - Restore to same region. 
@@ -245,10 +281,11 @@ Retention of weekly backup point: On Sunday at 8:00 AM for 12 weeks
 
 > [!IMPORTANT]
 > **Summary Rules of Thumb:**
-> - **Backup Vault != Backup Server**: A *Backup Vault* is a cloud storage resource in Azure for modern workloads (Blobs, Disks, AKS). A *Backup Server (MABS)* is an on-premises physical or virtual machine running backup server software.
-> - **Backup Vault is NOT a subset of Recovery Services Vault**: They are distinct ARM resources provided by different resource providers (`Microsoft.DataProtection` vs `Microsoft.RecoveryServices`).
-> - **Azure VMs use Recovery Services Vault, NOT Backup Vault**: Standalone Azure Managed Disks use Backup Vault, but full Azure VMs use Recovery Services Vault.
-> - **Azure SQL Database (PaaS) does NOT use Recovery Services Vault**: PaaS Azure SQL has automated continuous backups built directly into the service (stored in managed Azure Storage accounts). Recovery Services Vault is only used for **SQL Server installed inside Azure IaaS VMs**.
+
+1. **Backup Vault != Backup Server**: A *Backup Vault* is a cloud storage resource in Azure for modern workloads (Blobs, Disks, AKS). A *Backup Server (MABS)* is an on-premises physical or virtual machine running backup server software.
+2. **Backup Vault is NOT a subset of Recovery Services Vault**: They are distinct ARM resources provided by different resource providers (`Microsoft.DataProtection` vs `Microsoft.RecoveryServices`).
+3. **Azure VMs use Recovery Services Vault, NOT Backup Vault**: Standalone Azure Managed Disks use Backup Vault, but full Azure VMs use Recovery Services Vault.
+4. **Azure SQL Database (PaaS) does NOT use Recovery Services Vault**: PaaS Azure SQL has automated continuous backups built directly into the service (stored in managed Azure Storage accounts). Recovery Services Vault is only used for **SQL Server installed inside Azure IaaS VMs**.
 
 ---
 
@@ -336,10 +373,10 @@ In the AZ-305 exam, questions test your ability to design the appropriate resili
 ### 6. Availability, Recovery, and SLA Metrics
 
 #### Availability Metrics
-- **Mean Time to Recovery (MTTR)**: Average time required to repair or restore a failed component after an outage.
-  $$\text{MTTR} = \frac{\text{Total Maintenance/Downtime}}{\text{Number of Failures}}$$
+- **Mean Time to Recovery (MTTR)**: Average time required to repair or restore a failed component after an outage
+  MTTR = Total Maintenance/Downtime * Number of Failures
 - **Mean Time Between Failures (MTBF)**: Average operational time between inherent system failures.
-  $$\text{MTBF} = \frac{\text{Total Operational Uptime}}{\text{Number of Failures}}$$
+  MTBF = Total Operational Uptime * Number of Failures
 - **Mean Time to Failure (MTTF)**: Expected lifespan of a non-repairable component until its first failure.
 
 #### Recovery Metrics
@@ -350,11 +387,11 @@ In the AZ-305 exam, questions test your ability to design the appropriate resili
 #### Composite SLA Calculations
 Azure provides SLAs for individual services (e.g., VM 99.99% with multi-zone, Azure SQL 99.99%). In system architecture:
 - **Serial Components (Dependencies in Series)**: If Component A and Component B must both be online, multiply their SLAs:
-  $$\text{Composite SLA} = \text{SLA}_A \times \text{SLA}_B$$
-  *Example:* Web App (99.95%) $\times$ Azure SQL (99.99%) $= 0.9995 \times 0.9999 = 99.94\%$ (Composite availability is *lower* than individual components).
+  Composite SLA = SLA_A X SLA_B
+  *Example:* Web App (99.95%) X Azure SQL (99.99%) = 0.9995 X 0.9999 = 99.94% (Composite availability is *lower* than individual components).
 - **Parallel / Redundant Components (Failover in Parallel)**: If redundant instances run in parallel with automatic failover:
-  $$\text{Composite SLA} = 1 - (1 - \text{SLA}_A) \times (1 - \text{SLA}_B)$$
-  *Example:* Two independent VMs in parallel (each 99.9%): $1 - (0.001 \times 0.001) = 1 - 0.000001 = 99.9999\%$ (Composite availability is *higher*).
+  Composite SLA = 1 - (1 - SLA_A) X (1 - SLA_B)
+  *Example:* Two independent VMs in parallel (each 99.9%): 1 - (0.001 X 0.001) = 1 - 0.000001 = 99.9999% (Composite availability is *higher*).
 
 ---
 
