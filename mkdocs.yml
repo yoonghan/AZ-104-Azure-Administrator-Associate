@@ -48,6 +48,14 @@ nav:
     - Monitoring.md
     - Roles.md
     - Budget.md
+  - AZ-305:
+    - AZ-305/RelationalDB.md
+    - AZ-305/DataIntegration.md
+    - AZ-305/Compute.md
+    - AZ-305/ApplicationArchitecture.md
+    - AZ-305/NetworkSolutions.md
+    - AZ-305/Migration.md
+    - AZ-305/BusinessContinuity.md
   - Exam: 
     - Exam_Preparation/Notes.md
     - Exam_Preparation/Labs.md
