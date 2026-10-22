@@ -264,3 +264,15 @@ Contains:
 
 ## Trick question
 1. If change monitored with `last modified` and file moved from cool -> archive -> hot. It doesn't matter the lifecycle only monitors file's last modified. So within 24 hours it will move back to archive/cool depending on lifecycle applied, e.g. last modified = 5 move to archive then even when move to hot and file doesn't change within 24 hours it will move back to archive. 
+
+## Exam Az-305
+
+
+Feature | Time-based Retention Policy | Legal Hold
+--- | --- | ---
+Primary Purpose | To retain data for a fixed, predictable period (e.g., meeting regulatory compliance for 3 years). | To protect data indefinitely during an active or anticipated legal dispute or audit.
+Duration | Fixed time interval (defined in days or years) set by the administrator. | Indefinite. It remains in place until it is explicitly cleared.
+How it Ends | Automatically expires once the specified retention period passes. | Must be manually removed by an authorized user after the legal issue resolves.
+Modifications | Can be locked. Once locked, the policy duration cannot be shortened or deleted. | Can add a new legal hold tag, modify the list of active tags, or remove a tag from the container at any time. But not on data.
+Common Use Case | Storing financial records, medical histories, or warranty information for a legally mandated duration. | Pausing standard data deletion schedules for specific files relevant to a court case or investigation.
+
