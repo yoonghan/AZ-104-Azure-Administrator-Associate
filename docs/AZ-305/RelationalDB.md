@@ -7,7 +7,7 @@
 4. Azure SQL Edge: SQL Server designed for IoT and edge devices.
 
 ### Azure SQL Database
-![Azure SQL Database](azuresql.png)
+![Azure SQL Database](img/azuresql.png)
 
 1. vCore: A vCore is a virtual core. You choose the number of virtual cores and have greater control over your compute costs. This option supports the Azure Hybrid Benefit for SQL Server and reserved capacity (pay in advance).
 2. DTU: A DTU (Database Transaction Unit) is a combined measure of compute, storage, and I/O resources. The DTU option is an easy, preconfigured purchase option.
@@ -46,9 +46,9 @@
   - The Hyperscale architecture supports databases as large as 128 TB.
   - meets read-scale requirements for business workloads
 
-![General Purpose Availability](general_purpose_av.png)
-![Business Critical HA](business_critical_ha.png)
-![Hyperscale HA](hyperscale_ha.png)
+![General Purpose Availability](img/general_purpose_av.png)
+![Business Critical HA](img/business_critical_ha.png)
+![Hyperscale HA](img/hyperscale_ha.png)
 
 ## Features:
 1. **SQL Server Masking**: Dynamic data masking keeps sensitive data secure by masking it to non-privileged users. For example, you can mask credit card numbers so that only users with specific database roles can see the full number. 
