@@ -6,12 +6,16 @@
 (Can create in - portal * have departments etc..- MS365 * which have license set etc, still can see in portal- entra * also can add license, have departments etc similar to portal)
 
 ## Service Principal
-    - Create automatically
-    - Application Authentication
+  - Create automatically
+  - Application Authentication
 
 ## Managed Identities
   - System assigned * tied to resources
   - User-assigned, assigned to a group to a person
+  - It is to manage credential of application objects.
+
+## Application Object
+  - Concept: Each App like Web App registered will have 1 App object. For each App it will definitely have at least 1 service principal. For the App it lives in the the single "Home" tenant where it was created by developer.
 
 ### System assigned
 When you toggle "System Assigned" to "On," Azure automatically:

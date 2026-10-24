@@ -49,6 +49,7 @@ nav:
     - Roles.md
     - Budget.md
   - AZ-305:
+    - AZ-305/BluePrint.md
     - AZ-305/RelationalDB.md
     - AZ-305/DataIntegration.md
     - AZ-305/Compute.md

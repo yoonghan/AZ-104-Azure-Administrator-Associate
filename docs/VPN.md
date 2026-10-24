@@ -72,10 +72,12 @@ flowchart TD
     - AD
 
 ```mermaid
+flowchart TD
   A[VN Gateway] --> VPN Software
 ```
 
 ```mermaid
+flowchart TD
   A[VN Gateway] --> BGP(S2S) | On-premise 
   A --> BGP(S2S) | C[VN Gateway] <--> Peer | VNet
   C --> Tunnel --> D[Computer (Device1)]
