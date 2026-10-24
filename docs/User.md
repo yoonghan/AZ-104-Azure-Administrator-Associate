@@ -60,7 +60,7 @@ E.g. department = sales
 
 ## AZ-305 Exam
 
-### Identity Protection/User Risk
+### Identity Protection / Risk Policy
 ![User Risk](img/userrisk.png)
 
 1. This is under SIEM and can be exported to MS Sentinel.
