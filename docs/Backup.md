@@ -230,9 +230,10 @@ If you do not want to deploy a dedicated MABS server:
     - On-premises to Azure, requires MARS and MABS
     - MARS is the agent installed on the on-premises machine to back up files, folders, and system state. MABS is on VM/Hyper-machines to backup to MARS. 
 4. For on-premises to Azure, need to install **Mobility service** on the on-premises machine. (No agent for Azure to Azure)
-5. Can use Azure Site Recovery on an Azure VM (in different region) to replicate to another region.
+5. Can use Azure Site Recovery on an Azure VM (in different region) to replicate to another region. But take not NSG or public address are not created.
 6. For Hyper-V on-premises, need to install **Azure Site Recovery Provider** and **Azure Recovery Services Agent** on the on-premises Hyper-V host. A new Hyper-V site is required to be created for recovery.
-8. Recovery goal defines the RTO (Recovery Time Objective) and RPO (Recovery Point Objective).
+7. Recovery goal defines the RTO (Recovery Time Objective) and RPO (Recovery Point Objective).
+8. Each site requires a new VNet and Resource Group
 
 ### Testing failover
     a. Test failover;

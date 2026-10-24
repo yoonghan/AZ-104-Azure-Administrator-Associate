@@ -31,3 +31,9 @@ Return to review can risk more time than expected. To actually return to view al
 
 ## Monitor
 1. Any Azure Monitor/Dashboard can only have max up to 30days, regardless of logs analytics storage.
+
+## KeyVault
+1. Can be backup, but can only RESTORE to:
+
+  - same subscription
+  - same geography
