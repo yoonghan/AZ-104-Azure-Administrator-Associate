@@ -91,7 +91,8 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 2. Careful that it still charges for minimum retention.
 3. Can be set to delete. Careful on exam question, if not asked to delete assume it to be archived.
 4. Every access to the file resets the time again.
-5. Only Blobs - on General-purpose v2 (GPv2), Blob Storage, and Premium block blob storage accounts.
+5. Only Blobs - on General-purpose v2 (GPv2), Blob Storage (exclude premium).
+6. Premium Blob and File does not have Lifecycle.
 
 ## Object replication
 1. Object replication is supported when the source and destination accounts are in the Hot, Cool, or Cold tier. The source and destination accounts can be in different tiers.
@@ -128,6 +129,7 @@ Cannot be modified once selected:
 2. Can be use as replacement for NAS, has file sync capabilities.
 3. True file/directory structure.
 4. **Identity-Based**, only in Azure file there is identity based access. Means you can set AD authentication, either AD DS or Azure AD DS. Uses Keberos to authenticate the user's PC to allow access.
+5. Standard File has Transaction Optimized, Hot, and Cool tiers, but not an Archive or Cold. Storage tiers do not apply to Azure Files Premium or **Provisioned v2 standard accounts
 
 ### Access Tier (In order)
 1. *Premium - If premium is selected. cannot choose below options.

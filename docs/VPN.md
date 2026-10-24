@@ -32,3 +32,59 @@ You configure network peering between VNet1 and VNet2.
 
 You need to ensure that Device1 can access VNet2 when a VPN connection is established.
 ```
+
+## Extra AZ-305
+
+```mermaid
+flowchart TD
+    A[VPN] --> B[Az Virtual WAN]
+    VNet <--> B
+    VNet <--> B
+    C[Express Route] --> B
+    D[On Premise] --> C
+```
+
+### SKU for Azure WAN
+1. Basic - only S2S VPN, branch 2 VNET in single hub
+    - Max 1Gbps 
+2. Standard - S2S VPN + P2S VPN + Express Route, branch 2 VNET in multiple hubs
+    - Max 10Gbps
+
+### Create VPN Gateway
+1. Create GatewaySubnet in a VNet
+2. Create VPN Gateway / Virtual Network Gateway. Will need to select:
+    - route/policy
+    - SKU
+    - VNet with Gateway Subnet
+    - Public IP Address
+3. Create a Connection, either Point-to-Site (P2S) or Site-to-Site (S2S). Will need to select:
+    - VPN Gateway
+    - Virtual Network Gateway
+    - Pre-shared key (For S2S)
+    - Download VPN Client (For P2S)
+4. For VPN Gateway need to select VPN type: 
+    - Route-based (default); either static/dynamic
+    - Policy-based; define ip address & define the destination ip address range for on-premise
+5. Authentication:
+    - Certificate
+    - Entra ID
+    - AD
+
+```mermaid
+  A[VN Gateway] --> VPN Software
+```
+
+```mermaid
+  A[VN Gateway] --> BGP(S2S) | On-premise 
+  A --> BGP(S2S) | C[VN Gateway] <--> Peer | VNet
+  C --> Tunnel --> D[Computer (Device1)]
+  Dc--> P2S(P2S)
+
+  B[Local Gateway] --> BGP(S2S) | On-premise 
+```
+
+* VN Gateway must be named *Gateway Subnet*, only 1 subnet in 1 Vnet.
+* For P2S, client must be reinstalled when there is VPN gateway change. 
+
+## Express Route
+1. Uses BGP

@@ -63,6 +63,10 @@ Configures to remove based on:
 
 ![Scaling condition](img/vmss_scaling.png)
 
+## Scale
+1. VM Scale Set Scale-in policy wins (always largest scale-out win).
+2. Cooldown period, used in scale-in and scale-out to wait for the metrics. e.g. CPU 80% over 5 min. After trigger scale out, wait for 5 mins for the new VMs to scale out and stabilize. Then check again.
+
 ## VM Custom Script Extension
 1. Used to configure Post install - normally for software installation on your virtual machine after the initial deployment. 
 2. OS based:

@@ -70,6 +70,7 @@ To gather Guest OS, enable it with [Insights](https://learn.microsoft.com/en-us/
     - Desktop applications
     - Mobile applications
     - Cloud-hosted applications
+    - Telemetry
 3. Supports live metrics stream.
 4. Supports multiple application for one resource and across regions.
 5. This is a UI to Log Analytic Workspace. The table like AppDependencies are aliased as dependencies. 1 Workspace can have multiple App Insights but not the other way round.
@@ -93,7 +94,7 @@ To gather Guest OS, enable it with [Insights](https://learn.microsoft.com/en-us/
     - Packet Capture - Capture packet from VM
     - Connection troubleshooting - Test connectivity between two endpoints without agent
 2. If the tool just looks at Azure configurations (IP Flow Verify, Next Hop, VPN Troubleshoot, Effective Security Rules), it does not need the agent. If the tool has to interact with the inside of the operating system to capture or generate traffic (Packet Capture, Connection Troubleshoot, Connection Monitor), it requires the **AzureNetworkWatcherExtension**.
-3. Agent runs on port 443
+
     
 ### Connection Monitor
 1. Connection Monitor is a tool that helps you monitor the network connectivity between your Azure resources and the internet. It can be used to monitor the network connectivity between your Azure resources and the internet. 
