@@ -232,8 +232,8 @@ If you do not want to deploy a dedicated MABS server:
 4. For on-premises to Azure, need to install **Mobility service** on the on-premises machine. (No agent for Azure to Azure)
 5. Can use Azure Site Recovery on an Azure VM (in different region) to replicate to another region. But take not NSG or public address are not created.
 6. For Hyper-V on-premises, need to install **Azure Site Recovery Provider** and **Azure Recovery Services Agent** on the on-premises Hyper-V host. A new Hyper-V site is required to be created for recovery.
-7. Recovery goal defines the RTO (Recovery Time Objective) and RPO (Recovery Point Objective).
-8. Each site requires a new VNet and Resource Group
+7. Recovery goal defines the RPO (Recovery Point Objective).
+8. Each site requires a new VNet and Resource Group. During setup both have different VNet and Subnet and during disaster recovery it knows where to enable and during backup it knows where to store. Public IP also needs to change as ip address are region based. **DNS must also be updated to the new public IP**, so use traffic manager/front door in these cases.
 
 ### Testing failover
     a. Test failover;
