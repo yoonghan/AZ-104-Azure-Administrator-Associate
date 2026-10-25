@@ -202,7 +202,7 @@ If you do not want to deploy a dedicated MABS server:
 3. Add address in portal to ship
 4. Microsoft ships Data Box to you
 5. Update Azure Portal
-6. Optional - Copy data from Data Box using WAImport/Export Tool
+6. Optional - Copy data from Data Box using WAImport/Export ToolZ
 
 ## Recovery Service Vault
 1. To recover specific file, this is the portal.

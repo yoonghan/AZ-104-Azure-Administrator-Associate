@@ -14,6 +14,9 @@
 
 ## Azure Migrate: Discovery
 1. For on-premise HyperV & VMware. Explore on-premises servers to see what to move.
+2. Use Azure Migrate: Discovery and assessment tool to discover on-premises servers to assess their suitability for migration to Azure.
+3. Service Map is useful to see server connections via Log Analytics.
+4. For on-premise HyperV & VMware. Explore on-premises servers to see what to move.
 
 ## WebApp
 1. Webapp Migration Assistant.
