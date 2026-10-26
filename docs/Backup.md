@@ -123,6 +123,7 @@ When you want full VM-level and application-consistent backup for on-premises vi
   - **Completely agentless!** No agent is installed on the ESXi host or inside guest VMs.
   - MABS communicates directly with the **vCenter Server** or **ESXi host** using native VMware vSphere APIs (VADP).
 - **Data Flow**: On-premises VMs are backed up to **local attached disks on the MABS server first** (for fast local restore), and then offloaded to the **Azure Recovery Services Vault** for long-term retention.
+- Installing the MABS agent on DPM server allows the backups to be copied to Recovery Services vaults in Azure. And least problem if DPM exists.
 
 #### 2. Guest OS-Level Backup using MARS Agent (No Backup Server)
 If you do not want to deploy a dedicated MABS server:

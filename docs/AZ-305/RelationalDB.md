@@ -104,3 +104,15 @@
 | **Access Control** | **Row-Level Security (RLS)** | Uses SQL predicate functions to restrict which rows a user can see based on user identity or role (e.g., tenants can only access rows matching their TenantID). |
 | **Audit & Integrity** | **Ledger for Azure SQL** | Provides cryptographic proof of data integrity using SHA-256 block hashing (tamper-evident tables and ledgers). Protects against unauthorized modifications even by high-privileged DBAs. |
 | **Threat Protection** | **Microsoft Defender for SQL** | Vulnerability assessments, anomalous activity detection, and SQL injection alerting. |
+
+## Recovery
+
+Please see this [note](https://learn.microsoft.com/en-us/training/modules/describe-high-availability-disaster-recovery-strategies/6-explore-iaas-high-availability-disaster-recovery-solution)
+
+1. **Always On availability groups**: Primary VM sends copies of all committed transactions to at least one replica in the availability group. synchronous commit replication ensures zero data loss for synchronous replicas.
+2. **Always On Failover Cluster Instance**: uses Windows Server Failover Clustering (WSFC) to provide high availability for SQL Server instances. If the primary instance fails, a secondary instance automatically takes over. 
+3. **Multi-Region or Hybrid Always On availability groups**: If the primary site fails, you can fail over to a secondary Availability Group in a different location, either within Azure or on-premises.
+4. **Distributed availability groups**: Provides high availability for SQL Server instances across multiple availability groups.
+5. **Log shipping**: Copy transaction log backups from a primary SQL Server to one or more secondary SQL Servers. The transaction log backups are restored on the secondary server, keeping it synchronized with the primary server.
+ 
+

@@ -47,6 +47,7 @@ nav:
     - AzurePolicy.md
     - Monitoring.md
     - Roles.md
+    - KeyVault.md
     - Budget.md
   - AZ-305:
     - AZ-305/BluePrint.md

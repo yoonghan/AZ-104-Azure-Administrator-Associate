@@ -1,5 +1,7 @@
 # Migration
 
+[Read](https://learn.microsoft.com/en-us/training/modules/design-migrations/3-describe-azure-migration-framework)
+
 1. **Rehost (lift & shift)**: Migrate existing applications to the cloud with minimal changes.
 2. **Refactor (lift & optimize)**: Migrate applications to the cloud with some optimizations.
 3. **Re-architect**: Rearchitect applications to fully leverage cloud-native services.
