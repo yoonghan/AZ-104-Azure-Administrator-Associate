@@ -39,7 +39,6 @@ nav:
       - DNS.md
       - Network-Security-Group.md
       - Load-Balancers.md
-      - VPN.md
     - Virtual-Machines.md
     - Web-Application.md
     - Containers.md
@@ -55,9 +54,9 @@ nav:
     - AZ-305/DataIntegration.md
     - AZ-305/Compute.md
     - AZ-305/ApplicationArchitecture.md
-    - AZ-305/NetworkSolutions.md
+    - AZ-305/VPN.md
     - AZ-305/Migration.md
-    - AZ-305/BusinessContinuity.md
+    - AZ-305/Others.md
   - Exam: 
     - Exam_Preparation/Notes.md
     - Exam_Preparation/Labs.md

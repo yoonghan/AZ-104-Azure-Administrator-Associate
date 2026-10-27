@@ -67,7 +67,7 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 5. Archive - for rarely accessed data
 
 #### Notes
-1. You can only set to Hot or Cool during creation. After creation, you can move data between tiers.
+1. You can only set to Hot or Cool during creation. After creation, you can move data between tiers; even uploading straight to Archive. Portal choose archive, API or REST with `x-ms-access-tier: Archive`, PowerShell with `-AccessTier Archive`.
 2. If you have **Soft Delete** enabled (e.g., for 7 days) and you delete a blob, you continue to pay the storage cost for those 7 days while the blob sits in the "recycle bin."
 3. Archive is "offline", it cannot be read and need to be rehydrated to either Hot, Cool or Cold tier.
 4. Besides Hot tier, there are retention charges.
@@ -267,9 +267,10 @@ Contains:
 ## Trick question
 1. If change monitored with `last modified` and file moved from cool -> archive -> hot. It doesn't matter the lifecycle only monitors file's last modified. So within 24 hours it will move back to archive/cool depending on lifecycle applied, e.g. last modified = 5 move to archive then even when move to hot and file doesn't change within 24 hours it will move back to archive. 
 
+## Auditing
+1. Messages can be audited by enabling "Storage Analytic Logging" in Azure Portal. It will log all the operations on the storage account, and you can query the logs using Log Analytics.
+
 ## Exam Az-305
-
-
 Feature | Time-based Retention Policy | Legal Hold
 --- | --- | ---
 Primary Purpose | To retain data for a fixed, predictable period (e.g., meeting regulatory compliance for 3 years). | To protect data indefinitely during an active or anticipated legal dispute or audit.

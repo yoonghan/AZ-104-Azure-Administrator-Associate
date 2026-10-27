@@ -6,7 +6,8 @@
     - use ARM template, challenge to see how to create resource-group and storage account.
 
 ## Roles
-This is nice to go thru [roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+1. This is nice to go thru [roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+2. Know ACL vs RBAC. E.g. Azure Data Lake uses a two-step authorization evaluation process. Azure RBAC is always evaluated first. So if need to use ACL to control data RBAC needs to be disabled. If RBAC is enabled and have contributor then no "Read"/"Write" can be control per file but everything is enabled. But if RBAC is disabled and have user/group with read permission on file system then it can read.
 
 ## Timing
 You have ONLY 2 hours to complete ~60 questions. With that you can only spend an average of 2 minutes per question, so time it properly and if the question seems simple enough just go thru it.

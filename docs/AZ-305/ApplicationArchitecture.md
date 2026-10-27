@@ -4,6 +4,7 @@
 - Push and Pull
 - Have Queue and Topic
 - Reliable messaging.
+- Max only to **80GB** for Standard but can be upgraded.
 
 ## Event Hub
 - Only support Pull
@@ -39,11 +40,16 @@
 
 1. Note A standard queue has a maximum size cap of 80 GB if partitioned. Your 320 GB peak requirement will cause a Standard queue to fill up completely, resulting in the broker rejecting new incoming messages with a "Quota Exceeded" exception.
 
+## Auditing
+1. Messages can be audited by enabling "Storage Analytic Logging" in Azure Portal. It will log all the operations on the storage account, and you can query the logs using Log Analytics.
+2. Integration with Opentelemetry.
+
 ## Alternatives
 1. Storage Queue is alternative for Service Bus Queue. Choose Azure Storage Queues if:
 
   - Your system does not care about strict FIFO ordering
   - handle the occasional duplicate message
+2. Question on solution must be able to store over 90-GB of data and provide an audit trail of all messages.
 
 | Feature | Azure Storage Queues| Azure Service Bus (Premium)|
 | --- | --- |---|
