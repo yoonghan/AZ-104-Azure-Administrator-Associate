@@ -116,7 +116,7 @@ location: eastus
 name: my-container-group 
 properties:
   containers:
-  - name: web-frontend
+    - name: web-frontend
     properties:
       image: mcr.microsoft.com/azuredocs/aci-helloworld
       resources:
@@ -125,7 +125,7 @@ properties:
           memoryInGB: 1.5 # Container 1 RAM
       ports:
       - port: 80
-  - name: sidecar-logger
+    - name: sidecar-logger
     properties:
       image: mcr.microsoft.com/azuredocs/aci-tutorial-sidecar
       resources:

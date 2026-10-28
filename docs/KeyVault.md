@@ -2,11 +2,11 @@
 
 ## Tiers:
 1. Standard: 
-  - soft delete, purge protection, private endpoint
-  - non-HSM, 2000 transactions/5 min
+    - soft delete, purge protection, private endpoint
+    - non-HSM, 2000 transactions/5 min
 2. Premium (keyword FIPS 140 or fully managed): 
-  - 20,000 transactions/5 min
-  - Azure Key Vault Premium supports HSM-protected symmetric keys through the oct-HSM key type. Symmetric keys in vaults are HSM-backed only and require a Premium vault.
+    - 20,000 transactions/5 min
+    - Azure Key Vault Premium supports HSM-protected symmetric keys through the oct-HSM key type. Symmetric keys in vaults are HSM-backed only and require a Premium vault.
 
 ## Features
 - Rotation: Auto-rotation every 1 year

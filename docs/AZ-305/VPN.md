@@ -8,12 +8,12 @@
 ![Application Proxy](img/application_proxy.png)
 2. Steps:
 
-  - The user accesses the application through an endpoint and is redirected to the Microsoft Entra sign-in page.
-  - Microsoft Entra ID sends a token to the user's client device after a successful sign-in.
-  - The client sends the token to the application proxy service. The service retrieves the user principal name (UPN) and security principal name (SPN) from the token. The application proxy service then sends the request to the connector.
-  - The connector performs required SSO authentication on behalf of the user.
-  - The connector sends the request to the on-premises application.
-  - The connector and application proxy service send the response to the user.
+    - The user accesses the application through an endpoint and is redirected to the Microsoft Entra sign-in page.
+    - Microsoft Entra ID sends a token to the user's client device after a successful sign-in.
+    - The client sends the token to the application proxy service. The service retrieves the user principal name (UPN) and security principal name (SPN) from the token. The application proxy service then sends the request to the connector.
+    - The connector performs required SSO authentication on behalf of the user.
+    - The connector sends the request to the on-premises application.
+    - The connector and application proxy service send the response to the user.
 
 ---
 
@@ -44,10 +44,10 @@ A Site-to-Site VPN connects an on-premises network to an Azure Virtual Network o
 1. **Virtual Network (VNet)**: The target network in Azure.
 2. **GatewaySubnet**:
 
-  - Must be named **exactly** `GatewaySubnet`.
-  - Cannot contain workloads (VMs).
-  - Recommended size: `/27` or `/28` (minimum `/29`).
-  - Do **NOT** attach an NSG or UDR (with `0.0.0.0/0`) that blocks gateway management traffic.
+    - Must be named **exactly** `GatewaySubnet`.
+    - Cannot contain workloads (VMs).
+    - Recommended size: `/27` or `/28` (minimum `/29`).
+    - Do **NOT** attach an NSG or UDR (with `0.0.0.0/0`) that blocks gateway management traffic.
 3. **Virtual Network Gateway (VPN Gateway)**:
 
    - Gateway Type: `VPN` (vs `ExpressRoute`).
@@ -101,9 +101,9 @@ Connects individual client devices (Windows, macOS, Linux, iOS, Android) to an A
 - **Address Pool**: Dedicated private IP range allocated to connected VPN clients (cannot overlap with VNet or on-premises ranges).
 - **Protocols / Tunnels**:
 
-  - **OpenVPN**: Cross-platform (Windows, Mac, Linux, mobile); supports Entra ID auth.
-  - **SSTP**: Secure Sockets Tunneling Protocol (Windows-only, TCP 443 — passes easily through firewalls/proxies).
-  - **IKEv2**: Fast, standards-based mobile/desktop VPN.
+    - **OpenVPN**: Cross-platform (Windows, Mac, Linux, mobile); supports Entra ID auth.
+    - **SSTP**: Secure Sockets Tunneling Protocol (Windows-only, TCP 443 — passes easily through firewalls/proxies).
+    - **IKEv2**: Fast, standards-based mobile/desktop VPN.
 - **Authentication Methods**:
 
   1. **Azure Certificate Authentication**: Root certificate uploaded to Azure; client certificate installed on user machine.
@@ -146,14 +146,14 @@ flowchart TD
 
 1. **ExpressRoute:**
 
-  - Dedicated private connection via a Connectivity Partner (MPLS, Ethernet, or Cloud Exchange).
-  - Does not travel over the public Internet.
-  - Uses **BGP** for dynamic routing.
+    - Dedicated private connection via a Connectivity Partner (MPLS, Ethernet, or Cloud Exchange).
+    - Does not travel over the public Internet.
+    - Uses **BGP** for dynamic routing.
 2. **ExpressRoute + VPN Gateway Coexistence (Failover):**
 
-  - Both an ExpressRoute Gateway and a Route-Based VPN Gateway can coexist in the same `GatewaySubnet`.
-  - The S2S VPN tunnel acts as a **backup / failover** if the ExpressRoute circuit fails.
-  - By default, traffic prefers **ExpressRoute** over the VPN connection because ExpressRoute BGP routes are shorter/preferred.
+    - Both an ExpressRoute Gateway and a Route-Based VPN Gateway can coexist in the same `GatewaySubnet`.
+    - The S2S VPN tunnel acts as a **backup / failover** if the ExpressRoute circuit fails.
+    - By default, traffic prefers **ExpressRoute** over the VPN connection because ExpressRoute BGP routes are shorter/preferred.
 
 ```mermaid
 flowchart LR

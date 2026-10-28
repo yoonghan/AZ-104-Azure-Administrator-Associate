@@ -1,21 +1,21 @@
 # User
 
 ## User Identities
-  - Guest - invited
-  - Member - created in Entra ID / synch from AD
+    - Guest - invited
+    - Member - created in Entra ID / synch from AD
 (Can create in - portal * have departments etc..- MS365 * which have license set etc, still can see in portal- entra * also can add license, have departments etc similar to portal)
 
 ## Service Principal
-  - Create automatically
-  - Application Authentication
+    - Create automatically
+    - Application Authentication
 
 ## Managed Identities
-  - System assigned * tied to resources
-  - User-assigned, assigned to a group to a person
-  - It is to manage credential of application objects.
+    - System assigned * tied to resources
+    - User-assigned, assigned to a group to a person
+    - It is to manage credential of application objects.
 
 ## Application Object
-  - Concept: Each App like Web App registered will have 1 App object. For each App it will definitely have at least 1 service principal. For the App it lives in the the single "Home" tenant where it was created by developer.
+    - Concept: Each App like Web App registered will have 1 App object. For each App it will definitely have at least 1 service principal. For the App it lives in the the single "Home" tenant where it was created by developer.
 
 ### System assigned
 When you toggle "System Assigned" to "On," Azure automatically:
@@ -69,15 +69,15 @@ E.g. department = sales
 
 1. This is under SIEM and can be exported to MS Sentinel.
 2. Configurable in Conditional Access with P2 license [Policy](https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-configure-risk-policies)
-  - User risk policy
-  - Sign-in risk policy
+    - User risk policy
+    - Sign-in risk policy
 3. **User risk** represents the probability that a given identity or account is compromised. An example is when a user's valid credentials are leaked. User risks are calculated offline by using Microsoft's internal and external threat intelligence sources. Here are some user risks that can be identified:
-  - **Leaked credentials**: Microsoft checks for leaked credentials from the dark web, paste sites, or other sources. These leaked credentials are checked against Microsoft Entra users' current valid credentials for valid matches.
-  - **Microsoft Entra threat intelligence**: This risk detection type indicates user activity that's unusual for the given user or is consistent with known attack patterns.
+    - **Leaked credentials**: Microsoft checks for leaked credentials from the dark web, paste sites, or other sources. These leaked credentials are checked against Microsoft Entra users' current valid credentials for valid matches.
+    - **Microsoft Entra threat intelligence**: This risk detection type indicates user activity that's unusual for the given user or is consistent with known attack patterns.
 4. **Sign-in risk** represents the probability that a given sign-in (authentication request) isn't authorized by the identity owner. Sign-in risk can be calculated in real time or offline. Here are some sign-in risks that can be identified:
-  - **Anonymous IP address**: A sign-in attempt from an anonymous IP address like a Tor browser or an anonymized VPN.
-  - **Atypical travel**: Two sign-ins from the same user that originate from a geographically distant location. Given past behavior, at least one of the locations might also be atypical for the user.
-  - **Malicious IP address**: Sign-in from an IP with high failure rates due to invalid credentials or known bad IP reputation.
-  - **Password spray**: A password spray attack is where multiple identities are attacked using common passwords in a unified brute force manner.
-  - **Anomalous token**: Abnormal token characteristics, such as unusual lifetime or token played from an unfamiliar location.
-  - **Verified threat actor IP**: Sign-in from an IP associated with known nation-state or cybercriminal threat actors.
+    - **Anonymous IP address**: A sign-in attempt from an anonymous IP address like a Tor browser or an anonymized VPN.
+    - **Atypical travel**: Two sign-ins from the same user that originate from a geographically distant location. Given past behavior, at least one of the locations might also be atypical for the user.
+    - **Malicious IP address**: Sign-in from an IP with high failure rates due to invalid credentials or known bad IP reputation.
+    - **Password spray**: A password spray attack is where multiple identities are attacked using common passwords in a unified brute force manner.
+    - **Anomalous token**: Abnormal token characteristics, such as unusual lifetime or token played from an unfamiliar location.
+    - **Verified threat actor IP**: Sign-in from an IP associated with known nation-state or cybercriminal threat actors.

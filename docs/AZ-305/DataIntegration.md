@@ -6,8 +6,8 @@
 3. Provide continuous integration and delivery (CI/CD) and publish. Support CI/CD by using GitHub and Azure Pipelines to deliver the ETL process incrementally before publishing the data to the analytics engine.
 4. Monitor. Finally, use the Azure portal to monitor the pipeline for scheduled activities and for any failures.
 5. Azure Data Factory serves two communities: 
-  - the big data community
-  - the relational data warehousing community that uses SQL Server Integration Services (SSIS). 
+    - the big data community
+    - the relational data warehousing community that uses SQL Server Integration Services (SSIS). 
 
 ![Data Factory](img/dataFactory.png)
 
@@ -26,9 +26,9 @@
 3. Supports collaboration and handles both structured and streaming data.
 4. Consider data science preparation of data. Create, clone, and edit clusters of complex, unstructured data. Turn the data clusters into specific jobs. Deliver the results to data scientists and data analysts for review.
 5. Three environments:
-  - **Databricks SQL**: Azure Databricks SQL provides an easy-to-use platform for analysts who want to run SQL queries on their data lake. You can create multiple visualization types to explore query results from different perspectives, and build and share dashboards.
-  - **Databricks Data Science & Engineering**: Azure Databricks Data Science & Engineering lets data teams work together in an interactive workspace. Data is brought into Azure through batch or real-time tools like Azure Data Factory, Kafka, Event Hubs, or IoT Hub. Data is stored in Azure Blob Storage or Data Lake Storage. Databricks reads data from these sources and uses Spark to generate insights.
-  - **Databricks Machine Learning**: Azure Databricks Machine Learning is an integrated end-to-end machine learning environment. It incorporates managed services for experiment tracking, model training, feature development and management, and feature and model serving.
+   - **Databricks SQL**: Azure Databricks SQL provides an easy-to-use platform for analysts who want to run SQL queries on their data lake. You can create multiple visualization types to explore query results from different perspectives, and build and share dashboards.
+    - **Databricks Data Science & Engineering**: Azure Databricks Data Science & Engineering lets data teams work together in an interactive workspace. Data is brought into Azure through batch or real-time tools like Azure Data Factory, Kafka, Event Hubs, or IoT Hub. Data is stored in Azure Blob Storage or Data Lake Storage. Databricks reads data from these sources and uses Spark to generate insights.
+    - **Databricks Machine Learning**: Azure Databricks Machine Learning is an integrated end-to-end machine learning environment. It incorporates managed services for experiment tracking, model training, feature development and management, and feature and model serving.
 
 ### Difference with Data Factory.
 1. Databricks is based on Spark sources needs a connector. ADF features a native **Stored Procedure Activity** designed specifically to invoke existing stored procedures in SQL Server, Azure SQL Database, or Azure Synapse Analytics. To get Azure Databricks to communicate with an on-premises database, you have to deploy Databricks into your own Virtual Network (VNet Injection) and set up a Site-to-Site VPN or ExpressRoute. ADF avoids all this networking overhead by simply installing a **Self-Hosted Integration Runtime (SHIR)** on a local server. - Hence in most exam this Databricks needs overheads.
@@ -38,10 +38,10 @@
 
 1. Azure Synapse Link allows you to run analytics in Azure Synapse Analytics on operational data from Azure Cosmos DB and Dynamics 365 in **near real-time**, without the need for complex ETL (Extract, Transform, Load) pipelines.
 2. Breaks to:
-  - Azure Synapse SQL pool: Choose between dedicated SQL pools for consistent performance and cost, or serverless SQL endpoints for flexible, on-demand workloads.
-  - Azure Synapse Spark pool: Run Apache Spark clusters to process data using Python, Scala, SQL, or C#.
-  - Azure Synapse Pipelines: Use cloud-based ETL workflows to move and transform data at scale, combining multiple sources if needed.
-  - Azure Synapse Link: Connect to Azure Cosmos DB for near real-time analytics on operational data.
+    - Azure Synapse SQL pool: Choose between dedicated SQL pools for consistent performance and cost, or serverless SQL endpoints for flexible, on-demand workloads.
+    - Azure Synapse Spark pool: Run Apache Spark clusters to process data using Python, Scala, SQL, or C#.
+    - Azure Synapse Pipelines: Use cloud-based ETL workflows to move and transform data at scale, combining multiple sources if needed.
+    - Azure Synapse Link: Connect to Azure Cosmos DB for near real-time analytics on operational data.
 
 ![Synapse Link](img/synapselink.png)
 

@@ -46,9 +46,8 @@
 
 ## Alternatives
 1. Storage Queue is alternative for Service Bus Queue. Choose Azure Storage Queues if:
-
-  - Your system does not care about strict FIFO ordering
-  - handle the occasional duplicate message
+    - Your system does not care about strict FIFO ordering
+    - handle the occasional duplicate message
 2. Question on solution must be able to store over 90-GB of data and provide an audit trail of all messages.
 
 | Feature | Azure Storage Queues| Azure Service Bus (Premium)|

@@ -8,9 +8,9 @@ Checkout at [link] (https://learn.microsoft.com/en-us/azure/role-based-access-co
 
 ## Kubernetes
 1. Kubernetes role is very special. User roles cannot assign user (nor has there such need in kubernetes)
-  - Contributors can change roles and bindings. 
-  - The Azure Kubernetes Service Cluster Admin role provides permissions to list cluster admin credential actions only. 
-  - The Azure Kubernetes Service RBAC Writer role cannot modify roles and role bindings. - The Azure Kubernetes Service Cluster User role can only list user credential access.
+    - Contributors can change roles and bindings. 
+    - The Azure Kubernetes Service Cluster Admin role provides permissions to list cluster admin credential actions only. 
+    - The Azure Kubernetes Service RBAC Writer role cannot modify roles and role bindings. - The Azure Kubernetes Service Cluster User role can only list user credential access.
 
 ## Notes
 1. RBAC can be used in Management Group, subscription, resource group and resource level. But **NOT** in tags.

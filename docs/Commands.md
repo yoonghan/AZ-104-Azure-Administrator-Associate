@@ -26,14 +26,14 @@ Topic is covered more in AZ-400.
 
 ```bash
 az deployment group create \
-  --name blanktemplate \
-  --resource-group myResourceGroup \
-  --template-file $templateFile
+    --name blanktemplate \
+    --resource-group myResourceGroup \
+    --template-file $templateFile
 ```
 
 ```powershell
 New-AzResourceGroupDeployment `
-  -Name blanktemplate `
-  -ResourceGroupName myResourceGroup `
-  -TemplateFile $templateFile
+    -Name blanktemplate `
+    -ResourceGroupName myResourceGroup `
+    -TemplateFile $templateFile
 ```
