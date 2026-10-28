@@ -1,0 +1,2136 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Han">
+      
+      
+        <link rel="canonical" href="https://yoonghan.github.io/AZ-104-Azure-Administrator-Associate/AZ-305/RelationalDB/">
+      
+      
+        <link rel="prev" href="../BluePrint/">
+      
+      
+        <link rel="next" href="../DataIntegration/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Relational DB (Azure SQL) - Azure Administrator (AZ-104) Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#relational-db-azure-sql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Azure Administrator (AZ-104) Study Guide" class="md-header__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Azure Administrator (AZ-104) Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Relational DB (Azure SQL)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Infrastructure/" class="md-tabs__link">
+          
+  
+  
+  Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../BluePrint/" class="md-tabs__link">
+          
+  
+  
+  AZ-305
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Exam_Preparation/Notes/" class="md-tabs__link">
+          
+  
+  
+  Exam
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Azure Administrator (AZ-104) Study Guide" class="md-nav__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Azure Administrator (AZ-104) Study Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Topics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntraId
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EntraId
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EntraId/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../User/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Storage-Account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtual-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Network-Security-Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security Group (NSG)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Load-Balancers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtual-Machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Web-Application/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AzurePolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../KeyVault/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KeyVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Budget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Budget
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AZ-305
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AZ-305
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BluePrint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Blueprints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational DB (Azure SQL)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational DB (Azure SQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-deployment-models-decision-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Deployment Models Decision Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-azure-sql-database-purchasing-compute-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Azure SQL Database: Purchasing &amp; Compute Options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Azure SQL Database: Purchasing &amp; Compute Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purchasing-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purchasing Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-tiers-vcore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Tiers (vCore)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-database-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Database Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-service-tiers-high-availability-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Service Tiers &amp; High Availability Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Service Tiers &amp; High Availability Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availability-architecture-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High Availability Architecture Diagrams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-disaster-recovery-active-geo-replication-vs-failover-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Disaster Recovery: Active Geo-Replication vs. Failover Groups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-backups-business-continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Backups &amp; Business Continuity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-security-encryption-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Security, Encryption &amp; Compliance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataIntegration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ApplicationArchitecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Application Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Networking: VPN &amp; ExpressRoute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Others/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Others
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exam
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exam_Preparation/Notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exam_Preparation/Labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-deployment-models-decision-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Deployment Models Decision Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-azure-sql-database-purchasing-compute-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Azure SQL Database: Purchasing &amp; Compute Options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Azure SQL Database: Purchasing &amp; Compute Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purchasing-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purchasing Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-tiers-vcore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Tiers (vCore)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-database-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Database Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-service-tiers-high-availability-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Service Tiers &amp; High Availability Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Service Tiers &amp; High Availability Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availability-architecture-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High Availability Architecture Diagrams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-disaster-recovery-active-geo-replication-vs-failover-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Disaster Recovery: Active Geo-Replication vs. Failover Groups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-backups-business-continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Backups &amp; Business Continuity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-security-encryption-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Security, Encryption &amp; Compliance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="relational-db-azure-sql">Relational DB (Azure SQL)</h1>
+<blockquote>
+<p>[!NOTE]
+<strong>AZ-305 Exam Focus:</strong> The exam tests selecting the appropriate Azure SQL deployment model (SQL DB vs. SQL MI vs. SQL on VM), purchasing &amp; compute models (vCore vs. DTU, Serverless vs. Provisioned, Elastic Pools), high availability &amp; disaster recovery (Failover Groups vs. Active Geo-Replication), backup retention (PITR vs. LTR), and security implementations (TDE, Always Encrypted, RLS, DDM, Ledger).</p>
+</blockquote>
+<hr />
+<h2 id="1-deployment-models-decision-matrix">1. Deployment Models Decision Matrix</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Scope &amp; Architecture</th>
+<th style="text-align: left;">Best For / Scenarios</th>
+<th style="text-align: left;">Key Features &amp; Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Azure SQL Database</strong></td>
+<td style="text-align: left;">Database-scoped PaaS</td>
+<td style="text-align: left;">Modern cloud-native apps, microservices, multi-tenant SaaS, intermittent workloads</td>
+<td style="text-align: left;">• Fully managed, zero OS/instance overhead.<br>• Supports Serverless &amp; Elastic Pools.<br>• No instance-scoped features (no native SQL Agent, no cross-database queries across servers without Elastic Query).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure SQL Managed Instance</strong></td>
+<td style="text-align: left;">Instance-scoped PaaS (nearly 100% surface-area compatibility)</td>
+<td style="text-align: left;">Lift-and-shift of existing on-premises SQL Server with minimal application redesign</td>
+<td style="text-align: left;">• Supports <strong>SQL Server Agent</strong>, <strong>cross-database queries/transactions</strong>, <strong>Linked Servers</strong>, <strong>Service Broker</strong>, and <strong>CLR</strong>.<br>• Native <code>.bak</code> restore directly from Azure Blob Storage (<code>RESTORE ... FROM URL</code>).<br>• Requires a dedicated, delegated subnet in a VNet.<br>• Near-zero downtime migrations via <strong>Azure DMS (online)</strong>, <strong>Managed Instance link</strong>, or <strong>Log Replay Service (LRS)</strong>.<br>• <em>Limitations:</em> No FileStream, no Simple Recovery model.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SQL Server on Azure Virtual Machines</strong></td>
+<td style="text-align: left;">IaaS (full OS &amp; SQL control)</td>
+<td style="text-align: left;">Legacy SQL versions (e.g., SQL 2008/2012 with free ESU), OS-level access, strict third-party software dependencies</td>
+<td style="text-align: left;">• Full administrative control over VM and SQL instance.<br>• Supports <strong>FileStream</strong>, <strong>Simple Recovery model</strong>, and co-located <strong>SSAS / SSRS / SSIS</strong>.<br>• SQL Server IaaS Agent Extension enables automated patching, automated backups, and Azure Key Vault integration.<br>• Customer is responsible for OS updates, patching, and high availability configuration.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure SQL Edge</strong></td>
+<td style="text-align: left;">Edge/IoT-optimized container</td>
+<td style="text-align: left;">Low-latency streaming analytics on ARM64 and x64 edge devices</td>
+<td style="text-align: left;">Built-in data streaming, time-series, and edge AI/graph analytics.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-azure-sql-database-purchasing-compute-options">2. Azure SQL Database: Purchasing &amp; Compute Options</h2>
+<p><img alt="Azure SQL Database" src="../img/azuresql.png" /></p>
+<h3 id="purchasing-models">Purchasing Models</h3>
+<ol>
+<li><strong>vCore (Recommended)</strong>:</li>
+<li>Independently configure and scale compute (vCores) and storage.</li>
+<li>Supports <strong>Azure Hybrid Benefit (AHB)</strong> (up to 55% discount using on-premises SQL licenses with Software Assurance).</li>
+<li>Supports <strong>Reserved Capacity</strong> (pre-pay for 1 or 3 years for steep discounts).</li>
+<li><strong>DTU (Database Transaction Unit)</strong>:</li>
+<li>Bundled compute, storage, and I/O resources in fixed tiers (Basic, Standard, Premium).</li>
+<li>Simpler, but lacks independent scaling, AHB, and Serverless options.</li>
+</ol>
+<h3 id="compute-tiers-vcore">Compute Tiers (vCore)</h3>
+<ol>
+<li><strong>Provisioned Compute</strong>: Pre-allocates compute resources continuously billed per hour, whether used or not. Best for steady-state workloads.</li>
+<li><strong>Serverless Compute</strong>:</li>
+<li>Automatically scales compute between configurable min and max vCores based on demand.</li>
+<li><strong>Auto-pause &amp; Auto-resume</strong>: Automatically pauses the database during configured periods of inactivity (e.g., 1 hour), only billing for storage. Wakes up automatically on the next connection.</li>
+<li>Billed per vCore-second. Ideal for intermittent, unpredictable, or dev/test workloads.</li>
+</ol>
+<h3 id="elastic-database-pools">Elastic Database Pools</h3>
+<ul>
+<li>Buy a shared budget of compute resources (eDTUs or vCore pool) and storage shared across multiple databases.</li>
+<li><strong>AZ-305 Rule:</strong> Designed for <strong>multi-tenant SaaS patterns</strong> where multiple databases have variable and unpredictable peak usage at different times. It is <strong>NOT</strong> for vertical scaling of single databases; it optimizes cost across many databases.</li>
+</ul>
+<hr />
+<h2 id="3-service-tiers-high-availability-architecture">3. Service Tiers &amp; High Availability Architecture</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">General Purpose (GP)</th>
+<th style="text-align: left;">Business Critical (BC)</th>
+<th style="text-align: left;">Hyperscale (HS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Target Workload</strong></td>
+<td style="text-align: left;">Most standard business workloads</td>
+<td style="text-align: left;">High IOPS, low latency OLTP</td>
+<td style="text-align: left;">Very large databases (VLDB), rapid scale</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage Architecture</strong></td>
+<td style="text-align: left;">Remote Azure Premium Blob Storage (compute &amp; storage decoupled)</td>
+<td style="text-align: left;">Local NVMe SSD storage</td>
+<td style="text-align: left;">Separated multi-tier caching with Page Servers &amp; Log Service</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Max Database Size</strong></td>
+<td style="text-align: left;">4 TB (up to 128 TB on GP Next Gen)</td>
+<td style="text-align: left;">4 TB</td>
+<td style="text-align: left;"><strong>128 TB</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>High Availability Architecture</strong></td>
+<td style="text-align: left;">Azure Service Fabric attaches a new stateless compute node to remote storage</td>
+<td style="text-align: left;"><strong>Always On Availability Groups</strong> (4 replicas: 1 primary, 3 secondaries) with synchronous commit</td>
+<td style="text-align: left;">Separated compute nodes + resilient distributed page servers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Failover Time</strong></td>
+<td style="text-align: left;">1 – 2 minutes</td>
+<td style="text-align: left;">Sub-second (fastest)</td>
+<td style="text-align: left;">Rapid failover (seconds)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Read Scale-Out</strong></td>
+<td style="text-align: left;">Not supported</td>
+<td style="text-align: left;"><strong>1 free read-only replica</strong> (connect using <code>ApplicationIntent=ReadOnly</code>)</td>
+<td style="text-align: left;">Up to <strong>30 named replicas</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Backup / Restore Speed</strong></td>
+<td style="text-align: left;">Proportional to database size</td>
+<td style="text-align: left;">Proportional to database size</td>
+<td style="text-align: left;"><strong>Near-instantaneous</strong> (storage snapshots regardless of size)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="high-availability-architecture-diagrams">High Availability Architecture Diagrams</h3>
+<p><img alt="General Purpose Availability" src="../img/general_purpose_av.png" />
+<img alt="Business Critical HA" src="../img/business_critical_ha.png" />
+<img alt="Hyperscale HA" src="../img/hyperscale_ha.png" /></p>
+<hr />
+<h2 id="4-disaster-recovery-active-geo-replication-vs-failover-groups">4. Disaster Recovery: Active Geo-Replication vs. Failover Groups</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Capability</th>
+<th style="text-align: left;">Active Geo-Replication</th>
+<th style="text-align: left;">Auto-Failover Groups (Failover Groups)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Supported Offerings</strong></td>
+<td style="text-align: left;"><strong>Azure SQL Database only</strong></td>
+<td style="text-align: left;"><strong>Azure SQL Database AND SQL Managed Instance</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Replication Scope</strong></td>
+<td style="text-align: left;">Single database</td>
+<td style="text-align: left;">Group of databases or entire Managed Instance</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Target Secondary</strong></td>
+<td style="text-align: left;">Up to 4 readable secondaries across any Azure region</td>
+<td style="text-align: left;">1 secondary in a chosen paired/unpaired region</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Failover Process</strong></td>
+<td style="text-align: left;"><strong>Manual only</strong></td>
+<td style="text-align: left;"><strong>Automatic</strong> (with configurable grace period) or <strong>Manual</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Connection Strings</strong></td>
+<td style="text-align: left;"><strong>Must be reconfigured</strong> manually upon failover</td>
+<td style="text-align: left;"><strong>No change needed</strong>; uses dedicated DNS listener endpoints (<code>-primary</code> and <code>-secondary</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Read Scale-Out</strong></td>
+<td style="text-align: left;">Secondaries are readable</td>
+<td style="text-align: left;">Secondary can be used as a read-only endpoint</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-backups-business-continuity">5. Backups &amp; Business Continuity</h2>
+<ol>
+<li><strong>Automated Backups</strong>:</li>
+<li>Full backups: Weekly.</li>
+<li>Differential backups: Every 12–24 hours.</li>
+<li>Transaction log backups: Every 5–10 minutes.</li>
+<li><strong>Point-in-Time Restore (PITR)</strong>:</li>
+<li>Restores a database to any point in time within the retention window.</li>
+<li>Default: <strong>7 days</strong> (configurable from <strong>1 to 35 days</strong>).</li>
+<li><strong>Long-Term Retention (LTR)</strong>:</li>
+<li>Stores full backups for regulatory compliance for up to <strong>10 years</strong> using Azure Backup vault policies (W-M-Y: Weekly, Monthly, Yearly).</li>
+<li><strong>Backup Storage Redundancy</strong>:</li>
+<li>Configurable independently of compute tier: <strong>LRS</strong> (local), <strong>ZRS</strong> (zone), <strong>GRS</strong> (geo-redundant, default), or <strong>GZRS</strong>.</li>
+</ol>
+<hr />
+<h2 id="6-security-encryption-compliance">6. Security, Encryption &amp; Compliance</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Security Area</th>
+<th style="text-align: left;">Technology</th>
+<th style="text-align: left;">Implementation &amp; Exam Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Identity &amp; Access</strong></td>
+<td style="text-align: left;"><strong>Microsoft Entra ID (Azure AD)</strong></td>
+<td style="text-align: left;">Centralized identity management. Enables MFA, Conditional Access, and passwordless authentication via Managed Identities.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network Security</strong></td>
+<td style="text-align: left;"><strong>Private Link / Private Endpoint</strong></td>
+<td style="text-align: left;">Secures access over private IP within the VNet, blocking public internet exposure.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data at Rest</strong></td>
+<td style="text-align: left;"><strong>Transparent Data Encryption (TDE)</strong></td>
+<td style="text-align: left;">Encrypts database files, log files, and backups at rest using AES-256. Can use Service-Managed Keys or Customer-Managed Keys (BYOK via Azure Key Vault).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data in Transit</strong></td>
+<td style="text-align: left;"><strong>TLS 1.2+</strong></td>
+<td style="text-align: left;">Enforces transport layer encryption between client applications and Azure SQL.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data in Use / Process</strong></td>
+<td style="text-align: left;"><strong>Always Encrypted</strong></td>
+<td style="text-align: left;">Client driver encrypts sensitive columns before transmitting to database. Database processes ciphertext and never accesses plaintext. With <strong>Secure Enclaves</strong>, cryptographic operations (like equality/range queries) can occur inside hardware enclaves.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data in Use Encryption Types</strong></td>
+<td style="text-align: left;"><strong>Deterministic vs. Randomized</strong></td>
+<td style="text-align: left;">• <strong>Deterministic:</strong> Always yields the same ciphertext for a given plaintext value; allows point lookups, joins, grouping, and indexing.<br>• <strong>Randomized:</strong> Generates different ciphertext for identical plaintext; more secure, but prevents searching, grouping, and indexing.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Presentation Layer</strong></td>
+<td style="text-align: left;"><strong>Dynamic Data Masking (DDM)</strong></td>
+<td style="text-align: left;"><strong>NOT encryption</strong>. Obfuscates sensitive data in query results (e.g. <code>XXXX-XXXX-XXXX-1234</code> or custom masks) on the fly for non-privileged users without altering underlying data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Access Control</strong></td>
+<td style="text-align: left;"><strong>Row-Level Security (RLS)</strong></td>
+<td style="text-align: left;">Uses SQL predicate functions to restrict which rows a user can see based on user identity or role (e.g., tenants can only access rows matching their TenantID).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Audit &amp; Integrity</strong></td>
+<td style="text-align: left;"><strong>Ledger for Azure SQL</strong></td>
+<td style="text-align: left;">Provides cryptographic proof of data integrity using SHA-256 block hashing (tamper-evident tables and ledgers). Protects against unauthorized modifications even by high-privileged DBAs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Threat Protection</strong></td>
+<td style="text-align: left;"><strong>Microsoft Defender for SQL</strong></td>
+<td style="text-align: left;">Vulnerability assessments, anomalous activity detection, and SQL injection alerting.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recovery">Recovery</h2>
+<p>Please see this <a href="https://learn.microsoft.com/en-us/training/modules/describe-high-availability-disaster-recovery-strategies/6-explore-iaas-high-availability-disaster-recovery-solution">note</a></p>
+<ol>
+<li><strong>Always On availability groups</strong>: Primary VM sends copies of all committed transactions to at least one replica in the availability group. synchronous commit replication ensures zero data loss for synchronous replicas.</li>
+<li><strong>Always On Failover Cluster Instance</strong>: uses Windows Server Failover Clustering (WSFC) to provide high availability for SQL Server instances. If the primary instance fails, a secondary instance automatically takes over. </li>
+<li><strong>Multi-Region or Hybrid Always On availability groups</strong>: If the primary site fails, you can fail over to a secondary Availability Group in a different location, either within Azure or on-premises.</li>
+<li><strong>Distributed availability groups</strong>: Provides high availability for SQL Server instances across multiple availability groups.</li>
+<li><strong>Log shipping</strong>: Copy transaction log backups from a primary SQL Server to one or more secondary SQL Servers. The transaction log backups are restored on the secondary server, keeping it synchronized with the primary server.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

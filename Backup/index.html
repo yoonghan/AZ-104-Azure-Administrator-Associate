@@ -1,0 +1,3237 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Han">
+      
+      
+        <link rel="canonical" href="https://yoonghan.github.io/AZ-104-Azure-Administrator-Associate/Backup/">
+      
+      
+        <link rel="prev" href="../Containers/">
+      
+      
+        <link rel="next" href="../AzurePolicy/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Backup - Azure Administrator (AZ-104) Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#backup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Azure Administrator (AZ-104) Study Guide" class="md-header__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Azure Administrator (AZ-104) Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Backup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Infrastructure/" class="md-tabs__link">
+          
+  
+  
+  Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../AZ-305/BluePrint/" class="md-tabs__link">
+          
+  
+  
+  AZ-305
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Exam_Preparation/Notes/" class="md-tabs__link">
+          
+  
+  
+  Exam
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Azure Administrator (AZ-104) Study Guide" class="md-nav__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Azure Administrator (AZ-104) Study Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Topics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntraId
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EntraId
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EntraId/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../User/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Storage-Account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Virtual-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Network-Security-Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security Group (NSG)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Load-Balancers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Virtual-Machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Web-Application/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#backup-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup locations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RPO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-backup-can-provide-backup-services-for-the-following-data-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Backup can provide backup services for the following data assets:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Azure Backup can provide backup services for the following data assets:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability-and-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability and Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enhanced-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enhanced soft delete
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-vm-is-backed-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How VM is backed up
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How VM is backed up">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-on-premises-vms-are-backed-up-comparison-with-cloud-vms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How On-Premises VMs are Backed Up (Comparison with Cloud VMs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How On-Premises VMs are Backed Up (Comparison with Cloud VMs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hypervisor-level-vm-backup-using-mabs-microsoft-azure-backup-server-or-dpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hypervisor-Level VM Backup using MABS (Microsoft Azure Backup Server) or DPM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-guest-os-level-backup-using-mars-agent-no-backup-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Guest OS-Level Backup using MARS Agent (No Backup Server)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-vs-on-premises-vm-backup-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cloud vs. On-Premises VM Backup Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restore-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restore VM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deleting-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting Vault
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Box
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovery-service-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovery Service Vault
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-delete-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        To delete Vault
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-site-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Site Recovery
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Azure Site Recovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-failover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing failover
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planned-failover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned failover
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-recovery-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup &amp; Recovery Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-az-305" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra AZ-305
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extra AZ-305">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-disambiguating-confusing-terminology-service-vs-vaults-vs-server-vs-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Disambiguating Confusing Terminology: Service vs. Vaults vs. Server vs. DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-workload-to-vault-decision-matrix-exam-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Workload-to-Vault Decision Matrix (Exam High-Priority)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-detailed-comparison-recovery-services-vault-vs-backup-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Detailed Comparison: Recovery Services Vault vs. Backup Vault
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-vm-backup-policies-standard-vs-enhanced-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. VM Backup Policies: Standard vs. Enhanced Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-architecture-replication-vs-disaster-recovery-vs-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Architecture: Replication vs. Disaster Recovery vs. Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-availability-recovery-and-sla-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Availability, Recovery, and SLA Metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Availability, Recovery, and SLA Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#availability-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recovery-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovery Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composite-sla-calculations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composite SLA Calculations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-security-and-governance-for-vaults-az-305-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Security and Governance for Vaults (AZ-305 Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AzurePolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../KeyVault/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KeyVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Budget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Budget
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AZ-305
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AZ-305
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/BluePrint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Blueprints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/RelationalDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational DB (Azure SQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/DataIntegration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/Compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/ApplicationArchitecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Application Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Networking: VPN &amp; ExpressRoute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/Migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AZ-305/Others/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Others
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exam
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exam_Preparation/Notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Exam_Preparation/Labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#backup-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup locations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RPO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-backup-can-provide-backup-services-for-the-following-data-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Backup can provide backup services for the following data assets:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Azure Backup can provide backup services for the following data assets:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#availability-and-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability and Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enhanced-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enhanced soft delete
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-vm-is-backed-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How VM is backed up
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How VM is backed up">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-on-premises-vms-are-backed-up-comparison-with-cloud-vms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How On-Premises VMs are Backed Up (Comparison with Cloud VMs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How On-Premises VMs are Backed Up (Comparison with Cloud VMs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hypervisor-level-vm-backup-using-mabs-microsoft-azure-backup-server-or-dpm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hypervisor-Level VM Backup using MABS (Microsoft Azure Backup Server) or DPM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-guest-os-level-backup-using-mars-agent-no-backup-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Guest OS-Level Backup using MARS Agent (No Backup Server)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-vs-on-premises-vm-backup-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cloud vs. On-Premises VM Backup Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restore-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restore VM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deleting-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting Vault
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Box
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovery-service-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovery Service Vault
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-delete-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        To delete Vault
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#azure-site-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Site Recovery
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Azure Site Recovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-failover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing failover
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planned-failover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned failover
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-recovery-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup &amp; Recovery Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-az-305" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra AZ-305
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extra AZ-305">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-disambiguating-confusing-terminology-service-vs-vaults-vs-server-vs-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Disambiguating Confusing Terminology: Service vs. Vaults vs. Server vs. DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-workload-to-vault-decision-matrix-exam-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Workload-to-Vault Decision Matrix (Exam High-Priority)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-detailed-comparison-recovery-services-vault-vs-backup-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Detailed Comparison: Recovery Services Vault vs. Backup Vault
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-vm-backup-policies-standard-vs-enhanced-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. VM Backup Policies: Standard vs. Enhanced Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-architecture-replication-vs-disaster-recovery-vs-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Architecture: Replication vs. Disaster Recovery vs. Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-availability-recovery-and-sla-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Availability, Recovery, and SLA Metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Availability, Recovery, and SLA Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#availability-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Availability Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recovery-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovery Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composite-sla-calculations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composite SLA Calculations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-security-and-governance-for-vaults-az-305-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Security and Governance for Vaults (AZ-305 Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="backup">Backup</h1>
+<h2 id="backup-locations">Backup locations</h2>
+<ol>
+<li>Azure Backup manages and stores backed-up data across <strong>Recovery Services vaults</strong> and <strong>Backup vaults</strong>. However, <strong>not all backups physically move data into a vault</strong>:<ul>
+<li><strong>Operational (Snapshot / Local) Tier</strong>: The backup data remains locally in the source resource (e.g., local disk snapshots for VMs, or within the source storage account for Operational Blob Backup). The vault only orchestrates policies, jobs, and metadata.</li>
+<li><strong>Vault Tier</strong>: The backup data is physically transferred and stored in the vault's managed storage (e.g., Vaulted Blob Backup, Azure VM long-term retention).</li>
+</ul>
+</li>
+<li>For on-premises Windows machines, you can back up directly to Azure with the Azure Backup Microsoft Azure Recovery Services (MARS) agent. Alternatively, you can back up these Windows machines to a backup server, perhaps a System Center Data Protection Manager (DPM) or Microsoft Azure Backup Server (MABS). You can then back that server up to a Recovery Services vault in Azure.</li>
+<li>In UI, this is called <strong>Backup Center</strong>. Backup center allows you to have a single pane of glass to manage all tasks related to backups. Backup center is designed to function well across a large and distributed Azure environment. You can use Backup center to efficiently manage backups spanning multiple workload types, vaults, subscriptions, regions, and Azure Lighthouse tenants.</li>
+<li><strong>Recovery Services vault</strong> and <strong>Backup vault</strong> are <strong>different</strong> ARM resource types with distinct workload support. Recovery Services vaults support Azure VMs, SQL/SAP HANA in VMs, Azure Files, on-premises machines (MARS/MABS), and Azure Site Recovery (ASR). Backup vaults support newer cloud-native and PaaS workloads such as Azure Managed Disks, Azure Blobs, AKS, and Azure Database for PostgreSQL. </li>
+</ol>
+<p><img alt="Backup Center" src="/img/backup_center.png" /></p>
+<h2 id="method">Method</h2>
+<p><img alt="Azure Backup" src="../img/azure_backup.png" /></p>
+<ol>
+<li>Workload integration layer - Backup Extension: Integration with the actual workload, such as Azure virtual machines (VMs) or Azure Blobs, happens at this layer.</li>
+<li>Data Plane - Access Tiers: There are three access tiers where the backups could be stored:<ul>
+<li>Snapshot tier - The snapshot is taken and stored along with the disk.</li>
+<li>Standard tier - Backup data for all workloads supported by Azure Backup is stored in vaults, which hold backup storage, an autoscaling set of storage accounts managed by Azure Backup.</li>
+<li>Archive tier - The backup data is moved to an offline state in the archive tier. Azure Backup for storing backup data, including their Long-Term Retention (LTR) backup data, with retention needs defined in the organization's compliance rules. </li>
+</ul>
+</li>
+<li>Data Plane - Availability and Security: The backup data is replicated across zones or regions, based on the redundancy the user specifies.</li>
+<li>Management Plane – Recovery Services vault/Backup vault and Backup center: The vault provides an interface for the user to interact with the backup service.</li>
+</ol>
+<h2 id="rto">RTO</h2>
+<p>Recovery Time Objective (RTO) is the target time within which a business process must be restored after a disaster occurs to avoid unacceptable consequences. For instance, if a critical application goes down due to a server failure and the business can only tolerate a maximum of four hours of downtime, then the RTO is four hours.</p>
+<h2 id="rpo">RPO</h2>
+<p>Recovery Point Objective (RPO) is the maximum amount of data loss, measured in time, that your organization can sustain during an event.</p>
+<h2 id="azure-backup-can-provide-backup-services-for-the-following-data-assets">Azure Backup can provide backup services for the following data assets:</h2>
+<ul>
+<li>On-premises files, folders, and system state</li>
+<li>Azure Virtual Machines (VMs)</li>
+<li>Azure Managed Disks</li>
+<li>Azure Files Shares</li>
+<li>SQL Server in Azure VMs</li>
+<li>SAP HANA (High-performance Analytic Appliance) databases in Azure VMs</li>
+<li>Azure Database for PostgreSQL servers</li>
+<li>Azure Blobs</li>
+<li>Azure Database for PostgreSQL - Flexible servers</li>
+<li>Azure Database for MySQL - Flexible servers</li>
+<li>Azure Kubernetes cluster</li>
+</ul>
+<h3 id="support">Support</h3>
+<p>Azure Backup supports the following scenarios:</p>
+<ul>
+<li><strong>Azure VMs</strong> - Back up Windows or Linux Azure VMs
+Azure Backup provides independent and isolated backups to guard against unintended destruction of the data on your VMs. Backups are stored in a Recovery Services vault with built-in management of recovery points. Configuration and scaling are simple, backups are optimized, and you can easily restore as needed.</li>
+<li><strong>On-premises</strong> - Back up files, folders, and system state using the Microsoft Azure Recovery Services (MARS) agent. Or use Microsoft Azure Backup Server (MABS) or Data Protection Manager (DPM) server to protect on-premises VMs (Hyper-V and VMware) and other on-premises workloads.</li>
+<li><strong>Azure Files shares</strong> - Azure Files provides snapshot management by Azure Backup.</li>
+<li><strong>SQL Server in Azure VMs and SAP HANA databases in Azure VMs</strong> - Azure Backup offers stream-based, specialized solutions to back up SQL Server, or SAP HANA running in Azure VMs. These solutions take workload-aware backups that support different backup types such as full, differential and log, 15-minute RPO, and point-in-time recovery.</li>
+</ul>
+<h2 id="backup-types">Backup types</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full</td>
+<td>A full database backup backs up the entire database. It contains all the data in a specific database or in a set of filegroups or files. A full backup also contains enough logs to recover that data.</td>
+<td>At most, you can trigger one full backup per day. You can choose to make a full backup on a daily or weekly interval.</td>
+</tr>
+<tr>
+<td>Differential</td>
+<td>A differential backup is based on the most recent full-data backup. It captures only the data that changed since the full backup.</td>
+<td>At most, you can trigger one differential backup per day. You can't configure a full backup and a differential backup on the same day.</td>
+</tr>
+<tr>
+<td>Multiple backups per day</td>
+<td>Back up Azure VMs hourly with a minimum recovery point objective (RPO) of 4 hours and a maximum of 24 hours.</td>
+<td>You can use Enhanced backup policy to set the backup schedule to 4, 6, 8, 12, and 24 hours (respectively) for new Azure offerings, such as Trusted Launch VM.</td>
+</tr>
+<tr>
+<td>Selective disk backup</td>
+<td>Selectively back up a subset of the data disks that are attached to your VM, then restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. Selective disk backup helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.</td>
+<td>Azure Backup provides Selective Disk backup and restore capability using Enhanced backup policy.</td>
+</tr>
+<tr>
+<td>Transaction Log</td>
+<td>A log backup enables point-in-time restoration up to a specific second.</td>
+<td>At most, you can configure transactional log backups every 15 minutes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="availability-and-security">Availability and Security</h2>
+<ol>
+<li>Azure Backup also provides protection against malicious deletion of your backup by using soft-delete operations. </li>
+<li>A deleted backup is stored for 14 days, free of charge, which allows you to recover the backup if needed.</li>
+<li>You can choose from locally redundant storage (LRS), Geo-redundant storage (GRS), or zone-redundant storage (ZRS).</li>
+<li>If your three Azure VMs are deployed across multiple subscriptions or regions, you should note that Azure Backup doesn’t support cross-region backup for most workloads. However, it does support cross-region restore in a paired secondary region.</li>
+</ol>
+<h2 id="sql-server">SQL Server</h2>
+<p>If your main concern is to only back up the SQL Server data, Azure Backup provides support for that as well. Azure Backup offers a stream-based, specialized solution to back up SQL Servers running in Azure VMs. This solution aligns with Azure Backup's benefits of zero-infrastructure backup, long-term retention, and central management.</p>
+<p>Additionally, Azure Backup provides the following advantages specifically for SQL Server:
+- Workload aware backups that support all backup types: full, differential, and log
+- 15-minute recovery point objective (RPO) with frequent log backups
+- Point-in-time recovery up to a second
+- Individual database-level backup and restore</p>
+<h2 id="enhanced-soft-delete">Enhanced soft delete</h2>
+<p>Enhanced soft delete is <em>enabled</em> by default for all Recovery Services vaults and Backup vaults. It protects against malicious or accidental deletion of backup data. Can be disabled for specific vaults and can turn <em>Always On</em>.</p>
+<h2 id="backup-policy">Backup Policy</h2>
+<p>You can define the backup frequency and retention duration for your backups. Currently, the VM backup can be triggered daily or weekly, and can be stored for multiple years. The backup policy supports two access tiers: snapshot tier and the vault tier. By using the Enhanced policy, you can trigger hourly backups.</p>
+<p><strong>Selective disk backup</strong>: Azure Backup provides Selective Disk backup and restore capability using Enhanced policy. By using this capability, you can selectively back up a subset of the data disks that are attached to your VM. Then, you can restore a subset of the disks that are available in a recovery point, both from instant restore and vault tier. It helps you manage critical data in a subset of the VM disks and use database backup solutions when you want to back up only their OS disk to reduce cost.</p>
+<p><strong>Snapshot tier</strong>: All the snapshots are stored locally for a maximum period of five days, in what is called the snapshot tier. For all types of operation recoveries, we recommended that you restore from the snapshots because it's faster to do so. This capability is called instant restore.</p>
+<p><strong>Vault tier</strong>: All snapshots are additionally transferred to the vault for more security and longer retention. At this point, the recovery point type changes to "snapshot and vault."</p>
+<h2 id="how-vm-is-backed-up">How VM is backed up</h2>
+<ol>
+<li>For Azure VMs that are selected for backup, Azure Backup starts a backup job according to the backup frequency you specify in the backup policy.</li>
+<li>During the first backup, a backup extension is <strong>automatically installed</strong> by Azure Backup through the <strong>Azure VM Guest Agent</strong> (no manual installation needed):<ul>
+<li><strong>Windows VMs</strong>: Installs the <code>VMSnapshot</code> extension (coordinates with Windows VSS for application-consistent backups).</li>
+<li><strong>Linux VMs</strong>: Installs the <code>VMSnapshotLinux</code> extension (coordinates with file system / pre-post scripts).</li>
+<li><strong>Prerequisite</strong>: The <strong>Azure VM Guest Agent</strong> must be installed and in a <code>Ready</code> state with outbound network access to Azure Backup endpoints (port 443).</li>
+<li><strong>If the VM is stopped / deallocated</strong>: Azure Backup still completes the backup! It captures an <strong>agentless, crash-consistent backup</strong> directly from the Azure storage fabric without needing the VM to run or the extension to be installed.</li>
+</ul>
+</li>
+<li>After the snapshot is taken, the data is stored locally (Snapshot tier) and transferred to the vault.</li>
+<li>The backup is optimized by backing up each VM disk in parallel.</li>
+<li>For each disk that's being backed up, Azure Backup reads the blocks on the disk and identifies and transfers only the data blocks that changed (the delta) since the previous backup.</li>
+<li>Snapshot data might not be immediately copied to the vault. It might take several hours at peak times. Total backup time for a VM is less than 24 hours for daily backup policies.</li>
+<li>Example below; backup of 5 days ago can instant restore, but backup of 6 days ago, vault restore is used.
+<div class="highlight"><pre><span></span><code>The backup policy sub type is Standard, and the backup policy has the following configurations:
+
+Backup schedule frequency: Weekly
+Retain instant recovery snapshot(s) for: 15 days
+Retention of weekly backup point: On Sunday at 8:00 AM for 12 weeks
+</code></pre></div></li>
+</ol>
+<h3 id="how-on-premises-vms-are-backed-up-comparison-with-cloud-vms">How On-Premises VMs are Backed Up (Comparison with Cloud VMs)</h3>
+<p>Unlike Azure VMs, <strong>Azure cannot automatically push extensions to on-premises VMs</strong> because they run outside the Azure Resource Manager fabric and do not have the Azure VM Guest Agent.</p>
+<p>On-premises VMs are backed up using one of two approaches:</p>
+<h4 id="1-hypervisor-level-vm-backup-using-mabs-microsoft-azure-backup-server-or-dpm">1. Hypervisor-Level VM Backup using MABS (Microsoft Azure Backup Server) or DPM</h4>
+<p>When you want full VM-level and application-consistent backup for on-premises virtual environments:
+- <strong>Architecture</strong>: A dedicated on-premises server running <strong>MABS</strong> (or System Center DPM) coordinates the backups.
+- <strong>For Hyper-V VMs</strong>:
+    - The MABS protection agent is installed on the <strong>Hyper-V host server</strong> (NOT inside individual guest VMs).
+    - The agent captures VM snapshots host-side using the Hyper-V VSS writer.
+- <strong>For VMware VMs (vCenter / ESXi)</strong>:
+    - <strong>Completely agentless!</strong> No agent is installed on the ESXi host or inside guest VMs.
+    - MABS communicates directly with the <strong>vCenter Server</strong> or <strong>ESXi host</strong> using native VMware vSphere APIs (VADP).
+- <strong>Data Flow</strong>: On-premises VMs are backed up to <strong>local attached disks on the MABS server first</strong> (for fast local restore), and then offloaded to the <strong>Azure Recovery Services Vault</strong> for long-term retention.
+- Installing the MABS agent on DPM server allows the backups to be copied to Recovery Services vaults in Azure. And least problem if DPM exists.</p>
+<h4 id="2-guest-os-level-backup-using-mars-agent-no-backup-server">2. Guest OS-Level Backup using MARS Agent (No Backup Server)</h4>
+<p>If you do not want to deploy a dedicated MABS server:
+- You must <strong>manually install the MARS Agent</strong> directly inside each Windows guest OS.
+- Backs up <strong>Files, Folders, and System State</strong> directly over HTTPS to the <strong>Azure Recovery Services Vault</strong>.
+- <strong>Limitation</strong>: Does NOT support full VM image backup, bare metal recovery, or Linux workloads; cannot do hypervisor-level snapshots.</p>
+<h4 id="cloud-vs-on-premises-vm-backup-comparison">Cloud vs. On-Premises VM Backup Comparison</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature / Aspect</th>
+<th style="text-align: left;">Azure VMs (Cloud)</th>
+<th style="text-align: left;">On-Prem Hyper-V (via MABS)</th>
+<th style="text-align: left;">On-Prem VMware (via MABS)</th>
+<th style="text-align: left;">On-Prem Windows (via MARS)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Backup Extension / Agent</strong></td>
+<td style="text-align: left;"><strong>Auto-installed extension</strong> via Azure VM Guest Agent</td>
+<td style="text-align: left;">Agent installed on <strong>Hyper-V Host</strong></td>
+<td style="text-align: left;"><strong>Agentless</strong> (via vCenter APIs)</td>
+<td style="text-align: left;"><strong>Manually installed</strong> in Guest OS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Agent inside Guest VM?</strong></td>
+<td style="text-align: left;">No (only pre-installed Guest Agent)</td>
+<td style="text-align: left;"><strong>No</strong></td>
+<td style="text-align: left;"><strong>No</strong></td>
+<td style="text-align: left;"><strong>Yes</strong> (MARS agent)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dedicated Backup Server?</strong></td>
+<td style="text-align: left;"><strong>No</strong> (Zero-infrastructure BaaS)</td>
+<td style="text-align: left;"><strong>Yes</strong> (MABS / DPM on-premises)</td>
+<td style="text-align: left;"><strong>Yes</strong> (MABS / DPM on-premises)</td>
+<td style="text-align: left;"><strong>No</strong> (Direct to cloud)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Initial Backup Destination</strong></td>
+<td style="text-align: left;">Snapshot Tier (Local) + Vault</td>
+<td style="text-align: left;">Local MABS disk (operational)</td>
+<td style="text-align: left;">Local MABS disk (operational)</td>
+<td style="text-align: left;">Recovery Services Vault</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Offsite Long-Term Storage</strong></td>
+<td style="text-align: left;">Recovery Services Vault</td>
+<td style="text-align: left;">Recovery Services Vault</td>
+<td style="text-align: left;">Recovery Services Vault</td>
+<td style="text-align: left;">Recovery Services Vault</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Recovery Granularity</strong></td>
+<td style="text-align: left;">Full VM, Disks, or Files</td>
+<td style="text-align: left;">Full VM, Disks, Files, Apps</td>
+<td style="text-align: left;">Full VM, Disks, Files, Apps</td>
+<td style="text-align: left;">Files, folders, system state</td>
+</tr>
+</tbody>
+</table>
+<h2 id="restore-vm">Restore VM</h2>
+<p><a href="https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-restore-vms">Restore a VM</a>.</p>
+<ol>
+<li>Backup for VM are only for the same Region and OS. But backup for SQL Server can be restore to different region.</li>
+<li>If restore VM:<ul>
+<li>Restore to same region. </li>
+<li>Restore to different region, must make sure the OS is same.</li>
+</ul>
+</li>
+<li>If restore VM to different region, you need to provide a new<ul>
+<li>Network interface</li>
+<li>Private IP</li>
+<li>Public IP</li>
+<li>Availability set/zone</li>
+<li>VNet</li>
+<li>Subnet</li>
+<li>Resource Group</li>
+<li>Name (New)</li>
+<li>Storage Account for disk </li>
+<li>Disk Type</li>
+</ul>
+</li>
+<li>If restore OS disk only, you can:<ul>
+<li>Restore to same region. </li>
+<li>Restore to different region, must make sure the OS is same.</li>
+</ul>
+</li>
+<li>If restore OS disk only to different region:<ul>
+<li>No VNet, no Subnet, no Public IP, no Private IP</li>
+<li>Resource Group</li>
+<li>Name (New)</li>
+<li>Storage Account for disk </li>
+<li>Disk Type</li>
+</ul>
+</li>
+<li>Replacing existing disk, the VM must be stopped and the disk must be unattached from the VM. The VM must exists.<ul>
+<li>Replacing existing disk with encryption are not supported.</li>
+</ul>
+</li>
+<li>Encrypted VM cannot be restored to another region, because it require the key to decrypt. Unless using Azure Disk Encryption. </li>
+</ol>
+<h2 id="deleting-vault">Deleting Vault</h2>
+<ol>
+<li>You cannot delete a Resource Group that has vault backup</li>
+<li>Vault backup cannot be deleted when<ul>
+<li>requires to stop backup</li>
+<li>if data has retention/protected data</li>
+<li>if soft delete is turned on. Require to disable soft-delete, delete all data then delete soft-delete datas.</li>
+</ul>
+</li>
+</ol>
+<h2 id="data-box">Data Box</h2>
+<ol>
+<li>Types<ul>
+<li>DataBox Disk - up to 10TB</li>
+<li>DataBox - up to 80TB</li>
+<li>DataBox Heavy - 1 PB</li>
+<li>DataBox Go - up to 30TB</li>
+</ul>
+</li>
+</ol>
+<h3 id="import-procedure">Import Procedure</h3>
+<ol>
+<li>Create in Azure Portal a Ticket</li>
+<li>Copy data to Data Box using WAImport/Export Tool<ul>
+<li>Either specify dataset.csv and driveset.csv to copy file. </li>
+<li>Can specify encryption, e.g. Bitlocker.</li>
+</ul>
+</li>
+<li>Ship back to Microsoft</li>
+<li>Microsoft upload data to Azure</li>
+<li>Update in Azure Portal</li>
+</ol>
+<h3 id="export-procedure">Export Procedure</h3>
+<ol>
+<li>Create Azure Portal a job</li>
+<li>Select a container (only Blob allowed)</li>
+<li>Add address in portal to ship</li>
+<li>Microsoft ships Data Box to you</li>
+<li>Update Azure Portal</li>
+<li>Optional - Copy data from Data Box using WAImport/Export ToolZ</li>
+</ol>
+<h2 id="recovery-service-vault">Recovery Service Vault</h2>
+<ol>
+<li>To recover specific file, this is the portal.</li>
+<li>Default GRS backup.</li>
+<li>A Log must be created for Recovery Service Vault, it can be:<ul>
+<li>Log Analytics Workspace (any Region)  OR</li>
+<li>Storage Account (must in same region as Recovery Service Vault)</li>
+</ul>
+</li>
+<li>Minimum 30 days retention. </li>
+<li><strong>Backup Vault is NOT a subset of Recovery Services Vault</strong> — they are two distinct ARM resources under different resource providers (<code>Microsoft.RecoveryServices/vaults</code> vs <code>Microsoft.DataProtection/backupVaults</code>) managing different sets of workloads.</li>
+</ol>
+<h2 id="to-delete-vault">To delete Vault</h2>
+<ol>
+<li>Stop Backup</li>
+<li>Delete all the data</li>
+<li>Disable soft delete</li>
+<li>Delete all soft delete data</li>
+<li>Delete Backup Vault</li>
+<li>Delete Logs (optional)</li>
+<li>Delete Recovery Service Vault / Resource Group</li>
+</ol>
+<h2 id="azure-site-recovery">Azure Site Recovery</h2>
+<ol>
+<li>This is not related to backup/restore. This is for Disaster Recovery.</li>
+<li>Requires a Recovery Service Vault.</li>
+<li>Can be configured in two ways:<ul>
+<li>Azure to Azure</li>
+<li>On-premises to Azure, requires MARS and MABS</li>
+<li>MARS is the agent installed on the on-premises machine to back up files, folders, and system state. MABS is on VM/Hyper-machines to backup to MARS. </li>
+</ul>
+</li>
+<li>For on-premises to Azure, need to install <strong>Mobility service</strong> on the on-premises machine. (No agent for Azure to Azure)</li>
+<li>Can use Azure Site Recovery on an Azure VM (in different region) to replicate to another region. But take not NSG or public address are not created.</li>
+<li>For Hyper-V on-premises, need to install <strong>Azure Site Recovery Provider</strong> and <strong>Azure Recovery Services Agent</strong> on the on-premises Hyper-V host. A new Hyper-V site is required to be created for recovery.</li>
+<li>Recovery goal defines the RPO (Recovery Point Objective).</li>
+<li>Each site requires a new VNet and Resource Group. During setup both have different VNet and Subnet and during disaster recovery it knows where to enable and during backup it knows where to store. Public IP also needs to change as ip address are region based. <strong>DNS must also be updated to the new public IP</strong>, so use traffic manager/front door in these cases.</li>
+</ol>
+<h3 id="testing-failover">Testing failover</h3>
+<pre><code>a. Test failover;
+    - Create a new RPO (Recovery Point Objective)
+    - Create a new VM from the recovery point
+b. Commit;
+    - Failover to a new region
+c. Reprotect;
+    - Failover back to primary region
+</code></pre>
+<h3 id="planned-failover">Planned failover</h3>
+<pre><code>a. Planned failover;
+    - Stop the VM
+    - Create a new RPO (Recovery Point Objective)
+    - Create a new VM from the recovery point
+b. Commit;
+    - Failover to a new region, do not create new VM, just power on the VM.
+    - Commit the failover so recovery point is cleaned up.
+</code></pre>
+<h3 id="backup-recovery-agents">Backup &amp; Recovery Agents</h3>
+<ol>
+<li><strong>MARS Agent (Azure Backup Agent)</strong>:</li>
+<li>Lightweight agent installed directly on target machines.</li>
+<li>Backs up <strong>Files, Folders, and System State</strong> directly to Azure Recovery Services Vault.</li>
+<li>No separate backup server needed; Windows only (up to 3 backups/day).</li>
+<li><strong>MABS (Microsoft Azure Backup Server)</strong>:</li>
+<li>Dedicated on-premises backup server (requires local storage).</li>
+<li>Supports <strong>Application-aware workloads</strong> (SQL, Exchange, SharePoint), <strong>Hyper-V/VMware VMs</strong>, and <strong>Bare Metal Recovery</strong>.</li>
+<li>Backs up locally first, then offloads to Azure (uses MARS agent internally to replicate to the vault).</li>
+<li><strong>Azure Site Recovery (ASR) Mobility Service / Provider</strong>:</li>
+<li>Used for disaster recovery and VM replication to Azure (not traditional backup).</li>
+</ol>
+<h2 id="extra-az-305">Extra AZ-305</h2>
+<h3 id="1-disambiguating-confusing-terminology-service-vs-vaults-vs-server-vs-dr">1. Disambiguating Confusing Terminology: Service vs. Vaults vs. Server vs. DR</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Term / Component</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">What it actually is &amp; Where it runs</th>
+<th style="text-align: left;">Key Workloads Supported</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Azure Backup</strong></td>
+<td style="text-align: left;">Managed Cloud Service</td>
+<td style="text-align: left;">The umbrella Backup-as-a-Service (BaaS) provided by Microsoft for cloud and hybrid data protection.</td>
+<td style="text-align: left;">All supported Azure and hybrid backup workloads.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong> (<code>Microsoft.RecoveryServices/vaults</code>)</td>
+<td style="text-align: left;">Azure ARM Resource (Cloud Vault)</td>
+<td style="text-align: left;">The traditional, mature vault for IaaS VMs, databases in VMs, files, hybrid backup, AND Disaster Recovery.</td>
+<td style="text-align: left;"><strong>Azure VMs</strong>, <strong>SQL Server in Azure VMs</strong>, <strong>SAP HANA in Azure VMs</strong>, <strong>Azure Files</strong>, on-prem via <strong>MARS/MABS</strong>, and <strong>Azure Site Recovery (ASR)</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Backup Vault</strong> (<code>Microsoft.DataProtection/backupVaults</code>)</td>
+<td style="text-align: left;">Azure ARM Resource (Cloud Vault)</td>
+<td style="text-align: left;">The newer ARM resource designed specifically for modern cloud-native, PaaS, and containerized workloads.</td>
+<td style="text-align: left;"><strong>Azure Managed Disks</strong>, <strong>Azure Blobs</strong> (operational &amp; vaulted), <strong>Azure Database for PostgreSQL (Flexible Server)</strong>, <strong>Azure Kubernetes Service (AKS)</strong>, MySQL Flexible.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Microsoft Azure Backup Server (MABS)</strong></td>
+<td style="text-align: left;">Software Server / VM Appliance</td>
+<td style="text-align: left;">An on-premises backup server application (customized System Center DPM). Backs up locally to disk first, then offloads long-term copies to Azure.</td>
+<td style="text-align: left;">On-premises Hyper-V, VMware, Windows Server, SQL, Exchange, SharePoint, Bare Metal Recovery (BMR). Sends data to a <strong>Recovery Services Vault</strong> via embedded MARS.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MARS Agent</strong> (Azure Recovery Services Agent)</td>
+<td style="text-align: left;">Lightweight Software Agent</td>
+<td style="text-align: left;">Installed directly on a Windows OS (on-premises or VM). Backs up files, folders, and system state directly to Azure without requiring a backup server.</td>
+<td style="text-align: left;">Files, folders, and system state on Windows. Writes to a <strong>Recovery Services Vault</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Site Recovery (ASR)</strong></td>
+<td style="text-align: left;">Disaster Recovery Service (DRaaS)</td>
+<td style="text-align: left;">Continuous replication and failover orchestration service for Business Continuity and Disaster Recovery (BCDR). <strong>Not a traditional backup</strong>.</td>
+<td style="text-align: left;">Azure-to-Azure VM replication, VMware/Hyper-V/Physical-to-Azure replication. Managed inside a <strong>Recovery Services Vault</strong> (never Backup Vault).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Backup Center</strong></td>
+<td style="text-align: left;">Portal Management Plane</td>
+<td style="text-align: left;">A unified "single pane of glass" interface across subscriptions, regions, and tenants to manage both Recovery Services vaults and Backup vaults.</td>
+<td style="text-align: left;">Centralized monitoring, governance, auditing, and backup policies across all vaults.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT]
+<strong>Summary Rules of Thumb:</strong></p>
+</blockquote>
+<ol>
+<li><strong>Backup Vault != Backup Server</strong>: A <em>Backup Vault</em> is a cloud storage resource in Azure for modern workloads (Blobs, Disks, AKS). A <em>Backup Server (MABS)</em> is an on-premises physical or virtual machine running backup server software.</li>
+<li><strong>Backup Vault is NOT a subset of Recovery Services Vault</strong>: They are distinct ARM resources provided by different resource providers (<code>Microsoft.DataProtection</code> vs <code>Microsoft.RecoveryServices</code>).</li>
+<li><strong>Azure VMs use Recovery Services Vault, NOT Backup Vault</strong>: Standalone Azure Managed Disks use Backup Vault, but full Azure VMs use Recovery Services Vault.</li>
+<li><strong>Azure SQL Database (PaaS) does NOT use Recovery Services Vault</strong>: PaaS Azure SQL has automated continuous backups built directly into the service (stored in managed Azure Storage accounts). Recovery Services Vault is only used for <strong>SQL Server installed inside Azure IaaS VMs</strong>.</li>
+</ol>
+<hr />
+<h3 id="2-workload-to-vault-decision-matrix-exam-high-priority">2. Workload-to-Vault Decision Matrix (Exam High-Priority)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Workload</th>
+<th style="text-align: left;">Required Vault Type</th>
+<th style="text-align: left;">Backup Mechanism / Agent</th>
+<th style="text-align: left;">Target Storage Tiers</th>
+<th style="text-align: left;">Key Architectural Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Azure Virtual Machines (IaaS)</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;">Native agentless via VM Snapshot extension</td>
+<td style="text-align: left;">Snapshot Tier (Instant Restore: 1–5 days) + Vault Tier</td>
+<td style="text-align: left;">Standard policy (daily) vs Enhanced policy (hourly, Trusted Launch, Ultra Disks).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Managed Disks</strong></td>
+<td style="text-align: left;"><strong>Backup Vault</strong></td>
+<td style="text-align: left;">Agentless cloud-native disk snapshots</td>
+<td style="text-align: left;">Operational Tier (snapshots) + Vault Tier</td>
+<td style="text-align: left;">Can back up OS and data disks independently of VM state.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Blob Storage</strong></td>
+<td style="text-align: left;"><strong>Backup Vault</strong></td>
+<td style="text-align: left;">Continuous operational backup (native) or Vaulted backup</td>
+<td style="text-align: left;">Operational Tier (PITR) + Vault Tier (offsite retention)</td>
+<td style="text-align: left;">Operational backup uses point-in-time restore, object replication, and blob versioning without moving data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Files (File Shares)</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;">Native file share snapshots + Vault tier</td>
+<td style="text-align: left;">Snapshot Tier + Vault (Standard) Tier</td>
+<td style="text-align: left;">Metadata in vault; supports soft delete (enabled automatically).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SQL Server in Azure VM</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;"><code>AzureBackupWindowsWorkload</code> extension</td>
+<td style="text-align: left;">Vault Tier (Full, Differential, Log)</td>
+<td style="text-align: left;">15-min RPO, point-in-time recovery, individual DB restore.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SAP HANA in Azure VM</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;">Workload backup plugin</td>
+<td style="text-align: left;">Vault Tier (Full, Differential, Incremental, Log)</td>
+<td style="text-align: left;">Backint certified, streaming backup.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Database for PostgreSQL (Flexible)</strong></td>
+<td style="text-align: left;"><strong>Backup Vault</strong></td>
+<td style="text-align: left;">Native cloud PaaS integration</td>
+<td style="text-align: left;">Vault Tier</td>
+<td style="text-align: left;">Scheduled automated backups and long-term retention.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Kubernetes Service (AKS)</strong></td>
+<td style="text-align: left;"><strong>Backup Vault</strong></td>
+<td style="text-align: left;">Backup Extension (Velero-based)</td>
+<td style="text-align: left;">Operational Tier (Disk snapshots) + Vault Tier (blob storage)</td>
+<td style="text-align: left;">Backs up cluster configuration, Kubernetes resources, and CSI persistent volumes.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure SQL Database (PaaS)</strong></td>
+<td style="text-align: left;"><strong>None (Native PaaS)</strong></td>
+<td style="text-align: left;">Built-in automated backups</td>
+<td style="text-align: left;">Azure Storage (LRS/ZRS/GRS)</td>
+<td style="text-align: left;">Managed directly in Azure SQL service: 1–35 days PITR + Long-Term Retention (LTR) up to 10 years.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>On-Premises Files / System State</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;">MARS Agent (Windows only)</td>
+<td style="text-align: left;">Vault Tier directly</td>
+<td style="text-align: left;">No local staging disk needed; max 3 backups/day.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>On-Premises VMs &amp; Enterprise Apps</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;">MABS or System Center DPM</td>
+<td style="text-align: left;">Local disk (short-term) + Vault Tier (long-term)</td>
+<td style="text-align: left;">Application-aware (Exchange, SharePoint, SQL, Hyper-V, VMware).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Disaster Recovery (VM Replication)</strong></td>
+<td style="text-align: left;"><strong>Recovery Services Vault</strong></td>
+<td style="text-align: left;">Azure Site Recovery (ASR)</td>
+<td style="text-align: left;">Replicated target managed disks / cache storage</td>
+<td style="text-align: left;">Near real-time continuous replication, planned/unplanned failover orchestration.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="3-detailed-comparison-recovery-services-vault-vs-backup-vault">3. Detailed Comparison: Recovery Services Vault vs. Backup Vault</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature / Dimension</th>
+<th style="text-align: left;">Recovery Services Vault (<code>Microsoft.RecoveryServices</code>)</th>
+<th style="text-align: left;">Backup Vault (<code>Microsoft.DataProtection</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Introduction</strong></td>
+<td style="text-align: left;">Traditional / mature Azure vault</td>
+<td style="text-align: left;">Modern, cloud-native vault</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Target Workloads</strong></td>
+<td style="text-align: left;">IaaS VMs, SQL/SAP HANA in VMs, Azure Files, Hybrid (MARS/MABS)</td>
+<td style="text-align: left;">Azure Disks, Blobs, AKS, PostgreSQL Flexible Server, MySQL Flexible</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Site Recovery (ASR)</strong></td>
+<td style="text-align: left;"><strong>Yes</strong> (integrated DR management)</td>
+<td style="text-align: left;"><strong>No</strong> (ASR is not supported)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure VM Backup</strong></td>
+<td style="text-align: left;"><strong>Yes</strong> (Agentless VM extension)</td>
+<td style="text-align: left;"><strong>No</strong> (Cannot back up Azure VMs)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage Redundancy</strong></td>
+<td style="text-align: left;">LRS, GRS (default), ZRS, Cross-Region Restore (CRR)</td>
+<td style="text-align: left;">LRS, GRS, ZRS, Cross-Region Restore (CRR)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Access Tiers</strong></td>
+<td style="text-align: left;">Snapshot (Instant Restore), Vault Standard, Vault Archive</td>
+<td style="text-align: left;">Operational (Snapshot/Local), Vault Standard, Vault Archive</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Soft Delete</strong></td>
+<td style="text-align: left;">Enhanced Soft Delete (14–180 days, Always-On option)</td>
+<td style="text-align: left;">Enhanced Soft Delete (14–180 days, Always-On option)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Security &amp; Immutability</strong></td>
+<td style="text-align: left;">Immutable vault, Multi-User Authorization (MUA via Resource Guard)</td>
+<td style="text-align: left;">Immutable vault, Multi-User Authorization (MUA via Resource Guard)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Management</strong></td>
+<td style="text-align: left;">Centralized via Azure Backup Center</td>
+<td style="text-align: left;">Centralized via Azure Backup Center</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4-vm-backup-policies-standard-vs-enhanced-policy">4. VM Backup Policies: Standard vs. Enhanced Policy</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Capability</th>
+<th style="text-align: left;">Standard Backup Policy</th>
+<th style="text-align: left;">Enhanced Backup Policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Backup Frequency</strong></td>
+<td style="text-align: left;">Daily (once per day) or Weekly</td>
+<td style="text-align: left;">Hourly (every 4, 6, 8, 12, or 24 hours)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RPO</strong></td>
+<td style="text-align: left;">24 hours</td>
+<td style="text-align: left;">4 hours minimum</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Instant Restore Retention</strong></td>
+<td style="text-align: left;">1 to 5 days</td>
+<td style="text-align: left;">1 to 30 days</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Trusted Launch VMs</strong></td>
+<td style="text-align: left;">Not supported via Azure Portal configuration</td>
+<td style="text-align: left;"><strong>Supported</strong> (Mandatory for Trusted Launch VM backup)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Disk Types Supported</strong></td>
+<td style="text-align: left;">Standard HDD, Standard SSD, Premium SSD</td>
+<td style="text-align: left;"><strong>All types</strong>, including <strong>Ultra Disks</strong> and <strong>Premium SSD v2</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Snapshot Resilience</strong></td>
+<td style="text-align: left;">Zone-redundant snapshots not supported</td>
+<td style="text-align: left;"><strong>Supports Zone-Redundant (ZRS) snapshots</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Consistency Tier</strong></td>
+<td style="text-align: left;">Crash-consistent or Application-consistent</td>
+<td style="text-align: left;">Agentless crash-consistent multi-disk backups</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Selective Disk Backup</strong></td>
+<td style="text-align: left;">Supported</td>
+<td style="text-align: left;">Supported (Exclude OS or specific data disks)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="5-architecture-replication-vs-disaster-recovery-vs-backup">5. Architecture: Replication vs. Disaster Recovery vs. Backup</h3>
+<p>In the AZ-305 exam, questions test your ability to design the appropriate resilience strategy:</p>
+<div class="highlight"><pre><span></span><code>+---------------------------------------------------------------------------------------+
+|                                    BUSINESS CONTINUITY                                |
++---------------------------+-----------------------------------+-----------------------+
+|       HIGH AVAILABILITY   |        DISASTER RECOVERY          |        BACKUP         |
+|         (Replication)     |              (ASR)                |    (Azure Backup)     |
++---------------------------+-----------------------------------+-----------------------+
+| Hardware/zone failure     | Major regional outage             | Accidental deletion,  |
+| Zero RPO, zero/instant RTO| Low RPO (seconds/mins), low RTO   | ransomware, corruption|
+| Synchronous/Async storage | Continuous replication + failover | Point-in-time recovery|
+| Examples: ZRS, GRS, SQL AG| Examples: Azure Site Recovery     | Retention for years   |
++---------------------------+-----------------------------------+-----------------------+
+</code></pre></div>
+<ol>
+<li><strong>Replication is NOT Backup</strong>:</li>
+<li>Storage replication (LRS, ZRS, GRS) replicates data synchronously or asynchronously.</li>
+<li>If a file is deleted, infected by ransomware, or corrupted, <strong>the deletion or corruption is immediately replicated</strong> to all redundant copies!</li>
+<li>Replication provides high availability against infrastructure hardware failures, <strong>not</strong> data protection.</li>
+<li><strong>Disaster Recovery (ASR) vs. Backup</strong>:</li>
+<li><strong>Azure Site Recovery (ASR)</strong>: Keeps workloads running during datacenter/regional disasters by continuously replicating VM disk changes to a secondary region. It orchestrates failover so services can resume quickly (focus: <strong>RTO</strong>).</li>
+<li><strong>Azure Backup</strong>: Takes discrete point-in-time snapshots and streaming dumps, storing them with long-term retention policies for compliance and data restoration (focus: <strong>Historical RPO &amp; Long-Term Retention</strong>).</li>
+<li><strong>PaaS Database Strategy (Azure SQL)</strong>:</li>
+<li>For High Availability &amp; DR: Use <strong>Active Geo-Replication</strong> (up to 4 readable secondaries) or <strong>Auto-Failover Groups</strong> (automatic failover with read-write listener endpoint).</li>
+<li>For Backup: Use Azure SQL's built-in <strong>Point-in-Time Restore (PITR)</strong> (1–35 days) and <strong>Long-Term Retention (LTR)</strong> policies (up to 10 years).</li>
+</ol>
+<hr />
+<h3 id="6-availability-recovery-and-sla-metrics">6. Availability, Recovery, and SLA Metrics</h3>
+<h4 id="availability-metrics">Availability Metrics</h4>
+<ul>
+<li><strong>Mean Time to Recovery (MTTR)</strong>: Average time required to repair or restore a failed component after an outage
+  MTTR = Total Maintenance/Downtime * Number of Failures</li>
+<li><strong>Mean Time Between Failures (MTBF)</strong>: Average operational time between inherent system failures.
+  MTBF = Total Operational Uptime * Number of Failures</li>
+<li><strong>Mean Time to Failure (MTTF)</strong>: Expected lifespan of a non-repairable component until its first failure.</li>
+</ul>
+<h4 id="recovery-metrics">Recovery Metrics</h4>
+<ul>
+<li><strong>Recovery Time Objective (RTO)</strong>: Maximum acceptable duration of application downtime after an incident. Dictates how fast failover or recovery procedures must complete.</li>
+<li><strong>Recovery Point Objective (RPO)</strong>: Maximum acceptable duration of data loss, measured in time. Dictates backup frequency and replication latency (e.g., 15-minute log backup = 15-minute RPO).</li>
+<li><strong>Recovery Level Objective (RLO)</strong>: Granularity of the recovered data (e.g., entire VM, single database, specific table, or individual file/item).</li>
+</ul>
+<h4 id="composite-sla-calculations">Composite SLA Calculations</h4>
+<p>Azure provides SLAs for individual services (e.g., VM 99.99% with multi-zone, Azure SQL 99.99%). In system architecture:
+- <strong>Serial Components (Dependencies in Series)</strong>: If Component A and Component B must both be online, multiply their SLAs:
+  Composite SLA = SLA_A X SLA_B
+  <em>Example:</em> Web App (99.95%) X Azure SQL (99.99%) = 0.9995 X 0.9999 = 99.94% (Composite availability is <em>lower</em> than individual components).
+- <strong>Parallel / Redundant Components (Failover in Parallel)</strong>: If redundant instances run in parallel with automatic failover:
+  Composite SLA = 1 - (1 - SLA_A) X (1 - SLA_B)
+  <em>Example:</em> Two independent VMs in parallel (each 99.9%): 1 - (0.001 X 0.001) = 1 - 0.000001 = 99.9999% (Composite availability is <em>higher</em>).</p>
+<hr />
+<h3 id="7-security-and-governance-for-vaults-az-305-architecture">7. Security and Governance for Vaults (AZ-305 Architecture)</h3>
+<ol>
+<li><strong>Multi-User Authorization (MUA) with Resource Guard</strong>:</li>
+<li>Protects against malicious insiders or compromised administrator accounts.</li>
+<li>Critical operations (e.g., disabling soft delete, reducing retention duration, modifying backup policies, or deleting backup data) require authorization from a secondary administrator holding the <strong>Resource Guard</strong> resource.</li>
+<li>The backup admin does NOT have permissions on the Resource Guard, enforcing separation of duties.</li>
+<li><strong>Enhanced Soft Delete &amp; Always-On Soft Delete</strong>:</li>
+<li>Soft delete retains deleted backup data for a customizable period (14 to 180 days) at no extra cost for the first 14 days.</li>
+<li><strong>Always-On Soft Delete</strong>: When enabled, soft delete <strong>cannot be turned off</strong> by any user (including subscription owners), permanently preventing ransomware from wiping backups before encrypting primary data.</li>
+<li><strong>Immutable Vaults</strong>:</li>
+<li>Locks backup data using WORM (Write Once, Read Many) storage immutability.</li>
+<li>Prevents backup recovery points from being deleted or modified before their retention period expires, even by Microsoft Support.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "search.suggest"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
