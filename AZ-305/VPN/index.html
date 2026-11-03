@@ -1,0 +1,1879 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Han">
+      
+      
+        <link rel="canonical" href="https://yoonghan.github.io/AZ-104-Azure-Administrator-Associate/AZ-305/VPN/">
+      
+      
+        <link rel="prev" href="../ApplicationArchitecture/">
+      
+      
+        <link rel="next" href="../Migration/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Hybrid Networking: VPN & ExpressRoute - Azure Administrator (AZ-104) Study Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hybrid-networking-vpn-expressroute" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Azure Administrator (AZ-104) Study Guide" class="md-header__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Azure Administrator (AZ-104) Study Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hybrid Networking: VPN &amp; ExpressRoute
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="azure" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Infrastructure/" class="md-tabs__link">
+          
+  
+  
+  Topics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../BluePrint/" class="md-tabs__link">
+          
+  
+  
+  AZ-305
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Exam_Preparation/Notes/" class="md-tabs__link">
+          
+  
+  
+  Exam
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Azure Administrator (AZ-104) Study Guide" class="md-nav__button md-logo" aria-label="Azure Administrator (AZ-104) Study Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Azure Administrator (AZ-104) Study Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Topics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EntraId
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    EntraId
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EntraId/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../User/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Storage-Account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encryption
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtual-Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Network-Security-Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security Group (NSG)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Load-Balancers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtual-Machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Web-Application/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AzurePolicy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../KeyVault/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KeyVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Budget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Budget
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AZ-305
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AZ-305
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BluePrint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Blueprints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RelationalDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relational DB (Azure SQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataIntegration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ApplicationArchitecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Application Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Networking: VPN &amp; ExpressRoute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Others/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Others
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exam
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exam_Preparation/Notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exam Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exam_Preparation/Labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hybrid-networking-vpn-expressroute">Hybrid Networking: VPN &amp; ExpressRoute</h1>
+<blockquote>
+<p>[!NOTE]
+<strong>Exam Relevance:</strong> Both <strong>AZ-104</strong> and <strong>AZ-305</strong> heavily test Azure VPN Gateway (S2S, P2S, GatewaySubnet, and VNet Peering transit) and ExpressRoute. Azure Virtual WAN is covered in both, with deeper architectural design questions in AZ-305.</p>
+</blockquote>
+<h1 id="vma-application-proxy">VMA / Application Proxy</h1>
+<ol>
+<li>VPN are complex if seen below. Entra ID allows "Application Proxy".
+<img alt="Application Proxy" src="img/application_proxy.png" /></li>
+<li>
+<p>Steps:</p>
+<ul>
+<li>The user accesses the application through an endpoint and is redirected to the Microsoft Entra sign-in page.</li>
+<li>Microsoft Entra ID sends a token to the user's client device after a successful sign-in.</li>
+<li>The client sends the token to the application proxy service. The service retrieves the user principal name (UPN) and security principal name (SPN) from the token. The application proxy service then sends the request to the connector.</li>
+<li>The connector performs required SSO authentication on behalf of the user.</li>
+<li>The connector sends the request to the on-premises application.</li>
+<li>The connector and application proxy service send the response to the user.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="1-core-connectivity-options-overview">1. Core Connectivity Options Overview</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Service</th>
+<th style="text-align: left;">Connection Type</th>
+<th style="text-align: left;">Path / Medium</th>
+<th style="text-align: left;">Bandwidth / Throughput</th>
+<th style="text-align: left;">Typical Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Site-to-Site (S2S) VPN</strong></td>
+<td style="text-align: left;">Branch-to-Azure</td>
+<td style="text-align: left;">Encrypted IPsec/IKE over Public Internet</td>
+<td style="text-align: left;">Up to 10 Gbps (VpnGw5)</td>
+<td style="text-align: left;">Connecting on-premises branch/datacenter to Azure VNet</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Point-to-Site (P2S) VPN</strong></td>
+<td style="text-align: left;">Device-to-Azure</td>
+<td style="text-align: left;">Encrypted tunnel (OpenVPN, SSTP, IKEv2) over Internet</td>
+<td style="text-align: left;">Up to 10 Gbps (shared)</td>
+<td style="text-align: left;">Remote workers / road warriors accessing VNet resources</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ExpressRoute</strong></td>
+<td style="text-align: left;">Enterprise-to-Azure</td>
+<td style="text-align: left;">Private, dedicated connection via Exchange Provider (No public Internet)</td>
+<td style="text-align: left;">Up to 100 Gbps (Direct)</td>
+<td style="text-align: left;">Mission-critical, high-throughput, low-latency, SLA-backed hybrid connectivity</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Virtual WAN</strong></td>
+<td style="text-align: left;">Hub-and-Spoke Service</td>
+<td style="text-align: left;">Unified Microsoft global backbone connecting S2S, P2S, ExpressRoute, and VNets</td>
+<td style="text-align: left;">Up to 20 Gbps per hub</td>
+<td style="text-align: left;">Centralized, large-scale enterprise global transit network</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-reference-diagrams">2. Reference Diagrams</h2>
+<p><img alt="Express Route" src="img/vpn_express-route.png" />
+<img alt="VPN WAN" src="img/vpn_WAN.png" />
+<img alt="Hub and Spoke" src="img/vpn_hub-and-spoke.png" /></p>
+<hr />
+<h2 id="3-site-to-site-s2s-vpn">3. Site-to-Site (S2S) VPN</h2>
+<p>A Site-to-Site VPN connects an on-premises network to an Azure Virtual Network over an encrypted IPsec/IKE tunnel.</p>
+<h3 id="required-azure-components">Required Azure Components</h3>
+<ol>
+<li><strong>Virtual Network (VNet)</strong>: The target network in Azure.</li>
+<li>
+<p><strong>GatewaySubnet</strong>:</p>
+<ul>
+<li>Must be named <strong>exactly</strong> <code>GatewaySubnet</code>.</li>
+<li>Cannot contain workloads (VMs).</li>
+<li>Recommended size: <code>/27</code> or <code>/28</code> (minimum <code>/29</code>).</li>
+<li>Do <strong>NOT</strong> attach an NSG or UDR (with <code>0.0.0.0/0</code>) that blocks gateway management traffic.</li>
+<li><strong>Virtual Network Gateway (VPN Gateway)</strong>:</li>
+</ul>
+</li>
+<li>
+<p>Gateway Type: <code>VPN</code> (vs <code>ExpressRoute</code>).</p>
+</li>
+<li>VPN Type: <strong>Route-based</strong> (recommended; supports IKEv2, P2S, BGP) vs <strong>Policy-based</strong> (legacy IKEv1, static IP ranges only).</li>
+<li>Public IP Address: Standard SKU (Zone-redundant for <code>VpnGw#AZ</code> SKUs).</li>
+<li>
+<p><strong>Local Network Gateway (LNG)</strong>:</p>
+</li>
+<li>
+<p>Represents the <strong>on-premises</strong> VPN router/firewall in Azure.</p>
+</li>
+<li>Defines: On-premises public IP (or FQDN) and on-premises IP address prefixes (CIDR).</li>
+<li>Contains on-prem BGP settings (ASN and BGP peer IP) if BGP is used.</li>
+<li>
+<p><strong>VPN Connection</strong>:</p>
+</li>
+<li>
+<p>The Azure resource that links the <strong>Virtual Network Gateway</strong> to the <strong>Local Network Gateway</strong>.</p>
+</li>
+<li>Configures the <strong>Pre-Shared Key (PSK)</strong> and IPsec/IKE policy.</li>
+</ol>
+<h3 id="s2s-architecture-diagram">S2S Architecture Diagram</h3>
+<pre class="mermaid"><code>flowchart LR
+    subgraph OnPrem["On-Premises"]
+        Device["On-Premises VPN Device / Router"]
+        LAN["Local Corporate Network&lt;br&gt;(e.g., 192.168.0.0/16)"] --- Device
+    end
+
+    subgraph Azure["Azure Environment"]
+        subgraph VNet["Virtual Network (10.0.0.0/16)"]
+            subgraph GS["GatewaySubnet (10.0.255.0/27)"]
+                VNetGw["Virtual Network Gateway&lt;br&gt;(VPN Gateway)"]
+            end
+            subgraph WorkloadSubnet["Workload Subnet (10.0.1.0/24)"]
+                VM["Azure Virtual Machines"]
+            end
+            GS --- WorkloadSubnet
+        end
+
+        LNG["Local Network Gateway&lt;br&gt;(Represents On-Prem IP &amp; Ranges)"]
+    end
+
+    Device &lt;==|IPsec/IKE Tunnel (PSK or BGP)|==&gt; VNetGw
+    LNG -.-&gt;|Config link| VNetGw</code></pre>
+<hr />
+<h2 id="4-point-to-site-p2s-vpn">4. Point-to-Site (P2S) VPN</h2>
+<p>Connects individual client devices (Windows, macOS, Linux, iOS, Android) to an Azure VNet.</p>
+<h3 id="configuration">Configuration</h3>
+<ul>
+<li>Configured directly on the <strong>Virtual Network Gateway</strong> under <strong>Point-to-site configuration</strong>.</li>
+<li><strong>Address Pool</strong>: Dedicated private IP range allocated to connected VPN clients (cannot overlap with VNet or on-premises ranges).</li>
+<li>
+<p><strong>Protocols / Tunnels</strong>:</p>
+<ul>
+<li><strong>OpenVPN</strong>: Cross-platform (Windows, Mac, Linux, mobile); supports Entra ID auth.</li>
+<li><strong>SSTP</strong>: Secure Sockets Tunneling Protocol (Windows-only, TCP 443 — passes easily through firewalls/proxies).</li>
+<li><strong>IKEv2</strong>: Fast, standards-based mobile/desktop VPN.</li>
+<li><strong>Authentication Methods</strong>:</li>
+</ul>
+</li>
+<li>
+<p><strong>Azure Certificate Authentication</strong>: Root certificate uploaded to Azure; client certificate installed on user machine.</p>
+</li>
+<li><strong>Microsoft Entra ID (Azure AD)</strong>: Modern user-based auth (MFA, Conditional Access). Requires OpenVPN tunnel and Azure VPN Client app.</li>
+<li><strong>RADIUS Authentication</strong>: Integrates with on-premises Active Directory via Network Policy Server (NPS).</li>
+</ul>
+<h3 id="critical-exam-rule-client-reinstallation">⚠️ Critical Exam Rule (Client Reinstallation)</h3>
+<blockquote>
+<p><strong>P2S VPN Client Route Updates:</strong>
+When virtual network peering is added or modified between VNets, <strong>Windows P2S VPN clients do not automatically learn the new routes</strong>.
+The VPN client configuration package <strong>must be downloaded and reinstalled</strong> on the client device to inject the updated route table.</p>
+</blockquote>
+<pre class="mermaid"><code>flowchart TD
+    Client["Remote Device (Device1)&lt;br&gt;Windows / Mac"] --&gt;|P2S Encrypted Tunnel| VNGw["Virtual Network Gateway&lt;br&gt;(in GatewaySubnet)"]
+    VNGw --&gt; VNet1["Hub VNet (VNet1)"]
+    VNet1 &lt;--&gt;|VNet Peering| VNet2["Spoke VNet (VNet2)"]
+
+    classDef alert fill:#fff3cd,stroke:#ffeeba,stroke-width:2px;
+    Note["Exam Trap:&lt;br&gt;After peering VNet1 to VNet2,&lt;br&gt;Device1 CANNOT reach VNet2 until&lt;br&gt;VPN client package is re-downloaded &amp; reinstalled!"]:::alert
+    Client -.-&gt; Note</code></pre>
+<hr />
+<h2 id="5-gateway-skus-feature-comparison">5. Gateway SKUs &amp; Feature Comparison</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">Basic SKU (Legacy)</th>
+<th style="text-align: left;">VpnGw1 - VpnGw5 (Gen 1 &amp; Gen 2)</th>
+<th style="text-align: left;">VpnGw1AZ - VpnGw5AZ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Max Throughput</strong></td>
+<td style="text-align: left;">100 Mbps</td>
+<td style="text-align: left;">650 Mbps to 10 Gbps</td>
+<td style="text-align: left;">650 Mbps to 10 Gbps</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Max S2S Tunnels</strong></td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">30</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Max P2S Connections</strong></td>
+<td style="text-align: left;">128 (SSTP only)</td>
+<td style="text-align: left;">250 to 1,000 (OpenVPN/IKEv2)</td>
+<td style="text-align: left;">250 to 1,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BGP Support</strong></td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">✅ Yes</td>
+<td style="text-align: left;">✅ Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Active-Active Resiliency</strong></td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">✅ Yes</td>
+<td style="text-align: left;">✅ Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Zone Redundancy (AZ)</strong></td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">✅ Yes (Resilient to zone failure)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IKE Protocols (S2S)</strong></td>
+<td style="text-align: left;">IKEv1 only</td>
+<td style="text-align: left;">IKEv1 &amp; IKEv2</td>
+<td style="text-align: left;">IKEv1 &amp; IKEv2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-expressroute-coexistence">6. ExpressRoute &amp; Coexistence</h2>
+<ol>
+<li>
+<p><strong>ExpressRoute:</strong></p>
+<ul>
+<li>Dedicated private connection via a Connectivity Partner (MPLS, Ethernet, or Cloud Exchange).</li>
+<li>Does not travel over the public Internet.</li>
+<li>Uses <strong>BGP</strong> for dynamic routing.</li>
+<li>
+<p><strong>ExpressRoute + VPN Gateway Coexistence (Failover):</strong></p>
+</li>
+<li>
+<p>Both an ExpressRoute Gateway and a Route-Based VPN Gateway can coexist in the same <code>GatewaySubnet</code>.</p>
+</li>
+<li>The S2S VPN tunnel acts as a <strong>backup / failover</strong> if the ExpressRoute circuit fails.</li>
+<li>By default, traffic prefers <strong>ExpressRoute</strong> over the VPN connection because ExpressRoute BGP routes are shorter/preferred.</li>
+</ul>
+</li>
+</ol>
+<pre class="mermaid"><code>flowchart LR
+    subgraph OnPrem["On-Premises Datacenter"]
+        Router["Border Router"]
+    end
+
+    subgraph Azure["Azure VNet"]
+        subgraph GS["GatewaySubnet"]
+            ERGW["ExpressRoute Gateway"]
+            VPNGW["VPN Gateway (Route-Based)"]
+        end
+        Workloads["Azure Workload Subnets"]
+        GS --- Workloads
+    end
+
+    Router ==&gt;|"Primary: ExpressRoute (Private Circuit)"| ERGW
+    Router -.-&gt;|"Backup: S2S IPsec VPN (Public Internet)"| VPNGW</code></pre>
+<hr />
+<h2 id="7-azure-virtual-wan-vwan">7. Azure Virtual WAN (vWAN)</h2>
+<p>A managed, scalable hub-and-spoke networking service provided by Microsoft.</p>
+<h3 id="basic-vs-standard-virtual-wan">Basic vs. Standard Virtual WAN</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Capability</th>
+<th style="text-align: left;">Basic Virtual WAN</th>
+<th style="text-align: left;">Standard Virtual WAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Supported Connections</strong></td>
+<td style="text-align: left;">S2S VPN only</td>
+<td style="text-align: left;">S2S VPN, P2S (User) VPN, ExpressRoute</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hub-to-Spoke</strong></td>
+<td style="text-align: left;">Single hub only</td>
+<td style="text-align: left;">Multiple hubs across regions</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VNet-to-VNet Transit</strong></td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">✅ Yes (via virtual hub router)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Custom Route Tables</strong></td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">✅ Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Azure Firewall in Hub</strong></td>
+<td style="text-align: left;">❌ No</td>
+<td style="text-align: left;">✅ Yes (Secured Virtual Hub)</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TD
+    subgraph VWAN["Azure Virtual WAN (Standard)"]
+        subgraph Hub1["Virtual Hub (Region A)"]
+            HubRouter1["Hub Router &amp; Azure Firewall"]
+            S2SGw["S2S VPN Gateway"]
+            P2SGw["P2S VPN Gateway"]
+            ERGw["ExpressRoute Gateway"]
+        end
+    end
+
+    Branch["Branch Offices"] &lt;==&gt; S2SGw
+    RemoteUsers["Remote Workers (P2S)"] &lt;==&gt; P2SGw
+    HQ["Corporate HQ"] &lt;==|ExpressRoute|==&gt; ERGw
+
+    HubRouter1 &lt;--&gt; VNetA["Spoke VNet A"]
+    HubRouter1 &lt;--&gt; VNetB["Spoke VNet B"]</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
