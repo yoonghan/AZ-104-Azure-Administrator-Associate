@@ -40,7 +40,8 @@ Remediation is a process that allows you to apply a policy assignment to existin
     - parameters: Functions like variables in a script. It allows you to pass specific values (such as an array of allowed VM sizes) when you actually assign the policy, so you do not have to hardcode them into the definition.
     - policyRule: The core logic engine of the policy. It contains the If block (the conditions the policy checks) and the Then block (the effect triggered, such as Deny, Audit, or DeployIfNotExists).
     - metadata: Stores supplemental, descriptive information about the policy definition itself. By default, this includes things like the policy's category or version.
-3. Sample
+3. In the definition you can alos add type `Update Manager` or `system updates`. To enable System Update Manager. This can apply patches to the OS.
+4. Sample
 ```json
 {
 "properties": {

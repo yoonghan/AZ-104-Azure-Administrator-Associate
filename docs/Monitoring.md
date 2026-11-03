@@ -163,7 +163,13 @@ Topology service provides visualization of the network resources and their conne
 2. Defends for external AWS and GCP as well.
     - Extend CSPM recommendations and compliance assessments to AWS resources.
     - Extend Defender for Containers protections to Amazon EKS clusters.
-    - Extend Defender for Servers protections to EC2 instances. 
+    - Extend Defender for Servers protections to EC2 instances.
+3. Able to scan VMs for vulnerabilities:
+    - Then using **Azure Update Manager** to maintain the VM (Linux/Windows)
+
+## Azure Update Manager
+1. Only updates OS and security-level.
+2. It can run "yum update"
 
 ## MS Sentinel
 1. A cloud-native Security Information and Event Management (SIEM) and Security Orchestration, Automation, and Response (SOAR) platform. 
