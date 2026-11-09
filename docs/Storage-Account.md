@@ -48,8 +48,8 @@ Use Case | "Booting OS, SQL Server" | Shared department drives | "Images, Videos
 6. Premium Storage Account does not support GRS or RA-GRS.
 
 ## Service Endpoints
-1. Private Endpoints - $ and it's not via azure backbone
-2. Service Endpoints - are endpoints that use azure backbone
+1. Private Endpoints - $ and it's not via azure backbone, have private ip address
+2. Service Endpoints - are endpoints that use azure backbone, must configured only in subnet
 3. Firewall
 4. Use Virtual Network Settings to configure subnet access
 
